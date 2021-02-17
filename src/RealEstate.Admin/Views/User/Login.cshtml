@@ -11,14 +11,14 @@
 <form class="my-5 login-form" method="POST" asp-controller="login" asp-antiforgery="true">
     <div class="form-group">
         <label class="form-label" asp-for=Username></label>
-        <input class="form-control" asp-for="Username" required>
+        <input class="form-control" asp-for="Username">
     </div>
     <div class="form-group">
         <label class="form-label d-flex justify-content-between align-items-end">
             <div>Parola</div>
             <a asp-controller="login" asp-action="forgotpassword" class="d-block small">Parolamı Unuttum</a>
         </label>
-        <input asp-for="Password" class="form-control" required>
+        <input asp-for="Password" class="form-control">
     </div>
     <div class="d-flex justify-content-between align-items-center m-0">
         <label class="custom-control custom-checkbox m-0">

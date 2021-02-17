@@ -1,0 +1,19 @@
+$(document).ready(function () {
+  // validation for login form
+  $(".login-form").on("submit", function (e) {
+    if (
+      $("input[name='Username']").val() == "" ||
+      $("input[name='Password']").val() == ""
+    ) {
+      e.preventDefault();
+      toastr["error"]("Kullanıcı adı veya parola boş bırakılamaz.", "", {
+        positionClass: "toast-top-right",
+        closeButton: true,
+        progressBar: true,
+        preventDuplicates: true,
+        newestOnTop: true,
+        rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+      });
+    }
+  });
+});
