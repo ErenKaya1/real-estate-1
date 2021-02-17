@@ -96,13 +96,13 @@ namespace src.RealEstate.Admin.Controllers
             {
                 var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var httpEncodedToken = HttpUtility.UrlEncode(resetToken);
-                var content = $"<p>Parolanızı sıfırlamak için <a href=\"https://localhost:5001{Url.Action("ResetPassword", "User", new { userId = user.Id, token = httpEncodedToken })}\">tıklayınız</a>.</p>" +
+                var content = $"<p>Parolanızı sıfırlamak için <a href=\"https://localhost:5003{Url.Action("ResetPassword", "User", new { userId = user.Id, token = httpEncodedToken })}\">tıklayınız</a>.</p>" +
                                 "<p>Bu link 10 dakika sonra geçersiz olacaktır.</p>";
 
                 var mailDto = new MailDTO
                 {
                     From = _mailService.Username,
-                    Subject = "Reset Password",
+                    Subject = "Parola Sıfırlama",
                     To = new List<string> { model.Email },
                     Content = content
                 };
@@ -111,6 +111,18 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             ViewData["ForgotPasswordMessage"] = Messages.FORGOT_PASSWORD_MESSAGE;
+            return View(model);
+        }
+
+        [HttpGet("/ResetPassword")]
+        public IActionResult ResetPassword(string userId, string token)
+        {
+            var model = new UserResetPasswordViewModel
+            {
+                UserId = userId,
+                ResetToken = HttpUtility.UrlDecode(token),
+            };
+
             return View(model);
         }
     }
