@@ -1,48 +1,147 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr" class="light-style">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RealEstate.Admin</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/ionicons.css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/bootstrap.css" class="theme-settings-bootstrap-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/real-estate.css" class="theme-settings-appwork-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/theme-corporate.css" class="theme-settings-theme-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/colors.css" class="theme-settings-colors-css">
+    <script type="text/javascript" src="/assets/vendor/js/layout-helpers.js"></script>
+    <script type="text/javascript" src="/assets/vendor/js/theme-settings.js"></script>
+    <script type="text/javascript" src="/assets/vendor/js/pace.js"></script>
+    <script type="text/javascript" src="/assets/vendor/libs/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/real-estate.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RealEstate.Admin</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="page-loader">
+        <div class="bg-admin-primary"></div>
+    </div>
+    <div class="layout-wrapper layout-2">
+        <div class="layout-inner">
+            <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-logo-primary">
+                <div class="app-brand">
+                    <a class="app-brand-logo" asp-controller="admin" asp-action="index">
+                        <img src="/assets/logo.png" />
+                    </a>
+                    <a href="javascript:void(0)"
+                        class="layout-sidenav-toggle sidenav-link text-large ml-auto d-inline d-lg-none">
+                        <i class="ion ion-md-menu align-middle"></i>
+                    </a>
+                </div>
+                <div class="sidenav-divider mt-0"></div>
+                <ul class="sidenav-inner py-1">
+                    <li class="sidenav-item">
+                        <a href="https://localhost:5001" target="_blanc" class="sidenav-link">
+                            <i class="sidenav-icon fas fa-external-link-alt"></i>
+                            <div>Siteye Git</div>
+                        </a>
+                    </li>
+                    <div class="sidenav-divider mt-0"></div>
+                    <li class="sidenav-item index-open newestate-open">
+                        <a href="javascript:void(0)" class="sidenav-link sidenav-toggle">
+                            <i class="sidenav-icon ion ion-md-home"></i>
+                            <div>Anasayfa</div>
+                        </a>
+                        <ul class="sidenav-menu">
+                            <li class="sidenav-item newestate">
+                                <a asp-controller="Admin" asp-action="NewEstate" class="sidenav-link">
+                                    <div>New Real Estate</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item index">
+                                <a asp-controller="Admin" asp-action="ListEstates" class="sidenav-link">
+                                    <div>List Real Estates</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="layout-container">
+                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x"
+                    id="layout-navbar">
+
+                    <a href="index.html" class="navbar-brand app-brand d-lg-none py-0 mr-4">
+                        <span class="app-brand-logo">
+                            <img src="/assets/logo.png" />
+                        </span>
+                    </a>
+                    <div class="layout-sidenav-toggle navbar-nav d-lg-none align-items-lg-center mr-auto">
+                        <a class="nav-item nav-link px-0 mr-lg-4" href="javascript:void(0)">
+                            <i class="ion ion-md-menu text-large align-middle"></i>
+                        </a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#layout-navbar-collapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="navbar-collapse collapse" id="layout-navbar-collapse">
+                        <hr class="d-lg-none w-100 my-2">
+                        <div class="navbar-nav align-items-lg-center ml-auto">
+                            <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">
+                                <a asp-controller="admin" asp-action="ListAppointments" class="nav-link hide-arrow">
+                                    <i class="ion ion-md-notifications-outline navbar-icon align-middle"></i>
+                                    <span class="badge badge-primary badge-dot indicator"></span>
+                                </a>
+                            </div>
+                            <div class="demo-navbar-messages nav-item dropdown mr-lg-3">
+                                <a class="nav-link hide-arrow" href="#" data-toggle="dropdown">
+                                    <i class="ion ion-ios-mail navbar-icon align-middle"></i>
+                                    <span class="badge badge-primary badge-dot indicator"></span>
+                                    <span class="d-lg-none align-middle">&nbsp; Messages</span>
+                                </a>
+                            </div>
+                            <div
+                                class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">
+                                |</div>
+
+                            <div class="demo-navbar-user nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                    <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
+                                        <span class="px-1 mr-lg-2 ml-2 ml-lg-0">Admin Test</span>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a asp-controller="login" asp-action="updateprofile" class="dropdown-item">
+                                        <i class="ion ion-md-settings text-lightest"></i> &nbsp; Account settings
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a asp-controller="login" asp-action="logout" class="dropdown-item">
+                                        <i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="layout-content">
+                    <div class="container-fluid flex-grow-1 container-p-y">
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - RealEstate.Admin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    @RenderBody()
+
+    <script type="text/javascript" src="/assets/vendor/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/vendor/js/sidenav.js"></script>
+    <script type="text/javascript" src="/assets/js/admin.js"></script>
 </body>
+
 </html>
