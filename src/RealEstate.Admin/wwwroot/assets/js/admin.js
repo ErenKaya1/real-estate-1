@@ -135,6 +135,17 @@ $(document).ready(function () {
       }
     }
   });
+
+  var activeSidenav = $(
+    ".sidenav-link[href='" + window.location.pathname + "']"
+  ).parent();
+
+  if (activeSidenav.parent().hasClass("sidenav-menu")) {
+    activeSidenav.parent().parent().addClass("open");
+    activeSidenav.addClass("active");
+  } else {
+    activeSidenav.addClass("active");
+  }
 });
 
 $("input[name='CurrentPassword']").on("input", function () {
