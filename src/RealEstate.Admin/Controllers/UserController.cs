@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
@@ -7,7 +8,9 @@ using src.RealEstate.Admin.Models.User;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Common.Enum;
 using src.RealEstate.Common.Functions;
+using src.RealEstate.Entity.DTOs;
 using src.RealEstate.Entity.Entities;
+using src.RealEstate.Service.Contracts;
 
 namespace src.RealEstate.Admin.Controllers
 {
@@ -15,11 +18,13 @@ namespace src.RealEstate.Admin.Controllers
     {
         private readonly UserManager<EstateUser> _userManager;
         private readonly SignInManager<EstateUser> _signInManager;
+        private readonly IMailService _mailService;
 
-        public UserController(UserManager<EstateUser> userManager, SignInManager<EstateUser> signInManager)
+        public UserController(UserManager<EstateUser> userManager, SignInManager<EstateUser> signInManager, IMailService mailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _mailService = mailService;
         }
 
         public async Task<bool> CreateUser()
@@ -93,9 +98,20 @@ namespace src.RealEstate.Admin.Controllers
                 var httpEncodedToken = HttpUtility.UrlEncode(resetToken);
                 var content = $"<p>Parolanızı sıfırlamak için <a href=\"https://localhost:5001{Url.Action("ResetPassword", "User", new { userId = user.Id, token = httpEncodedToken })}\">tıklayınız</a>.</p>" +
                                 "<p>Bu link 10 dakika sonra geçersiz olacaktır.</p>";
+
+                var mailDto = new MailDTO
+                {
+                    From = _mailService.Username,
+                    Subject = "Reset Password",
+                    To = new List<string> { model.Email },
+                    Content = content
+                };
+
+                await _mailService.Send(mailDto);
             }
 
-            return View();
+            ViewData["ForgotPasswordMessage"] = Messages.FORGOT_PASSWORD_MESSAGE;
+            return View(model);
         }
     }
 }

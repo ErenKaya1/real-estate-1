@@ -58,6 +58,8 @@ namespace RealEstate.Admin
                 options.ExpireTimeSpan = TimeSpan.FromDays(14);
             });
 
+            services.Configure<DataProtectionTokenProviderOptions>(options => options.TokenLifespan = TimeSpan.FromMinutes(10));
+
             services.AddScoped<IMailService>(x => new MailService
             {
                 Host = Configuration["Mail:Host"],
