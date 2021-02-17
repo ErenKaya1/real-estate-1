@@ -21,8 +21,8 @@
     <script type="text/javascript" src="/assets/vendor/js/theme-settings.js"></script>
     <script type="text/javascript" src="/assets/vendor/js/pace.js"></script>
     <script type="text/javascript" src="/assets/vendor/libs/jquery/jquery.min.js"></script>
-    <link rel="stylesheet" href="/assets/css/real-estate.css">
-    <link rel="stylesheet" href="/assets/css/admin.css">
+    <link rel="stylesheet" href="/assets/css/real-estate.css" asp-append-version="true">
+    <link rel="stylesheet" href="/assets/css/admin.css" asp-append-version="true">
 </head>
 
 <body>
@@ -31,9 +31,9 @@
     </div>
     <div class="layout-wrapper layout-2">
         <div class="layout-inner">
-            <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-logo-primary">
+            <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-admin-primary">
                 <div class="app-brand">
-                    <a class="app-brand-logo" asp-controller="admin" asp-action="index">
+                    <a class="app-brand-logo" asp-controller="home" asp-action="index">
                         <img src="/assets/logo.png" />
                     </a>
                     <a href="javascript:void(0)"
@@ -102,7 +102,6 @@
                                 <a class="nav-link hide-arrow" href="#" data-toggle="dropdown">
                                     <i class="ion ion-ios-mail navbar-icon align-middle"></i>
                                     <span class="badge badge-primary badge-dot indicator"></span>
-                                    <span class="d-lg-none align-middle">&nbsp; Messages</span>
                                 </a>
                             </div>
                             <div
@@ -116,12 +115,12 @@
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a asp-controller="login" asp-action="updateprofile" class="dropdown-item">
-                                        <i class="ion ion-md-settings text-lightest"></i> &nbsp; Account settings
+                                    <a asp-controller="User" asp-action="AccountSettings" class="dropdown-item">
+                                        <i class="ion ion-md-settings text-lightest"></i> &nbsp; Hesap Ayarları
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a asp-controller="login" asp-action="logout" class="dropdown-item">
-                                        <i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out
+                                    <a asp-controller="User" asp-action="Logout" class="dropdown-item">
+                                        <i class="ion ion-ios-log-out text-danger"></i> &nbsp; Çıkış Yap
                                     </a>
                                 </div>
                             </div>
@@ -137,11 +136,9 @@
         </div>
     </div>
 
-    @RenderBody()
-
-    <script type="text/javascript" src="/assets/vendor/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/assets/vendor/js/sidenav.js"></script>
-    <script type="text/javascript" src="/assets/js/admin.js"></script>
+    <script type="text/javascript" src="/assets/vendor/js/bootstrap.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/vendor/js/sidenav.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/admin.js" asp-append-version="true"></script>
 </body>
 
 </html>

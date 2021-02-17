@@ -142,9 +142,16 @@ namespace src.RealEstate.Admin.Controllers
                     return RedirectToAction(nameof(Login));
                 }
             }
-            
+
             ViewData["ResetPasswordError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet("/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

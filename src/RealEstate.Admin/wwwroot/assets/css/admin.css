@@ -1,19 +1,24 @@
-.bg-logo-primary {
-  background-color: #2e313c;
+:root {
+  --admin-primary: #2e313c;
+  --admin-primary-hovered: #383b44;
 }
 
-.btn-logo-primary {
-  background-color: #2e313c;
+.bg-admin-primary {
+  background-color: var(--admin-primary);
+}
+
+.btn-admin-primary {
+  background-color: var(--admin-primary);
   color: #ffffff;
 }
 
-.btn-logo-primary:hover {
-  background-color: #383b44;
+.btn-admin-primary:hover {
+  background-color: var(--admin-primary-hovered);
   color: #ffffff;
 }
 
-.page-loader .bg-primary {
-  background-color: #ff332a !important;
+.auth-logo {
+  height: 200px;
 }
 
 .layout-sidenav a {
@@ -26,7 +31,7 @@
 }
 
 .app-brand-logo {
-  background-color: #2e313c;
+  background-color: var(--admin-primary);
   height: 100%;
   width: 100%;
   padding-top: 15px;
@@ -41,17 +46,17 @@
 }
 
 .list-group-item.active {
-  background-color: #2e313c;
+  background-color: var(--admin-primary);
   color: #ffffff;
-  border-color: #2e313c;
+  border-color: var(--admin-primary);
 }
 
 .list-group-item.active:hover,
 .list-group-item.active:active,
 .list-group-item.active:focus {
-  background-color: #383b44;
+  background-color: var(--admin-primary-hovered);
   color: #ffffff;
-  border-color: #383b44;
+  border-color: var(--admin-primary-hovered);
 }
 
 .error {
@@ -65,7 +70,7 @@
 .estate-table thead tr,
 .toast-table thead tr,
 .appointment-table thead tr {
-  background-color: #2e313c;
+  background-color: var(--admin-primary);
   color: #ffffff;
 }
 
@@ -99,15 +104,15 @@
 }
 
 .page-item.active .page-link {
-  background-color: #2e313c;
+  background-color: var(--admin-primary);
   color: #ffffff;
-  border-color: #2e313c;
+  border-color: var(--admin-primary);
 }
 
 .page-item.active .page-link:hover {
-  background-color: #383b44;
+  background-color: var(--admin-primary-hovered);
   color: #ffffff;
-  border-color: #383b44;
+  border-color: var(--admin-primary-hovered);
 }
 
 .back-link {
@@ -164,15 +169,15 @@
 }
 
 .btn-file {
-  background-color: #2e313c;
+  background-color: var(--admin-primary);
   color: #ffffff;
-  border-color: #2e313c;
+  border-color: var(--admin-primary);
 }
 
 .btn-file:hover {
-  background-color: #383b44;
+  background-color: var(--admin-primary-hovered);
   color: #ffffff;
-  border-color: #383b44;
+  border-color: var(--admin-primary-hovered);
 }
 
 .homepage-slider-container {
