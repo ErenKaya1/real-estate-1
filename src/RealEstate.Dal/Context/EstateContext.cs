@@ -20,5 +20,7 @@ namespace src.RealEstate.Dal.Context
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             base.OnConfiguring(optionsBuilder);
         }
+
+        public InteriorProperty InteriorProperty { get; set; }
     }
 }

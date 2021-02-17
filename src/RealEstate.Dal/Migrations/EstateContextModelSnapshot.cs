@@ -180,7 +180,7 @@ namespace RealEstate.Dal.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("varchar(12)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");

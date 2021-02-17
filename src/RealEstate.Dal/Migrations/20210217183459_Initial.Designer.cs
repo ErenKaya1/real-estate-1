@@ -9,7 +9,7 @@ using src.RealEstate.Dal.Context;
 namespace RealEstate.Dal.Migrations
 {
     [DbContext(typeof(EstateContext))]
-    [Migration("20210217021213_Initial")]
+    [Migration("20210217183459_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,7 +182,7 @@ namespace RealEstate.Dal.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("varchar(12)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");

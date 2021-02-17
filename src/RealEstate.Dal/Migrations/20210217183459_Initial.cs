@@ -30,7 +30,7 @@ namespace RealEstate.Dal.Migrations
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(type: "varchar(12)", maxLength: 256, nullable: false),
+                    UserName = table.Column<string>(type: "varchar(50)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "varchar(12)", maxLength: 256, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: false),
                     NormalizedEmail = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: false),
