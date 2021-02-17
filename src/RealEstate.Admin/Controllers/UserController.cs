@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using src.RealEstate.Admin.Models.User;
@@ -50,8 +51,10 @@ namespace src.RealEstate.Admin.Controllers
         }
 
         [HttpPost("/login")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserLoginViewModel model)
         {
+            if (!ModelState.IsValid) return View(model);
             EstateUser user;
             var loginProvider = Utility.GetLoginProvider(model.Username);
 
@@ -74,6 +77,24 @@ namespace src.RealEstate.Admin.Controllers
         [HttpGet("/ForgotPassword")]
         public IActionResult ForgotPassword()
         {
+            return View();
+        }
+
+        [HttpPost("/ForgotPassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(UserForgotPasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var httpEncodedToken = HttpUtility.UrlEncode(resetToken);
+                var content = $"<p>Parolanızı sıfırlamak için <a href=\"https://localhost:5001{Url.Action("ResetPassword", "User", new { userId = user.Id, token = httpEncodedToken })}\">tıklayınız</a>.</p>" +
+                                "<p>Bu link 10 dakika sonra geçersiz olacaktır.</p>";
+            }
+
             return View();
         }
     }

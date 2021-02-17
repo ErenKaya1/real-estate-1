@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using src.RealEstate.Dal.Context;
 using src.RealEstate.Entity.Entities;
+using src.RealEstate.Service;
+using src.RealEstate.Service.Contracts;
 
 namespace RealEstate.Admin
 {
@@ -54,6 +56,15 @@ namespace RealEstate.Admin
                 };
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(14);
+            });
+
+            services.AddScoped<IMailService>(x => new MailService
+            {
+                Host = Configuration["Mail:Host"],
+                Port = string.IsNullOrEmpty(Configuration["Mail:Port"]) ? 0 : Convert.ToInt32(Configuration["Mail:Port"]),
+                Username = Configuration["Mail:Username"],
+                Password = Configuration["Mail:Password"],
+                UseSsl = !string.IsNullOrEmpty(Configuration["Mail:UseSsl"]) && Convert.ToBoolean(Configuration["Mail:UseSsl"]),
             });
         }
 
