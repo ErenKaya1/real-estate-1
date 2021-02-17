@@ -1,0 +1,214 @@
+.bg-logo-primary {
+  background-color: #2e313c;
+}
+
+.btn-logo-primary {
+  background-color: #2e313c;
+  color: #ffffff;
+}
+
+.btn-logo-primary:hover {
+  background-color: #383b44;
+  color: #ffffff;
+}
+
+.page-loader .bg-primary {
+  background-color: #ff332a !important;
+}
+
+.layout-sidenav a {
+  color: #a1a1a1;
+}
+
+.sidenav-item.active a {
+  background-color: #434652;
+  color: #ffffff;
+}
+
+.app-brand-logo {
+  background-color: #2e313c;
+  height: 100%;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-brand-logo img {
+  height: 60px;
+}
+
+.list-group-item.active {
+  background-color: #2e313c;
+  color: #ffffff;
+  border-color: #2e313c;
+}
+
+.list-group-item.active:hover,
+.list-group-item.active:active,
+.list-group-item.active:focus {
+  background-color: #383b44;
+  color: #ffffff;
+  border-color: #383b44;
+}
+
+.error {
+  color: red;
+}
+
+.informartion-table thead tr,
+.city-table thead tr,
+.district-table thead tr,
+.estatetype-table thead tr,
+.estate-table thead tr,
+.toast-table thead tr,
+.appointment-table thead tr {
+  background-color: #2e313c;
+  color: #ffffff;
+}
+
+.id-column {
+  width: 5%;
+  text-align: center;
+}
+
+.active-status-column {
+  width: 7%;
+  text-align: center;
+}
+
+.sort-column {
+  width: 3%;
+  text-align: center;
+}
+
+.options-column {
+  width: 10%;
+  text-align: center;
+}
+
+.details-column {
+  width: 15%;
+  text-align: center;
+}
+
+.date-column {
+  width: 15%;
+}
+
+.page-item.active .page-link {
+  background-color: #2e313c;
+  color: #ffffff;
+  border-color: #2e313c;
+}
+
+.page-item.active .page-link:hover {
+  background-color: #383b44;
+  color: #ffffff;
+  border-color: #383b44;
+}
+
+.back-link {
+  margin-left: 15px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.back-link-right {
+  margin-right: 15px;
+}
+
+.back-link-right:hover {
+  text-decoration: underline;
+}
+
+.edit-estate-img-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.edit-estate-img-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.edit-estate-img-wrapper img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.edit-estate-img-container input {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+.image-column {
+  width: 7%;
+}
+
+.image-column img {
+  height: 40px;
+  width: 80px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.btn-file {
+  background-color: #2e313c;
+  color: #ffffff;
+  border-color: #2e313c;
+}
+
+.btn-file:hover {
+  background-color: #383b44;
+  color: #ffffff;
+  border-color: #383b44;
+}
+
+.homepage-slider-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.homepage-slider-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.homepage-slider-container img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.homepage-slider-container input {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 991px) {
+  .app-brand-logo img {
+    height: 45px;
+  }
+
+  .app-brand-logo {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 3px;
+  }
+}
