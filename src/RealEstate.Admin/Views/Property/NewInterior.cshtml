@@ -1,0 +1,26 @@
+@model src.RealEstate.Admin.Models.InteriorProperty.InteriorPropertyNewViewModel
+
+@{
+    ViewData["Title"] = "Yeni İç Özellik";
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yeni İç Özellik Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="Property" asp-action="NewInterior" method="POST"
+            class="property-form">
+            <div class="form-group">
+                <label asp-for="PropertyNameTR" class="form-label"></label>
+                <input asp-for="PropertyNameTR" class="form-control" placeholder="Asansör">
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyNameEN" class="form-label"></label>
+                <input asp-for="PropertyNameEN" class="form-control" placeholder="Elevetor">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="Property" asp-action="ListInteriors" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
