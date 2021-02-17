@@ -6,5 +6,7 @@ namespace src.RealEstate.Common.Constants
         public const string FORGOT_PASSWORD_MESSAGE = "Gelen kutunuzu kontrol ediniz.";
         public const string RESET_PASSWORD_MESSAGE = "Yeni parolanızla giriş yapabilirsiniz.";
         public const string DEFAULT_ERROR_MESSAGE = "Beklenmedik bir hata oluştu.";
+        public const string UPDATE_PROFILE_MESSAGE = "Hesap bilgileri güncellendi.";
+        public const string UPDATE_PASSWORD_ERROR = "Parola güncellenemedi. Lütfen bilgilerinizi kontrol ediniz.";
     }
 }

@@ -9,8 +9,8 @@ namespace src.RealEstate.Entity.Entities
     public class EstateUser : IdentityUser<Guid>
     {
         [Required]
-        [StringLength(12)]
-        [Column(TypeName = "varchar(12)")]
+        [StringLength(50)]
+        [Column(TypeName = "varchar(50)")]
         public override string UserName { get; set; }
 
         [Required]

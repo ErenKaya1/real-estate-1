@@ -8,7 +8,22 @@
     Account settings
 </h4>
 
-<form asp-controller="login" asp-action="updateprofile" asp-antiforgery="true" class="accountsettings-form" method="POST">
+@if (TempData["AccountSettingsMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["AccountSettingsMessage"]</b></div>
+}
+
+@if (TempData["AccountSettingsError"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["AccountSettingsError"]</b></div>
+}
+
+@if (TempData["UpdatePasswordError"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["UpdatePasswordError"]</b></div>
+}
+
+<form asp-controller="User" asp-action="AccountSettings" asp-antiforgery="true" class="accountsettings-form" method="POST">
     <div class="card overflow-hidden">
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">

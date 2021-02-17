@@ -175,5 +175,45 @@ namespace src.RealEstate.Admin.Controllers
 
             return RedirectToAction("index", "home");
         }
+
+        [HttpPost("/AccountSettings")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AccountSettings(UserAccountSettingsViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(AccountSettings));
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+
+                var updateResult = await _userManager.UpdateAsync(user);
+
+                if (updateResult.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.CurrentPassword) && model.NewPassword == model.NewPasswordConfirm)
+                    {
+                        var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+                        if (result.Succeeded)
+                        {
+                            TempData["AccountSettingsMessage"] = Messages.UPDATE_PROFILE_MESSAGE;
+                            return RedirectToAction(nameof(AccountSettings));
+                        }
+
+                        TempData["UpdatePasswordError"] = Messages.UPDATE_PASSWORD_ERROR;
+                        return RedirectToAction(nameof(AccountSettings));
+                    }
+
+                    TempData["AccountSettingsMessage"] = Messages.UPDATE_PROFILE_MESSAGE;
+                    return RedirectToAction(nameof(AccountSettings));
+                }
+            }
+
+            TempData["AccountSettingsError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return RedirectToAction(nameof(AccountSettings));
+        }
     }
 }
