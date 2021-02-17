@@ -21,6 +21,6 @@ namespace src.RealEstate.Dal.Context
             base.OnConfiguring(optionsBuilder);
         }
 
-        public InteriorProperty InteriorProperty { get; set; }
+        public DbSet<InteriorProperty> InteriorProperty { get; set; }
     }
 }

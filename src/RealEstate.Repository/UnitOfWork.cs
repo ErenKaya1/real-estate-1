@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using src.RealEstate.Dal.Context;
+using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 
 namespace src.RealEstate.Repository
@@ -9,6 +10,9 @@ namespace src.RealEstate.Repository
     {
         private bool disposedValue;
         private readonly EstateContext _dbContext;
+        private IRepository<InteriorProperty> _interiorPropertyRepository;
+
+        public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {

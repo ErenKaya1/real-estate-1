@@ -195,6 +195,30 @@ namespace RealEstate.Dal.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.InteriorProperty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("date");
+
+                    b.Property<string>("PropertyNameEN")
+                        .IsRequired()
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PropertyNameTR")
+                        .IsRequired()
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("interior_property");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("src.RealEstate.Entity.Entities.EstateRole", null)

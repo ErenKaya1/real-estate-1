@@ -42,6 +42,21 @@ namespace RealEstate.Dal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "interior_property",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PropertyNameTR = table.Column<string>(maxLength: 50, nullable: false),
+                    PropertyNameEN = table.Column<string>(maxLength: 50, nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_interior_property", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -201,6 +216,9 @@ namespace RealEstate.Dal.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "interior_property");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
