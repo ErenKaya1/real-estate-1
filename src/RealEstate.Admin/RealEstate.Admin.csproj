@@ -12,6 +12,7 @@
     <ProjectReference Include="..\RealEstate.Dal\RealEstate.Dal.csproj" />
     <ProjectReference Include="..\RealEstate.Common\RealEstate.Common.csproj" />
     <ProjectReference Include="..\RealEstate.Service\RealEstate.Service.csproj" />
+    <ProjectReference Include="..\RealEstate.Repository\RealEstate.Repository.csproj" />
   </ItemGroup>
 
 </Project>

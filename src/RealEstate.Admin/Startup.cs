@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using src.RealEstate.Dal.Context;
 using src.RealEstate.Entity.Entities;
+using src.RealEstate.Repository;
+using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service;
 using src.RealEstate.Service.Contracts;
 
@@ -68,6 +70,8 @@ namespace RealEstate.Admin
                 Password = Configuration["Mail:Password"],
                 UseSsl = !string.IsNullOrEmpty(Configuration["Mail:UseSsl"]) && Convert.ToBoolean(Configuration["Mail:UseSsl"]),
             });
+
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
