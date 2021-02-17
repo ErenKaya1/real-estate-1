@@ -43,11 +43,11 @@ namespace RealEstate.Admin
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = new PathString("/SignIn");
-                options.LogoutPath = new PathString("/SignOut");
+                options.LoginPath = new PathString("/Login");
+                options.LogoutPath = new PathString("/Logout");
                 options.Cookie = new CookieBuilder
                 {
-                    Name = "AspNetCoreIdentityUserCookie",
+                    Name = "user",
                     HttpOnly = false,
                     SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax,
                     SecurePolicy = CookieSecurePolicy.Always

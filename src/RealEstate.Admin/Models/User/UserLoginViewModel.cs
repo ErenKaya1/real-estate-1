@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace src.RealEstate.Admin.Models.User
 {
-    [Bind(nameof(Username), nameof(Password))]
+    [Bind(nameof(Username), nameof(Password), nameof(IsPersistent))]
     public class UserLoginViewModel
     {
         [Required]
