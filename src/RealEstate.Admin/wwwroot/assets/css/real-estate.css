@@ -1,0 +1,22 @@
+:root {
+  --admin-primary: #2e313c;
+  --admin-primary-hovered: #383b44;
+}
+
+.bg-admin-primary {
+  background-color: var(--admin-primary);
+}
+
+.btn-admin-primary {
+  background-color: var(--admin-primary);
+  color: #ffffff;
+}
+
+.btn-admin-primary:hover {
+  background-color: var(--admin-primary-hovered);
+  color: #ffffff;
+}
+
+.auth-logo {
+  height: 200px;
+}
