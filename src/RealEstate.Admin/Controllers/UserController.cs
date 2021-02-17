@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using src.RealEstate.Admin.Models.User;
@@ -148,10 +149,31 @@ namespace src.RealEstate.Admin.Controllers
         }
 
         [HttpGet("/Logout")]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
+        }
+
+        [HttpGet("/AccountSettings")]
+        [Authorize]
+        public async Task<IActionResult> AccountSettings()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var model = new UserAccountSettingsViewModel
+                {
+                    UserName = user.UserName,
+                    Email = user.Email
+                };
+
+                return View(model);
+            }
+
+            return RedirectToAction("index", "home");
         }
     }
 }
