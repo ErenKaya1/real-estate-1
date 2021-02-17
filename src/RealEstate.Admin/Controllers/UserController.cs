@@ -70,5 +70,11 @@ namespace src.RealEstate.Admin.Controllers
             ViewData["LoginError"] = Messages.LOGIN_ERROR;
             return View(model);
         }
+
+        [HttpGet("/ForgotPassword")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
     }
 }
