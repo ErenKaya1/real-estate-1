@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Title"]</title>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/bootstrap.css" class="theme-settings-bootstrap-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/real-estate.css" class="theme-settings-appwork-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/theme-corporate.css" class="theme-settings-theme-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/colors.css" class="theme-settings-colors-css">
+    <link rel="stylesheet" href="/assets/vendor/css/rtl/uikit.css">
+    <script type="text/javascript" src="/assets/vendor/js/layout-helpers.js"></script>
+    <script type="text/javascript" src="/assets/vendor/js/theme-settings.js"></script>
+    <script type="text/javascript" src="/assets/vendor/js/pace.js"></script>
+    <script type="text/javascript" src="/assets/vendor/libs/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/vendor/css/pages/authentication.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/toastr/toastr.css">
+</head>
+
+<body>
+    <div class="page-loader">
+        <div class="bg-primary"></div>
+    </div>
+    <div class="authentication-wrapper authentication-1 px-4">
+        <div class="authentication-inner py-5">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/assets/vendor/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/vendor/libs/toastr/toastr.js"></script>
+</body>
+
+</html>
