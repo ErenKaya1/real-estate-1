@@ -125,5 +125,26 @@ namespace src.RealEstate.Admin.Controllers
 
             return View(model);
         }
+
+        [HttpPost("/ResetPassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(UserResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid || model.Password != model.PasswordConfirm) return View(model);
+
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user != null)
+            {
+                var result = await _userManager.ResetPasswordAsync(user, model.ResetToken, model.Password);
+                if (result.Succeeded)
+                {
+                    TempData["ResetPasswordMessage"] = Messages.RESET_PASSWORD_MESSAGE;
+                    return RedirectToAction(nameof(Login));
+                }
+            }
+            
+            ViewData["ResetPasswordError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return View(model);
+        }
     }
 }
