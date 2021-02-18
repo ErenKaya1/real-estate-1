@@ -229,5 +229,25 @@ namespace src.RealEstate.Admin.Controllers
             TempData["ExternalNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(ListExternals));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteExternal(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["ExternalNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListExternals));
+            }
+
+            var result = await _externalPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
+            if (result)
+            {
+                TempData["DeleteExternalMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(ListExternals));
+            }
+
+            TempData["DeleteExternalError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return RedirectToAction(nameof(ListExternals));
+        }
     }
 }
