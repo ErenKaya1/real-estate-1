@@ -166,6 +166,23 @@ $(document).ready(function () {
   }
 });
 
+function deleteConfirm(action, id) {
+  Swal.fire({
+    title: "Emin misiniz?",
+    text: "Bir iç özellik silmek üzeresiniz.",
+    icon: "error",
+    showCancelButton: true,
+    customClass: {
+      confirmButton: "btn btn-danger btn-lg",
+      cancelButton: "btn btn-default btn-lg",
+    },
+  }).then((result) => {
+    if (result.value) {
+      window.location.href = "/Property/" + action + "?propertyId=" + id;
+    }
+  });
+}
+
 $("input[name='CurrentPassword']").on("input", function () {
   if ($("input[name='CurrentPassword']").val() != "") {
     $("input[name='NewPassword']").prop("disabled", false);

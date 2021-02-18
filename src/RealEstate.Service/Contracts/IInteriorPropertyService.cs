@@ -10,5 +10,6 @@ namespace src.RealEstate.Service.Contracts
         IQueryable<InteriorProperty> GetAll();
         Task<InteriorProperty> GetByIdAsync(int id);
         Task<bool> EditAsync(InteriorProperty entity);
+        Task<bool> DeleteByIdAsync(int id);
     }
 }

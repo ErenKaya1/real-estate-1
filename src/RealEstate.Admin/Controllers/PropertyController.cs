@@ -113,5 +113,25 @@ namespace src.RealEstate.Admin.Controllers
             TempData["InteriorNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(ListInteriors));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteInterior(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["InteriorNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListInteriors));
+            }
+
+            var result = await _interiorPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
+            if (result)
+            {
+                TempData["DeleteInteriorMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(ListInteriors));
+            }
+
+            TempData["DeleteInteriorError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return RedirectToAction(nameof(ListInteriors));
+        }
     }
 }

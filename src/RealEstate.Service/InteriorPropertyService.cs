@@ -20,7 +20,7 @@ namespace src.RealEstate.Service
         {
             if (entity == null) return false;
             _unitOfWork.InteriorPropertyRepository.Add(entity);
-            
+
             return await _unitOfWork.SaveChanges();
         }
 
@@ -43,8 +43,17 @@ namespace src.RealEstate.Service
 
         public async Task<bool> EditAsync(InteriorProperty entity)
         {
-            if(entity == null) return false;
+            if (entity == null) return false;
             _unitOfWork.InteriorPropertyRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
+
+        public async Task<bool> DeleteByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.InteriorPropertyRepository.FindOne(x => x.Id == id);
+            if (entity == null) return false;
+            _unitOfWork.InteriorPropertyRepository.Delete(entity);
 
             return await _unitOfWork.SaveChanges();
         }
