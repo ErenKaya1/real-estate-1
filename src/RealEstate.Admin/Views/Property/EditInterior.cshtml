@@ -1,0 +1,27 @@
+@model src.RealEstate.Admin.Models.InteriorProperty.InteriorPropertyEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Interior Property";
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        İç Özellik Düzenle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="Property" asp-action="EditInterior" method="POST"
+            class="property-form">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PropertyNameTR" class="form-label"></label>
+                <input asp-for="PropertyNameTR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyNameEN" class="form-label"></label>
+                <input asp-for="PropertyNameEN" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="admin" asp-action="ListExternalInformations" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>

@@ -33,7 +33,7 @@ namespace src.RealEstate.Repository
 
         public Task<T> FindOne(Expression<Func<T, bool>> predicate)
         {
-            return _dbSet.FirstOrDefaultAsync();
+            return _dbSet.FirstOrDefaultAsync(predicate);
         }
 
         public void Add(T entity)

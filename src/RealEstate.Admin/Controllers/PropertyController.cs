@@ -44,7 +44,7 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("ListInteriors");
+                return RedirectToAction(nameof(ListInteriors));
             }
 
             ViewData["NewInteriorError"] = Messages.DEFAULT_ERROR_MESSAGE;
@@ -62,6 +62,32 @@ namespace src.RealEstate.Admin.Controllers
             }).AsNoTracking().ToListAsync();
 
             return View(models);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditInterior(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["InteriorNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListInteriors));
+            }
+
+            var entity = await _interiorPropertyService.GetById(Convert.ToInt32(propertyId));
+            if (entity != null)
+            {
+                var model = new InteriorPropertyEditViewModel
+                {
+                    Id = entity.Id,
+                    PropertyNameTR = entity.PropertyNameTR,
+                    PropertyNameEN = entity.PropertyNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["InteriorNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListInteriors));
         }
     }
 }

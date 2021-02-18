@@ -34,5 +34,12 @@ namespace src.RealEstate.Service
 
             return entities;
         }
+
+        public async Task<InteriorProperty> GetById(int id)
+        {
+            var entity = await _unitOfWork.InteriorPropertyRepository.FindOne(x => x.Id == id);
+            System.Console.WriteLine(entity.PropertyNameTR);
+            return entity;
+        }
     }
 }

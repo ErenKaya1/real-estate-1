@@ -8,5 +8,6 @@ namespace src.RealEstate.Service.Contracts
     {
         Task<bool> AddOne(InteriorProperty entity);
         IQueryable<InteriorProperty> GetAll();
+        Task<InteriorProperty> GetById(int id);
     }
 }
