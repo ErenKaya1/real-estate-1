@@ -49,9 +49,13 @@ namespace src.RealEstate.Service
             return await _unitOfWork.SaveChanges();
         }
 
-        public Task<bool> DeleteByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _unitOfWork.AmbitPropertyRepository.FindOne(x => x.Id == id);
+            if(entity == null) return false;
+            _unitOfWork.AmbitPropertyRepository.Delete(entity);
+
+            return await _unitOfWork.SaveChanges();
         }
     }
 }

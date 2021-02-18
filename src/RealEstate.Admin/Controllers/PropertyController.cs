@@ -343,8 +343,28 @@ namespace src.RealEstate.Admin.Controllers
                     return RedirectToAction(nameof(EditAmbit), new { propertyId = model.Id });
                 }
             }
-            
+
             TempData["AmbitNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListAmbits));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAmbit(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["AmbitNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListAmbits));
+            }
+
+            var result = await _ambitPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
+            if (result)
+            {
+                TempData["DeleteAmbitMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(ListAmbits));
+            }
+
+            TempData["DeleteAmbitError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(ListAmbits));
         }
     }
