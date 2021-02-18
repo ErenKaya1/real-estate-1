@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using src.RealEstate.Admin.Models.AmbitProperty;
 using src.RealEstate.Admin.Models.ExternalProperty;
 using src.RealEstate.Admin.Models.InteriorProperty;
 using src.RealEstate.Common.Constants;
@@ -17,11 +18,15 @@ namespace src.RealEstate.Admin.Controllers
     {
         private readonly IInteriorPropertyService _interiorPropertyService;
         private readonly IExternalPropertyService _externalPropertyService;
+        private readonly IAmbitPropertyService _ambitPropertyService;
 
-        public PropertyController(IInteriorPropertyService interiorPropertyService, IExternalPropertyService externalPropertyService)
+        public PropertyController(IInteriorPropertyService interiorPropertyService,
+                                  IExternalPropertyService externalPropertyService,
+                                  IAmbitPropertyService ambitPropertyService)
         {
             _interiorPropertyService = interiorPropertyService;
             _externalPropertyService = externalPropertyService;
+            _ambitPropertyService = ambitPropertyService;
         }
 
         [HttpGet]
@@ -254,6 +259,30 @@ namespace src.RealEstate.Admin.Controllers
         public IActionResult NewAmbit()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewAmbit(AmbitPropertyNewViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var entity = new AmbitProperty
+            {
+                PropertyNameTR = model.PropertyNameTR,
+                PropertyNameEN = model.PropertyNameEN,
+                CreatedDate = DateTime.Now.Date
+            };
+
+            var result = await _ambitPropertyService.AddOneAsync(entity);
+            if (result)
+            {
+                TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction("ListAmbits");
+            }
+
+            TempData["NewAmbitError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return View(model);
         }
     }
 }

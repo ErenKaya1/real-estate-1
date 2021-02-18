@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Threading.Tasks;
+using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service.Contracts;
 
@@ -10,6 +13,34 @@ namespace src.RealEstate.Service
         public AmbitPropertyService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<bool> AddOneAsync(AmbitProperty entity)
+        {
+            if (entity == null) return false;
+            _unitOfWork.AmbitPropertyRepository.Add(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
+
+        public IQueryable<AmbitProperty> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<AmbitProperty> GetByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> EditAsync(AmbitProperty entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> DeleteByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
