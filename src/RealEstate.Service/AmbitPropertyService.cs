@@ -35,9 +35,10 @@ namespace src.RealEstate.Service
             return entities;
         }
 
-        public Task<AmbitProperty> GetByIdAsync(int id)
+        public async Task<AmbitProperty> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _unitOfWork.AmbitPropertyRepository.FindOne(x => x.Id == id);
+            return entity;
         }
 
         public Task<bool> EditAsync(AmbitProperty entity)

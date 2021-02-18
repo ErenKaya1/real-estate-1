@@ -9,6 +9,11 @@
     <div class="alert alert-success"><b>@TempData["SavedSuccessfully"]</b></div>
 }
 
+@if (TempData["AmbitNotFound"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["AmbitNotFound"]</b></div>
+}
+
 @if (Model.Count == 0)
 {
     <div class="alert alert-warning"><b>Henüz muhit özelliği eklemediniz.</b></div>

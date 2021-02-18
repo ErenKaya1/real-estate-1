@@ -297,5 +297,31 @@ namespace src.RealEstate.Admin.Controllers
 
             return View(models);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAmbit(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["AmbitNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListAmbits));
+            }
+
+            var entity = await _ambitPropertyService.GetByIdAsync(Convert.ToInt32(propertyId));
+            if (entity != null)
+            {
+                var model = new AmbitPropertyEditViewModel
+                {
+                    Id = entity.Id,
+                    PropertyNameTR = entity.PropertyNameTR,
+                    PropertyNameEN = entity.PropertyNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["AmbitNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListAmbits));
+        }
     }
 }
