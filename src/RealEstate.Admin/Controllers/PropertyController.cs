@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using src.RealEstate.Admin.Models.ExternalProperty;
 using src.RealEstate.Admin.Models.InteriorProperty;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -15,10 +16,12 @@ namespace src.RealEstate.Admin.Controllers
     public class PropertyController : Controller
     {
         private readonly IInteriorPropertyService _interiorPropertyService;
+        private readonly IExternalPropertyService _externalPropertyService;
 
-        public PropertyController(IInteriorPropertyService interiorPropertyService)
+        public PropertyController(IInteriorPropertyService interiorPropertyService, IExternalPropertyService externalPropertyService)
         {
             _interiorPropertyService = interiorPropertyService;
+            _externalPropertyService = externalPropertyService;
         }
 
         [HttpGet]
@@ -138,6 +141,30 @@ namespace src.RealEstate.Admin.Controllers
         public IActionResult NewExternal()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewExternal(ExternalPropertyNewViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var entity = new ExternalProperty
+            {
+                PropertyNameTR = model.PropertyNameTR,
+                PropertyNameEN = model.PropertyNameEN,
+                CreatedDate = DateTime.Now.Date
+            };
+
+            var result = await _externalPropertyService.AddOneAsync(entity);
+            if (result)
+            {
+                TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction("ListExternals");
+            }
+
+            ViewData["NewExternalError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return View(model);
         }
     }
 }

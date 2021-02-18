@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Threading.Tasks;
+using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service.Contracts;
 
@@ -10,6 +13,34 @@ namespace src.RealEstate.Service
         public ExternalPropertyService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<bool> AddOneAsync(ExternalProperty entity)
+        {
+            if (entity == null) return false;
+            _unitOfWork.ExternalPropertyRepository.Add(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
+
+        public IQueryable<ExternalProperty> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ExternalProperty> GetByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> EditAsync(ExternalProperty entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> DeleteByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -4,6 +4,11 @@
     ViewData["Title"] = "Yeni Dış Özellik";
 }
 
+@if (ViewData["NewExternalError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["NewExternalError"]</b></div>
+}
+
 <div class="card mb-4">
     <h6 class="card-header">
         Yeni Dış Özellik Ekle
