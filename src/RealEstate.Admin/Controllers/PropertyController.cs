@@ -249,5 +249,11 @@ namespace src.RealEstate.Admin.Controllers
             TempData["DeleteExternalError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(ListExternals));
         }
+
+        [HttpGet]
+        public IActionResult NewAmbit()
+        {
+            return View();
+        }
     }
 }
