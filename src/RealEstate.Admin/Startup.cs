@@ -71,8 +71,9 @@ namespace RealEstate.Admin
                 UseSsl = !string.IsNullOrEmpty(Configuration["Mail:UseSsl"]) && Convert.ToBoolean(Configuration["Mail:UseSsl"]),
             });
 
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IInteriorPropertyService, InteriorPropertyService>();
+            services.AddScoped<IExternalPropertyService, ExternalPropertyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

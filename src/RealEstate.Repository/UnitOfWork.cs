@@ -11,8 +11,10 @@ namespace src.RealEstate.Repository
         private bool disposedValue;
         private readonly EstateContext _dbContext;
         private IRepository<InteriorProperty> _interiorPropertyRepository;
+        private IRepository<ExternalProperty> _externalPropertyRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
+        public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {

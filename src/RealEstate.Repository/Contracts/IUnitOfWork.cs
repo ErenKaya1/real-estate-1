@@ -8,5 +8,6 @@ namespace src.RealEstate.Repository.Contracts
     {
         Task<bool> SaveChanges();
         IRepository<InteriorProperty> InteriorPropertyRepository { get; }
+        IRepository<ExternalProperty> ExternalPropertyRepository { get; }
     }
 }
