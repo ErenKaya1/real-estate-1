@@ -63,13 +63,7 @@
   color: red;
 }
 
-.informartion-table thead tr,
-.city-table thead tr,
-.district-table thead tr,
-.estatetype-table thead tr,
-.estate-table thead tr,
-.toast-table thead tr,
-.appointment-table thead tr {
+.list-table thead tr {
   background-color: var(--admin-primary);
   color: #ffffff;
 }

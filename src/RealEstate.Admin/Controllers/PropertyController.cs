@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.InteriorProperty;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -47,6 +49,19 @@ namespace src.RealEstate.Admin.Controllers
 
             ViewData["NewInteriorError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListInteriors()
+        {
+            var models = await _interiorPropertyService.GetAll().Select(x => new InteriorPropertyListViewModel
+            {
+                Id = x.Id,
+                PropertyNameTR = x.PropertyNameTR,
+                PropertyNameEN = x.PropertyNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }
