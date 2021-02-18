@@ -8,5 +8,6 @@ namespace src.RealEstate.Common.Constants
         public const string DEFAULT_ERROR_MESSAGE = "Beklenmedik bir hata oluştu.";
         public const string UPDATE_PROFILE_MESSAGE = "Hesap bilgileri güncellendi.";
         public const string UPDATE_PASSWORD_ERROR = "Parola güncellenemedi. Lütfen bilgilerinizi kontrol ediniz.";
+        public const string SAVED_SUCCESSFULLY_MESSAGE = "Başarıyla kaydedildi.";
     }
 }

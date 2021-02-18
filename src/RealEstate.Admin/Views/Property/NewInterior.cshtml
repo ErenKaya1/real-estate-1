@@ -4,6 +4,11 @@
     ViewData["Title"] = "Yeni İç Özellik";
 }
 
+@if (ViewData["NewInteriorError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["Error"]</b></div>
+}
+
 <div class="card mb-4">
     <h6 class="card-header">
         Yeni İç Özellik Ekle
