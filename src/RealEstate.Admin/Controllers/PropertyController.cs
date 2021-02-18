@@ -414,5 +414,31 @@ namespace src.RealEstate.Admin.Controllers
 
             return View(models);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTransportation(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["TransportationNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListTransportations));
+            }
+
+            var entity = await _transportationPropertyService.GetByIdAsync(Convert.ToInt32(propertyId));
+            if (entity != null)
+            {
+                var model = new TransportationPropertyEditViewModel
+                {
+                    Id = entity.Id,
+                    PropertyNameTR = entity.PropertyNameTR,
+                    PropertyNameEN = entity.PropertyNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["TransportationNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListTransportations));
+        }
     }
 }

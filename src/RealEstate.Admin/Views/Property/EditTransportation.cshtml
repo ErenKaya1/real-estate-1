@@ -1,0 +1,32 @@
+@model src.RealEstate.Admin.Models.TransportationProperty.TransportationPropertyEditViewModel
+
+@{
+    ViewData["Title"] = "Ulaşım Özelliği Düzenle";
+}
+
+@if (TempData["EditTransportationMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["EditTransportationMessage"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Ulaşım Özelliği Düzenle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="Property" asp-action="EditTransportation" method="POST"
+            class="property-form">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PropertyNameTR" class="form-label"></label>
+                <input asp-for="PropertyNameTR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyNameEN" class="form-label"></label>
+                <input asp-for="PropertyNameEN" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="Property" asp-action="ListTransportations" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>

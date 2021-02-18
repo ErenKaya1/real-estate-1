@@ -35,9 +35,10 @@ namespace src.RealEstate.Service
             return entities;
         }
 
-        public Task<TransportationProperty> GetByIdAsync(int id)
+        public async Task<TransportationProperty> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _unitOfWork.TransportationPropertyRepository.FindOne(x => x.Id == id);
+            return entity;
         }
 
         public Task<bool> EditAsync(TransportationProperty entity)
