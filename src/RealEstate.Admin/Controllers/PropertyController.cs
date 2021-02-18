@@ -464,5 +464,25 @@ namespace src.RealEstate.Admin.Controllers
             TempData["TransportationNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(ListTransportations));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteTransportation(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["TransportationNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListTransportations));
+            }
+
+            var result = await _transportationPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
+            if (result)
+            {
+                TempData["DeleteTransportationMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(ListTransportations));
+            }
+
+            TempData["DeleteTransportationError"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+            return RedirectToAction(nameof(ListTransportations));
+        }
     }
 }
