@@ -205,5 +205,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["ExternalNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(ListExternals));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditExternal(ExternalPropertyEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(EditExternal), new { propertyId = model.Id });
+
+            var entity = await _externalPropertyService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.PropertyNameTR = model.PropertyNameTR;
+                entity.PropertyNameEN = model.PropertyNameEN;
+
+                var result = await _externalPropertyService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditExternalMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(EditExternal), new { propertyId = model.Id });
+                }
+            }
+
+            TempData["ExternalNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListExternals));
+        }
     }
 }

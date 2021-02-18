@@ -40,9 +40,11 @@ namespace src.RealEstate.Service
             return entity;
         }
 
-        public Task<bool> EditAsync(ExternalProperty entity)
+        public async Task<bool> EditAsync(ExternalProperty entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null) return false;
+            _unitOfWork.ExternalPropertyRepository.Update(entity);
+            return await _unitOfWork.SaveChanges();
         }
 
         public Task<bool> DeleteByIdAsync(int id)
