@@ -4,6 +4,11 @@
     ViewData["Title"] = "Edit Interior Property";
 }
 
+@if (TempData["EditInteriorMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["EditInteriorMessage"]</b></div>
+}
+
 <div class="card mb-4">
     <h6 class="card-header">
         İç Özellik Düzenle
@@ -21,7 +26,7 @@
                 <input asp-for="PropertyNameEN" class="form-control">
             </div>
             <button type="submit" class="btn btn-admin-primary">Kaydet</button>
-            <a asp-controller="admin" asp-action="ListExternalInformations" class="back-link">Listeye Dön</a>
+            <a asp-controller="Property" asp-action="ListInteriors" class="back-link">Listeye Dön</a>
         </form>
     </div>
 </div>

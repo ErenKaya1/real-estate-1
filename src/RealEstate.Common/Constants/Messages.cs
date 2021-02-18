@@ -10,5 +10,6 @@ namespace src.RealEstate.Common.Constants
         public const string UPDATE_PASSWORD_ERROR = "Parola güncellenemedi. Lütfen bilgilerinizi kontrol ediniz.";
         public const string SAVED_SUCCESSFULLY_MESSAGE = "Başarıyla kaydedildi.";
         public const string NOT_FOUND_ERROR = "Kayıt bulunamadı.";
+        public const string EDIT_SUCCESSFULLY_MESSAGE = "Başarıyla güncellendi.";
     }
 }

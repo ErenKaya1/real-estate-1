@@ -16,7 +16,7 @@ namespace src.RealEstate.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddOne(InteriorProperty entity)
+        public async Task<bool> AddOneAsync(InteriorProperty entity)
         {
             if (entity == null) return false;
             _unitOfWork.InteriorPropertyRepository.Add(entity);
@@ -35,11 +35,18 @@ namespace src.RealEstate.Service
             return entities;
         }
 
-        public async Task<InteriorProperty> GetById(int id)
+        public async Task<InteriorProperty> GetByIdAsync(int id)
         {
             var entity = await _unitOfWork.InteriorPropertyRepository.FindOne(x => x.Id == id);
-            System.Console.WriteLine(entity.PropertyNameTR);
             return entity;
+        }
+
+        public async Task<bool> EditAsync(InteriorProperty entity)
+        {
+            if(entity == null) return false;
+            _unitOfWork.InteriorPropertyRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
         }
     }
 }

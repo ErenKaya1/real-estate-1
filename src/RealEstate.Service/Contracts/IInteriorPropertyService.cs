@@ -6,8 +6,9 @@ namespace src.RealEstate.Service.Contracts
 {
     public interface IInteriorPropertyService
     {
-        Task<bool> AddOne(InteriorProperty entity);
+        Task<bool> AddOneAsync(InteriorProperty entity);
         IQueryable<InteriorProperty> GetAll();
-        Task<InteriorProperty> GetById(int id);
+        Task<InteriorProperty> GetByIdAsync(int id);
+        Task<bool> EditAsync(InteriorProperty entity);
     }
 }

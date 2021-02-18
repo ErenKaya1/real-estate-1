@@ -40,7 +40,7 @@ namespace src.RealEstate.Admin.Controllers
                 CreatedTime = DateTime.Now.Date
             };
 
-            var result = await _interiorPropertyService.AddOne(entity);
+            var result = await _interiorPropertyService.AddOneAsync(entity);
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
@@ -73,7 +73,7 @@ namespace src.RealEstate.Admin.Controllers
                 return RedirectToAction(nameof(ListInteriors));
             }
 
-            var entity = await _interiorPropertyService.GetById(Convert.ToInt32(propertyId));
+            var entity = await _interiorPropertyService.GetByIdAsync(Convert.ToInt32(propertyId));
             if (entity != null)
             {
                 var model = new InteriorPropertyEditViewModel
@@ -84,6 +84,30 @@ namespace src.RealEstate.Admin.Controllers
                 };
 
                 return View(model);
+            }
+
+            TempData["InteriorNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListInteriors));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditInterior(InteriorPropertyEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(EditInterior), new { propertyId = model.Id });
+
+            var entity = await _interiorPropertyService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.PropertyNameTR = model.PropertyNameTR;
+                entity.PropertyNameEN = model.PropertyNameEN;
+
+                var result = await _interiorPropertyService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditInteriorMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(EditInterior), new { propertyId = model.Id });
+                }
             }
 
             TempData["InteriorNotFound"] = Messages.NOT_FOUND_ERROR;
