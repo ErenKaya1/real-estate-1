@@ -1,20 +1,20 @@
-@model src.RealEstate.Admin.Models.InteriorProperty.InteriorPropertyEditViewModel
+@model src.RealEstate.Admin.Models.ExternalProperty.ExternalPropertyEditViewModel
 
 @{
-    ViewData["Title"] = "İç Özellik Düzenle";
+    ViewData["Title"] = "Dış Özellik Düzenle";
 }
 
-@if (TempData["EditInteriorMessage"] != null)
+@if (TempData["EditExternalMessage"] != null)
 {
-    <div class="alert alert-info"><b>@TempData["EditInteriorMessage"]</b></div>
+    <div class="alert alert-info"><b>@TempData["EditExternalMessage"]</b></div>
 }
 
 <div class="card mb-4">
     <h6 class="card-header">
-        İç Özellik Düzenle
+        Dış Özellik Düzenle
     </h6>
     <div class="card-body">
-        <form asp-controller="Property" asp-action="EditInterior" method="POST"
+        <form asp-controller="Property" asp-action="EditExternal" method="POST"
             class="property-form">
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -26,7 +26,7 @@
                 <input asp-for="PropertyNameEN" class="form-control">
             </div>
             <button type="submit" class="btn btn-admin-primary">Kaydet</button>
-            <a asp-controller="Property" asp-action="ListInteriors" class="back-link">Listeye Dön</a>
+            <a asp-controller="Property" asp-action="ListExternals" class="back-link">Listeye Dön</a>
         </form>
     </div>
 </div>

@@ -1,12 +1,17 @@
 @model System.Collections.Generic.List<src.RealEstate.Admin.Models.ExternalProperty.ExternalPropertyListViewModel>
 
 @{
-    ViewData["Title"] = "List External Properties";
+    ViewData["Title"] = "Dış Özellikler";
 }
 
 @if (TempData["SavedSuccessfully"] != null)
 {
     <div class="alert alert-success"><b>@TempData["SavedSuccessfully"]</b></div>
+}
+
+@if (TempData["ExternalNotFound"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["ExternalNotFound"]</b></div>
 }
 
 @if (Model.Count == 0)

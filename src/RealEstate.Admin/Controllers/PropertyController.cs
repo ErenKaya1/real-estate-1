@@ -179,5 +179,31 @@ namespace src.RealEstate.Admin.Controllers
 
             return View(models);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditExternal(int? propertyId)
+        {
+            if (propertyId == null)
+            {
+                TempData["ExternalNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(ListExternals));
+            }
+
+            var entity = await _externalPropertyService.GetByIdAsync(Convert.ToInt32(propertyId));
+            if (entity != null)
+            {
+                var model = new ExternalPropertyEditViewModel
+                {
+                    Id = entity.Id,
+                    PropertyNameTR = entity.PropertyNameTR,
+                    PropertyNameEN = entity.PropertyNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["ExternalNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListExternals));
+        }
     }
 }

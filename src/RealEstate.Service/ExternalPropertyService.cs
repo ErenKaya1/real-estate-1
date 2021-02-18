@@ -34,9 +34,10 @@ namespace src.RealEstate.Service
             return entities;
         }
 
-        public Task<ExternalProperty> GetByIdAsync(int id)
+        public async Task<ExternalProperty> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _unitOfWork.ExternalPropertyRepository.FindOne(x => x.Id == id);
+            return entity;
         }
 
         public Task<bool> EditAsync(ExternalProperty entity)
