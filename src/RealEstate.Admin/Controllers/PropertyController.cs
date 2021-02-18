@@ -278,11 +278,24 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("ListAmbits");
+                return RedirectToAction(nameof(ListAmbits));
             }
 
             TempData["NewAmbitError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListAmbits()
+        {
+            var models = await _ambitPropertyService.GetAll().Select(x => new AmbitPropertyListViewModel
+            {
+                Id = x.Id,
+                PropertyNameTR = x.PropertyNameTR,
+                PropertyNameEN = x.PropertyNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }
