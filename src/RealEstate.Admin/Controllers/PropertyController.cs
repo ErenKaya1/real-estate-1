@@ -323,5 +323,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["AmbitNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(ListAmbits));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAmbit(AmbitPropertyEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(EditAmbit), new { propertyId = model.Id });
+
+            var entity = await _ambitPropertyService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.PropertyNameTR = model.PropertyNameTR;
+                entity.PropertyNameEN = model.PropertyNameEN;
+
+                var result = await _ambitPropertyService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditAmbitMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(EditAmbit), new { propertyId = model.Id });
+                }
+            }
+            
+            TempData["AmbitNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListAmbits));
+        }
     }
 }
