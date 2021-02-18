@@ -15,9 +15,12 @@ namespace src.RealEstate.Service
             _unitOfWork = unitOfWork;
         }
 
-        public Task<bool> AddOneAsync(TransportationProperty entity)
+        public async Task<bool> AddOneAsync(TransportationProperty entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null) return false;
+            _unitOfWork.TransportationPropertyRepository.Add(entity);
+
+            return await _unitOfWork.SaveChanges();
         }
 
         public IQueryable<TransportationProperty> GetAll()

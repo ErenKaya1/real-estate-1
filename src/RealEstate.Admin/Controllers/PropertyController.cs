@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.AmbitProperty;
 using src.RealEstate.Admin.Models.ExternalProperty;
 using src.RealEstate.Admin.Models.InteriorProperty;
+using src.RealEstate.Admin.Models.TransportationProperty;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
@@ -19,14 +20,17 @@ namespace src.RealEstate.Admin.Controllers
         private readonly IInteriorPropertyService _interiorPropertyService;
         private readonly IExternalPropertyService _externalPropertyService;
         private readonly IAmbitPropertyService _ambitPropertyService;
+        private readonly ITransportationPropertyService _transportationPropertyService;
 
         public PropertyController(IInteriorPropertyService interiorPropertyService,
                                   IExternalPropertyService externalPropertyService,
-                                  IAmbitPropertyService ambitPropertyService)
+                                  IAmbitPropertyService ambitPropertyService,
+                                  ITransportationPropertyService transportationPropertyService)
         {
             _interiorPropertyService = interiorPropertyService;
             _externalPropertyService = externalPropertyService;
             _ambitPropertyService = ambitPropertyService;
+            _transportationPropertyService = transportationPropertyService;
         }
 
         [HttpGet]
@@ -372,6 +376,29 @@ namespace src.RealEstate.Admin.Controllers
         public IActionResult NewTransportation()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NewTransportation(TransportationPropertyNewViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var entity = new TransportationProperty
+            {
+                PropertyNameTR = model.PropertyNameTR,
+                PropertyNameEN = model.PropertyNameEN,
+                CreatedDate = DateTime.Now.Date
+            };
+
+            var result = await _transportationPropertyService.AddOneAsync(entity);
+            if (result)
+            {
+                TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction("ListTransportations");
+            }
+
+            TempData["NewTransportationError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return View(model);
         }
     }
 }

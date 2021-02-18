@@ -13,7 +13,7 @@ namespace src.RealEstate.Admin.Models.TransportationProperty
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Özellik Adı (Türkçe)")]
+        [Display(Name = "Özellik Adı (İngilizce)")]
         public string PropertyNameEN { get; set; }
     }
 }
