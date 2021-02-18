@@ -379,6 +379,7 @@ namespace src.RealEstate.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> NewTransportation(TransportationPropertyNewViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -394,11 +395,24 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("ListTransportations");
+                return RedirectToAction(nameof(ListTransportations));
             }
 
             TempData["NewTransportationError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListTransportations()
+        {
+            var models = await _transportationPropertyService.GetAll().Select(x => new TransportationPropertyListViewModel
+            {
+                Id = x.Id,
+                PropertyNameTR = x.PropertyNameTR,
+                PropertyNameEN = x.PropertyNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }

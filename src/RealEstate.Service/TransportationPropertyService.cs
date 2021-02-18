@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service.Contracts;
@@ -25,7 +26,13 @@ namespace src.RealEstate.Service
 
         public IQueryable<TransportationProperty> GetAll()
         {
-            throw new System.NotImplementedException();
+            var entities = _unitOfWork.TransportationPropertyRepository
+                                        .FindAll()
+                                        .OrderByDescending(x => x.CreatedDate)
+                                        .AsNoTracking()
+                                        .AsQueryable();
+
+            return entities;
         }
 
         public Task<TransportationProperty> GetByIdAsync(int id)
