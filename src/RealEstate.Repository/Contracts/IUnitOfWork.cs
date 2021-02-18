@@ -10,5 +10,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<InteriorProperty> InteriorPropertyRepository { get; }
         IRepository<ExternalProperty> ExternalPropertyRepository { get; }
         IRepository<AmbitProperty> AmbitPropertyRepository { get; }
+        IRepository<TransportationProperty> TransportationPropertyRepository { get; }
     }
 }

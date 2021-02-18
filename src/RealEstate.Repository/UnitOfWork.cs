@@ -13,10 +13,12 @@ namespace src.RealEstate.Repository
         private IRepository<InteriorProperty> _interiorPropertyRepository;
         private IRepository<ExternalProperty> _externalPropertyRepository;
         private IRepository<AmbitProperty> _ambitPropertyRepository;
+        private IRepository<TransportationProperty> _transportationRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
         public IRepository<AmbitProperty> AmbitPropertyRepository => _ambitPropertyRepository ??= new Repository<AmbitProperty>(_dbContext);
+        public IRepository<TransportationProperty> TransportationPropertyRepository => _transportationRepository ??= new Repository<TransportationProperty>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {
