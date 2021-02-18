@@ -160,11 +160,24 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("ListExternals");
+                return RedirectToAction(nameof(ListExternals));
             }
 
             ViewData["NewExternalError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListExternals()
+        {
+            var models = await _externalPropertyService.GetAll().Select(x => new ExternalPropertyListViewModel
+            {
+                Id = x.Id,
+                PropertyNameTR = x.PropertyNameTR,
+                PropertyNameEN = x.PropertyNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }

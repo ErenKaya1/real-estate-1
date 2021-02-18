@@ -166,10 +166,10 @@ $(document).ready(function () {
   }
 });
 
-function deleteConfirm(action, id) {
+function deletePropertyConfirm(action, id) {
   Swal.fire({
     title: "Emin misiniz?",
-    text: "Bir iç özellik silmek üzeresiniz.",
+    text: "Bir özellik silmek üzeresiniz.",
     icon: "error",
     showCancelButton: true,
     customClass: {
