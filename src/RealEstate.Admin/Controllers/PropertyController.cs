@@ -367,5 +367,11 @@ namespace src.RealEstate.Admin.Controllers
             TempData["DeleteAmbitError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(ListAmbits));
         }
+
+        [HttpGet]
+        public IActionResult NewTransportation()
+        {
+            return View();
+        }
     }
 }
