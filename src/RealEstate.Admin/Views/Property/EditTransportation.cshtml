@@ -14,8 +14,7 @@
         Ulaşım Özelliği Düzenle
     </h6>
     <div class="card-body">
-        <form asp-controller="Property" asp-action="EditTransportation" method="POST"
-            class="property-form">
+        <form asp-controller="Property" asp-action="EditTransportation" method="POST" class="property-form">
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="PropertyNameTR" class="form-label"></label>
@@ -26,7 +25,16 @@
                 <input asp-for="PropertyNameEN" class="form-control">
             </div>
             <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a href="javascript:void(0)" class="btn btn-danger" onclick="deletePropertyConfirm('DeleteTransportation','@Model.Id')">Sil</a>
             <a asp-controller="Property" asp-action="ListTransportations" class="back-link">Listeye Dön</a>
         </form>
     </div>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
+}
+
+@section Scripts{
+    <script type="text/javascript" src="/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+}

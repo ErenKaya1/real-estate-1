@@ -26,7 +26,16 @@
                 <input asp-for="PropertyNameEN" class="form-control">
             </div>
             <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a href="javascript:void(0)" class="btn btn-danger" onclick="deletePropertyConfirm('DeleteInterior','@Model.Id')">Sil</a>
             <a asp-controller="Property" asp-action="ListInteriors" class="back-link">Listeye Dön</a>
         </form>
     </div>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
+}
+
+@section Scripts{
+    <script type="text/javascript" src="/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+}
