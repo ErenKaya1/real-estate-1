@@ -170,6 +170,8 @@ function deletePropertyConfirm(action, id) {
   Swal.fire({
     title: "Emin misiniz?",
     text: "Bir özellik silmek üzeresiniz.",
+    confirmButtonText: "Tamam",
+    cancelButtonText: "Vazgeç",
     icon: "error",
     showCancelButton: true,
     customClass: {
