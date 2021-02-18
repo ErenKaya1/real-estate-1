@@ -440,5 +440,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["TransportationNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(ListTransportations));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTransportation(TransportationPropertyEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(EditTransportation), new { propertyId = model.Id });
+
+            var entity = await _transportationPropertyService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.PropertyNameTR = model.PropertyNameTR;
+                entity.PropertyNameEN = model.PropertyNameEN;
+
+                var result = await _transportationPropertyService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditTransportationMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(EditTransportation), new { propertyId = entity.Id });
+                }
+            }
+
+            TempData["TransportationNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(ListTransportations));
+        }
     }
 }
