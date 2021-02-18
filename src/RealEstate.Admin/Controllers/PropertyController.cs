@@ -133,5 +133,11 @@ namespace src.RealEstate.Admin.Controllers
             TempData["DeleteInteriorError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(ListInteriors));
         }
+
+        [HttpGet]
+        public IActionResult NewExternal()
+        {
+            return View();
+        }
     }
 }

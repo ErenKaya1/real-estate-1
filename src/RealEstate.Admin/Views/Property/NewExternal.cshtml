@@ -1,0 +1,25 @@
+@model src.RealEstate.Admin.Models.ExternalProperty.ExternalPropertyNewViewModel
+
+@{
+    ViewData["Title"] = "Yeni Dış Özellik";
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yeni Dış Özellik Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="Property" asp-action="NewExternal" method="POST" class="property-form">
+            <div class="form-group">
+                <label asp-for="PropertyNameTR" class="form-label"></label>
+                <input asp-for="PropertyNameTR" class="form-control" placeholder="Otopark">
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyNameEN" class="form-label"></label>
+                <input asp-for="PropertyNameEN" class="form-control" placeholder="Car park">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="Property" asp-action="ListExternals" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
