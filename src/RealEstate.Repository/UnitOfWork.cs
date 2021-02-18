@@ -12,9 +12,11 @@ namespace src.RealEstate.Repository
         private readonly EstateContext _dbContext;
         private IRepository<InteriorProperty> _interiorPropertyRepository;
         private IRepository<ExternalProperty> _externalPropertyRepository;
+        private IRepository<AmbitProperty> _ambitPropertyRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
+        public IRepository<AmbitProperty> AmbitPropertyRepository => _ambitPropertyRepository ??= new Repository<AmbitProperty>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {

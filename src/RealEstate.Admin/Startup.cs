@@ -74,6 +74,7 @@ namespace RealEstate.Admin
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IInteriorPropertyService, InteriorPropertyService>();
             services.AddScoped<IExternalPropertyService, ExternalPropertyService>();
+            services.AddScoped<IAmbitPropertyService, AmbitPropertyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
