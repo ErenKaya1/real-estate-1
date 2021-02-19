@@ -4,6 +4,16 @@
     ViewData["Title"] = "İller";
 }
 
+@if (TempData["SavedSuccessfully"] != null)
+{
+    <div class="alert alert-success"><b>@TempData["SavedSuccessfully"]</b></div>
+}
+
+@if (TempData["ProvinceNotFound"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["ProvinceNotFound"]</b></div>
+}
+
 @if (Model.Count == 0)
 {
     <div class="alert alert-warning"><b>Henüz il eklemediniz.</b></div>

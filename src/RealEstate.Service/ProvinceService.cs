@@ -34,5 +34,17 @@ namespace src.RealEstate.Service
 
             return entities;
         }
+
+        public Task<Province> GetByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<Province> GetWithDistrictsByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.ProvinceRepository.Find(x => x.Id == id).Include(x => x.District).FirstOrDefaultAsync();
+            if(entity == null) return null;
+            return entity;
+        }
     }
 }

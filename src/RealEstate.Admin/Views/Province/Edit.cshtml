@@ -1,0 +1,81 @@
+@model src.RealEstate.Admin.Models.Province.ProvinceEditViewModel
+
+@{
+    ViewData["Title"] = "İl Düzenle";
+}
+
+@if (TempData["EditProvinceMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["EditProvinceMessage"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        İl Düzenle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="Province" asp-action="Edit" method="POST" class="province-form">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="NameTR" class="form-label"></label>
+                <input asp-for="NameTR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEN" class="form-label"></label>
+                <input asp-for="NameEN" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a href="javascript:void(0)" class="btn btn-danger" onclick="deleteProvinceConfirm('@Model.Id')">Sil</a>
+            <a asp-controller="admin" asp-action="ListCities" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
+
+@if (Model.Districts.Count == 0)
+{
+    <div class="alert alert-warning"><b>@Model.NameTR şehri için henüz ilçe eklemediniz.</b></div>
+}
+else
+{
+    <h4 class="font-weight-bold py-3 mb-4">@Model.NameTR Şehrine Ait İlçeler</h4>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered list-table">
+            <thead>
+                <tr>
+                    <th class="sort-column"></th>
+                    <th>Türkçe</th>
+                    <th>İngilizce</th>
+                    <th class="options-column">Seçenekler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Districts.Count; i++)
+                {
+                    <tr>
+                        <td class="sort-column">@(i+1)</td>
+                        <td>@Model.Districts[i].DistrictNameTR</td>
+                        <td>@Model.Districts[i].DistrictNameEN</td>
+                        <td class="options-column">
+                            <a asp-controller="District" asp-action="Edit" asp-route-provinceId="@Model.Id"
+                                asp-route-districtId="@Model.Districts[i].Id" class="badge badge-info">Düzenle</a>
+                            <a href="javascript:void(0)" class="badge badge-danger"
+                                onclick="deleteDistrictConfirm('@Model.Id', '@Model.Districts[i].Id')">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables/datatables.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
+}
+
+@section Scripts{
+    <script src="/assets/vendor/libs/datatables/datatables.js"></script>
+    <script src="/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="/assets/js/dataTables.js"></script>
+}

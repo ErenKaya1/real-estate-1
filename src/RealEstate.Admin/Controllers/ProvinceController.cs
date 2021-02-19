@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using src.RealEstate.Admin.Models.District;
 using src.RealEstate.Admin.Models.Province;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -70,8 +71,28 @@ namespace src.RealEstate.Admin.Controllers
                 TempData["ProvinceNotFound"] = Messages.NOT_FOUND_ERROR;
                 return RedirectToAction(nameof(List));
             }
-            
-            return View();
+
+            var entity = await _provinceService.GetWithDistrictsByIdAsync(Convert.ToInt32(provinceId));
+            if (entity != null)
+            {
+                var model = new ProvinceEditViewModel
+                {
+                    Id = entity.Id,
+                    NameTR = entity.NameTR,
+                    NameEN = entity.NameEN,
+                    Districts = entity.District.OrderByDescending(x => x.CreatedDate).Select(x => new DistrictListViewModel
+                    {
+                        Id = x.Id,
+                        DistrictNameTR = x.DistrictNameTR,
+                        DistrictNameEN = x.DistrictNameEN
+                    }).ToList(),
+                };
+
+                return View(model);
+            }
+
+            TempData["ProvinceNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
         }
     }
 }
