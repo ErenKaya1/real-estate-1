@@ -1,0 +1,30 @@
+@model src.RealEstate.Admin.Models.Province.ProvinceNewViewModel
+
+@{
+    ViewData["Title"] = "Yeni İl";
+}
+
+@if (ViewData["NewProvinceError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["NewProvinceError"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yeni İl Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="Province" asp-action="New" method="POST" class="province-form">
+            <div class="form-group">
+                <label asp-for="NameTR" class="form-label"></label>
+                <input asp-for="NameTR" class="form-control" placeholder="İstanbul">
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEN" class="form-label"></label>
+                <input asp-for="NameEN" class="form-control" placeholder="Istanbul">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="Province" asp-action="List" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
