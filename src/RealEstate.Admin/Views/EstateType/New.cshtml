@@ -1,0 +1,30 @@
+@model src.RealEstate.Admin.Models.EstateType.EstateTypeNewViewModel
+
+@{
+    ViewData["Title"] = "Yeni Emlak Türü";
+}
+
+@if (ViewData["NewEstateTypeError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["NewEstateTypeError"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yeni Emlak Türü Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="EstateType" asp-action="New" method="POST" class="estatetype-form">
+            <div class="form-group">
+                <label asp-for="TypeNameTR" class="form-label"></label>
+                <input asp-for="TypeNameTR" class="form-control" placeholder="Apartman">
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeNameEN" class="form-label"></label>
+                <input asp-for="TypeNameEN" class="form-control" placeholder="Apartment">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="EstateType" asp-action="List" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
