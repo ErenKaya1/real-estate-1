@@ -12,5 +12,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<AmbitProperty> AmbitPropertyRepository { get; }
         IRepository<TransportationProperty> TransportationPropertyRepository { get; }
         IRepository<EstateType> EstateTypeRepository { get; }
+        IRepository<Province> ProvinceRepository { get; }
     }
 }

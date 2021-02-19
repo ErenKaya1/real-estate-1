@@ -77,6 +77,7 @@ namespace RealEstate.Admin
             services.AddScoped<IAmbitPropertyService, AmbitPropertyService>();
             services.AddScoped<ITransportationPropertyService, TransportationPropertyService>();
             services.AddScoped<IEstateTypeService, EstateTypeService>();
+            services.AddScoped<IProvinceService, ProvinceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
