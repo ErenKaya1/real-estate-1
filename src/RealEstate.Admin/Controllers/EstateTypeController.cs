@@ -111,5 +111,25 @@ namespace src.RealEstate.Admin.Controllers
             TempData["EstateTypeNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(List));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? estateTypeId)
+        {
+            if (estateTypeId == null)
+            {
+                TempData["EstateTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var result = await _estateTypeService.DeleteByIdAsync(Convert.ToInt32(estateTypeId));
+            if (result)
+            {
+                TempData["DeleteEstateTypeMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(List));
+            }
+
+            TempData["DeleteEstateTypeError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return RedirectToAction(nameof(List));
+        }
     }
 }

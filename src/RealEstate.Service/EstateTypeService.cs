@@ -47,5 +47,14 @@ namespace src.RealEstate.Service
 
             return await _unitOfWork.SaveChanges();    
         }
+
+        public async Task<bool> DeleteByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.EstateTypeRepository.FindOne(x => x.Id == id);
+            if(entity == null) return false;
+            _unitOfWork.EstateTypeRepository.Delete(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
     }
 }
