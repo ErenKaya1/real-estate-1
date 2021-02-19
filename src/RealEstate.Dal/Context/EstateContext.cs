@@ -25,5 +25,6 @@ namespace src.RealEstate.Dal.Context
         public DbSet<ExternalProperty> ExternalProperty { get; set; }
         public DbSet<AmbitProperty> AmbitProperty { get; set; }
         public DbSet<TransportationProperty> TransportationProperty { get; set; }
+        public DbSet<EstateType> EstateType { get; set; }
     }
 }
