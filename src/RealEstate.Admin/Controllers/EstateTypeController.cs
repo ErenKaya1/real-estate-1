@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.EstateType;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -40,11 +42,24 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(List));
             }
 
             ViewData["NewEstateTypeError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var models = await _estateTypeService.GetAll().Select(x => new EstateTypeListViewModel
+            {
+                Id = x.Id,
+                TypeNameTR = x.TypeNameTR,
+                TypeNameEN = x.TypeNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }
