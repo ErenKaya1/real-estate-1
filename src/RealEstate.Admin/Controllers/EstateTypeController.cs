@@ -61,5 +61,31 @@ namespace src.RealEstate.Admin.Controllers
 
             return View(models);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? estateTypeId)
+        {
+            if (estateTypeId == null)
+            {
+                TempData["EstateTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var entity = await _estateTypeService.GetByIdAsync(Convert.ToInt32(estateTypeId));
+            if (entity != null)
+            {
+                var model = new EstateTypeEditViewModel
+                {
+                    Id = entity.Id,
+                    TypeNameEN = entity.TypeNameEN,
+                    TypeNameTR = entity.TypeNameTR
+                };
+
+                return View(model);
+            }
+
+            TempData["EstateTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
     }
 }

@@ -33,5 +33,11 @@ namespace src.RealEstate.Service
                                         .AsQueryable();
             return entities;
         }
+
+        public async Task<EstateType> GetByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.EstateTypeRepository.FindOne(x => x.Id == id);
+            return entity;
+        }
     }
 }
