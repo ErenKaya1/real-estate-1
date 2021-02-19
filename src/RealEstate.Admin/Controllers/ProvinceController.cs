@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.Province;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -37,14 +39,27 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _provinceService.AddOneAsync(entity);
-            if (result) 
+            if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(List));
             }
 
             ViewData["NewProvinceError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var models = await _provinceService.GetAll().Select(x => new ProvinceListViewModel
+            {
+                Id = x.Id,
+                NameTR = x.NameTR,
+                NameEN = x.NameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }

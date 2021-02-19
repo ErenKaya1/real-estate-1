@@ -1,0 +1,55 @@
+@model System.Collections.Generic.List<src.RealEstate.Admin.Models.Province.ProvinceListViewModel>
+
+@{
+    ViewData["Title"] = "İller";
+}
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning"><b>Henüz il eklemediniz.</b></div>
+}
+else
+{
+    <h4 class="font-weight-bold py-3 mb-4">İller</h4>
+    <a asp-controller="Province" asp-action="New" class="btn btn-admin-primary mb-3">
+        <i class="fas fa-plus mr-2"></i>Yeni Ekle
+    </a>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered list-table">
+            <thead>
+                <tr>
+                    <th class="sort-column"></th>
+                    <th>Türkçe</th>
+                    <th>İngilizce</th>
+                    <th class="options-column">Seçenekler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td class="sort-column">@(i+1)</td>
+                        <td>@Model[i].NameTR</td>
+                        <td>@Model[i].NameEN</td>
+                        <td class="options-column">
+                            <a asp-controller="Province" asp-action="Edit" asp-route-estateTypeId="@Model[i].Id" class="badge badge-info">Düzenle</a>
+                            <a href="javascript:void(0)" class="badge badge-danger" onclick="deleteProvinceConfirm('@Model[i].Id')">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables/datatables.css">
+    <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
+}
+
+@section Scripts{
+    <script type="text/javascript" src="/assets/vendor/libs/datatables/datatables.js"></script>
+    <script type="text/javascript" src="/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script type="text/javascript" src="/assets/js/dataTables.js"></script>
+}
