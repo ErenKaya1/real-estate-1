@@ -94,5 +94,12 @@ namespace src.RealEstate.Admin.Controllers
             TempData["ProvinceNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(List));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ProvinceEditViewModel model)
+        {   
+            return View();
+        }   
     }
 }
