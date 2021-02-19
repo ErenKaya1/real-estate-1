@@ -154,6 +154,24 @@ $(document).ready(function () {
     }
   });
 
+  // validation for estate type form
+  $(".estatetype-form").on("submit", function (e) {
+    if (
+      $("input[name='TypeNameTR']").val() == "" ||
+      $("input[name='TypeNameTR']").val() == ""
+    ) {
+      e.preventDefault();
+      toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
+        positionClass: "toast-top-right",
+        closeButton: true,
+        progressBar: true,
+        preventDuplicates: true,
+        newestOnTop: true,
+        rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+      });
+    }
+  });
+
   var activeSidenav = $(
     ".sidenav-link[href='" + window.location.pathname + "']"
   ).parent();
