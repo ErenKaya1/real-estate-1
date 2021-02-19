@@ -98,8 +98,25 @@ namespace src.RealEstate.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProvinceEditViewModel model)
-        {   
-            return View();
-        }   
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit), new { provinceId = model.Id });
+
+            var entity = await _provinceService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.NameTR = model.NameTR;
+                entity.NameEN = model.NameEN;
+
+                var result = await _provinceService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditProvinceMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(Edit), new { provinceId = model.Id });
+                }
+            }
+
+            TempData["ProvinceNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
     }
 }

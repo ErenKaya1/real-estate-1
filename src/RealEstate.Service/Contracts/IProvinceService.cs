@@ -10,5 +10,6 @@ namespace src.RealEstate.Service.Contracts
         IQueryable<Province> GetAll();
         Task<Province> GetByIdAsync(int id);
         Task<Province> GetWithDistrictsByIdAsync(int id);
+        Task<bool> EditAsync(Province entity);
     }
 }

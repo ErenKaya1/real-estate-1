@@ -18,7 +18,7 @@ namespace src.RealEstate.Service
 
         public async Task<bool> AddOneAsync(Province entity)
         {
-            if(entity == null) return false;
+            if (entity == null) return false;
             _unitOfWork.ProvinceRepository.Add(entity);
 
             return await _unitOfWork.SaveChanges();
@@ -35,16 +35,25 @@ namespace src.RealEstate.Service
             return entities;
         }
 
-        public Task<Province> GetByIdAsync(int id)
+        public async Task<Province> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _unitOfWork.ProvinceRepository.FindOne(x => x.Id == id);
+            return entity;
         }
 
         public async Task<Province> GetWithDistrictsByIdAsync(int id)
         {
             var entity = await _unitOfWork.ProvinceRepository.Find(x => x.Id == id).Include(x => x.District).FirstOrDefaultAsync();
-            if(entity == null) return null;
+            if (entity == null) return null;
             return entity;
+        }
+
+        public async Task<bool> EditAsync(Province entity)
+        {
+            if(entity == null) return false;
+            _unitOfWork.ProvinceRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
         }
     }
 }

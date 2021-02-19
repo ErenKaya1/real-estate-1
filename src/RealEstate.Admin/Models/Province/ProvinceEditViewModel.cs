@@ -21,12 +21,10 @@ namespace src.RealEstate.Admin.Models.Province
         [Display(Name = "İl Adı (İngilizce)")]
         public string NameEN { get; set; }
 
-        [Required]
         [StringLength(30)]
         [Display(Name = "İlçe Adı (Türkçe)")]
         public string DistrictNameTR { get; set; }
 
-        [Required]
         [StringLength(30)]
         [Display(Name = "İlçe Adı (İngilizce)")]
         public string DistrictNameEN { get; set; }
