@@ -61,5 +61,17 @@ namespace src.RealEstate.Admin.Controllers
 
             return View(models);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? provinceId)
+        {
+            if (provinceId == null)
+            {
+                TempData["ProvinceNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+            
+            return View();
+        }
     }
 }

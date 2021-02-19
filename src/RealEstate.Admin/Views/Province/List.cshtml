@@ -33,7 +33,7 @@ else
                         <td>@Model[i].NameTR</td>
                         <td>@Model[i].NameEN</td>
                         <td class="options-column">
-                            <a asp-controller="Province" asp-action="Edit" asp-route-estateTypeId="@Model[i].Id" class="badge badge-info">Düzenle</a>
+                            <a asp-controller="Province" asp-action="Edit" asp-route-provinceId="@Model[i].Id" class="badge badge-info">Düzenle</a>
                             <a href="javascript:void(0)" class="badge badge-danger" onclick="deleteProvinceConfirm('@Model[i].Id')">Sil</a>
                         </td>
                     </tr>

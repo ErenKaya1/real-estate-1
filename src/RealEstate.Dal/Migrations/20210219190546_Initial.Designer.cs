@@ -9,8 +9,8 @@ using src.RealEstate.Dal.Context;
 namespace RealEstate.Dal.Migrations
 {
     [DbContext(typeof(EstateContext))]
-    [Migration("20210219180520_CreatedProvinceTable")]
-    partial class CreatedProvinceTable
+    [Migration("20210219190546_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -140,6 +140,35 @@ namespace RealEstate.Dal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ambit_property");
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.District", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("DistrictNameEN")
+                        .IsRequired()
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("DistrictNameTR")
+                        .IsRequired()
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("district");
                 });
 
             modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateRole", b =>
@@ -388,6 +417,15 @@ namespace RealEstate.Dal.Migrations
                     b.HasOne("src.RealEstate.Entity.Entities.EstateUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.District", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.Province", "Province")
+                        .WithMany("District")
+                        .HasForeignKey("ProvinceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

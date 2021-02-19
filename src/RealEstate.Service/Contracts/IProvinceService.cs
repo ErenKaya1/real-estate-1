@@ -8,5 +8,6 @@ namespace src.RealEstate.Service.Contracts
     {
         Task<bool> AddOneAsync(Province entity);
         IQueryable<Province> GetAll();
+        Task<Province> GetByIdAsync(int id);
     }
 }

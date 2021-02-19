@@ -1,26 +1,28 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using src.RealEstate.Entity.Entities.Base;
 
 namespace src.RealEstate.Entity.Entities
 {
-    [Table("province")]
-    public class Province : BaseEntity
+    [Table("district")]
+    public class District : BaseEntity
     {
         [Required]
         [StringLength(30)]
-        public string NameTR { get; set; }
+        public string DistrictNameTR { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string NameEN { get; set; }
+        public string DistrictNameEN { get; set; }
 
         [Required]
         [Column(TypeName = "date")]
         public DateTime CreatedDate { get; set; }
 
-        public List<District> District { get; set; }
+        [Required]
+        public int ProvinceId { get; set; }
+
+        public Province Province { get; set; }
     }
 }

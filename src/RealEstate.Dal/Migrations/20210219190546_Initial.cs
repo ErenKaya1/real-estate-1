@@ -9,6 +9,21 @@ namespace RealEstate.Dal.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ambit_property",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PropertyNameTR = table.Column<string>(maxLength: 50, nullable: false),
+                    PropertyNameEN = table.Column<string>(maxLength: 50, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ambit_property", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -42,6 +57,36 @@ namespace RealEstate.Dal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "estate_type",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TypeNameTR = table.Column<string>(maxLength: 30, nullable: false),
+                    TypeNameEN = table.Column<string>(maxLength: 30, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_estate_type", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "external_property",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PropertyNameTR = table.Column<string>(maxLength: 50, nullable: false),
+                    PropertyNameEN = table.Column<string>(maxLength: 50, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_external_property", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "interior_property",
                 columns: table => new
                 {
@@ -54,6 +99,36 @@ namespace RealEstate.Dal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_interior_property", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "province",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NameTR = table.Column<string>(maxLength: 30, nullable: false),
+                    NameEN = table.Column<string>(maxLength: 30, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_province", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "transportation_property",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PropertyNameTR = table.Column<string>(maxLength: 50, nullable: false),
+                    PropertyNameEN = table.Column<string>(maxLength: 50, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transportation_property", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,6 +237,28 @@ namespace RealEstate.Dal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "district",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DistrictNameTR = table.Column<string>(maxLength: 30, nullable: false),
+                    DistrictNameEN = table.Column<string>(maxLength: 30, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "date", nullable: false),
+                    ProvinceId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_district", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_district_province_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "province",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -198,10 +295,18 @@ namespace RealEstate.Dal.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_district_ProvinceId",
+                table: "district",
+                column: "ProvinceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ambit_property");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -218,13 +323,28 @@ namespace RealEstate.Dal.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "district");
+
+            migrationBuilder.DropTable(
+                name: "estate_type");
+
+            migrationBuilder.DropTable(
+                name: "external_property");
+
+            migrationBuilder.DropTable(
                 name: "interior_property");
+
+            migrationBuilder.DropTable(
+                name: "transportation_property");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "province");
         }
     }
 }
