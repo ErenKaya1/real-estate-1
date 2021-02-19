@@ -87,5 +87,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["EstateTypeNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(List));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EstateTypeEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit), new { estateTypeId = model.Id });
+
+            var entity = await _estateTypeService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.TypeNameTR = model.TypeNameTR;
+                entity.TypeNameEN = model.TypeNameEN;
+
+                var result = await _estateTypeService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditEstateTypeMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(Edit), new { estateTypeId = model.Id });
+                }
+            }
+
+            TempData["EstateTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
     }
 }

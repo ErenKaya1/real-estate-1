@@ -158,7 +158,7 @@ $(document).ready(function () {
   $(".estatetype-form").on("submit", function (e) {
     if (
       $("input[name='TypeNameTR']").val() == "" ||
-      $("input[name='TypeNameTR']").val() == ""
+      $("input[name='TypeNameEN']").val() == ""
     ) {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {

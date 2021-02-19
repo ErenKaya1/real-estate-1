@@ -18,7 +18,7 @@ namespace src.RealEstate.Service
 
         public async Task<bool> AddOneAsync(EstateType entity)
         {
-            if(entity == null) return false;
+            if (entity == null) return false;
             _unitOfWork.EstateTypeRepository.Add(entity);
 
             return await _unitOfWork.SaveChanges();
@@ -38,6 +38,14 @@ namespace src.RealEstate.Service
         {
             var entity = await _unitOfWork.EstateTypeRepository.FindOne(x => x.Id == id);
             return entity;
+        }
+
+        public async Task<bool> EditAsync(EstateType entity)
+        {
+            if(entity == null) return false;
+            _unitOfWork.EstateTypeRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();    
         }
     }
 }
