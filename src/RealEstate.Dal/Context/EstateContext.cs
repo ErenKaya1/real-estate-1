@@ -26,5 +26,6 @@ namespace src.RealEstate.Dal.Context
         public DbSet<AmbitProperty> AmbitProperty { get; set; }
         public DbSet<TransportationProperty> TransportationProperty { get; set; }
         public DbSet<EstateType> EstateType { get; set; }
+        public DbSet<Province> Province { get; set; }
     }
 }
