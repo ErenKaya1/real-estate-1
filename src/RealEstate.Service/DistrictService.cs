@@ -21,5 +21,11 @@ namespace src.RealEstate.Service
 
             return await _unitOfWork.SaveChanges();
         }
+
+        public async Task<District> GetByIdAsync(int provinceId, int districtId)
+        {
+            var entity = await _unitOfWork.DistrictRepository.FindOne(x => x.Id == districtId && x.ProvinceId == provinceId);
+            return entity;
+        }
     }
 }

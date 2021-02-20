@@ -138,7 +138,7 @@ namespace src.RealEstate.Admin.Controllers
             else if (result == DeleteResponse.InUse)
             {
                 TempData["ProvinceIsUseError"] = Messages.CITY_DELETE_ERROR;
-                return RedirectToAction(nameof(Edit), new { provinceId = provinceId });
+                return RedirectToAction(nameof(List));
             }
 
             TempData["ProvinceDeleteError"] = Messages.DEFAULT_ERROR_MESSAGE;

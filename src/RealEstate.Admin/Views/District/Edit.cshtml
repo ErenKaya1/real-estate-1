@@ -1,0 +1,27 @@
+@model src.RealEstate.Admin.Models.District.DistrictEditViewModel
+
+@{
+    ViewData["Title"] = "İlçe Düzenle";
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        İlçe Düzenle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="District" asp-action="Edit" method="POST" class="editdistrict-form">
+            <input type="hidden" asp-for="ProvinceId" />
+            <input type="hidden" asp-for="DistrictId" />
+            <div class="form-group">
+                <label asp-for="DistrictNameTR" class="form-label"></label>
+                <input asp-for="DistrictNameTR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="DistrictNameEN" class="form-label"></label>
+                <input asp-for="DistrictNameEN" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="Province" asp-action="Edit" asp-route-provinceId="@Model.ProvinceId" class="back-link">Geri Dön</a>
+        </form>
+    </div>
+</div>

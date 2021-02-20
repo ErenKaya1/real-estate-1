@@ -226,6 +226,24 @@ $(document).ready(function () {
     }
   });
 
+  // validation for edit district form
+  $(".editdistrict-form").on("submit", function (e) {
+    if (
+      $("input[name='DistrictNameTR']").val() == "" ||
+      $("input[name='DistrictNameEN']").val() == ""
+    ) {
+      e.preventDefault();
+      toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
+        positionClass: "toast-top-right",
+        closeButton: true,
+        progressBar: true,
+        preventDuplicates: true,
+        newestOnTop: true,
+        rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+      });
+    }
+  });
+
   var activeSidenav = $(
     ".sidenav-link[href='" + window.location.pathname + "']"
   ).parent();

@@ -41,6 +41,11 @@
     <div class="alert alert-danger"><b>@TempData["NewDistrictError"]</b></div>
 }
 
+@if (TempData["DistrictNotFound"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["DistrictNotFound"]</b></div>
+}
+
 @if (Model.Districts.Count == 0)
 {
     <div class="alert alert-warning"><b>@Model.NameTR şehri için henüz ilçe eklemediniz.</b></div>

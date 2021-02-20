@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using src.RealEstate.Admin.Models.District;
 using src.RealEstate.Admin.Models.Province;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -38,6 +39,33 @@ namespace src.RealEstate.Admin.Controllers
 
             TempData["NewDistrictError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction("Edit", "Province", new { provinceId = model.Id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? provinceId, int? districtId)
+        {
+            if (provinceId == null || districtId == null)
+            {
+                TempData["DistrictNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
+            }
+
+            var entity = await _districtService.GetByIdAsync(Convert.ToInt32(provinceId), Convert.ToInt32(districtId));
+            if (entity != null)
+            {
+                var model = new DistrictEditViewModel
+                {
+                    DistrictId = entity.Id,
+                    DistrictNameTR = entity.DistrictNameTR,
+                    DistrictNameEN = entity.DistrictNameEN,
+                    ProvinceId = entity.ProvinceId
+                };
+
+                return View(model);
+            }
+
+            TempData["DistrictNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
         }
     }
 }
