@@ -12,5 +12,6 @@ namespace src.RealEstate.Common.Constants
         public const string NOT_FOUND_ERROR = "Kayıt bulunamadı.";
         public const string EDIT_SUCCESSFULLY_MESSAGE = "Başarıyla güncellendi.";
         public const string DELETED_SUCCESSFULLY_MESSAGE = "Başarıyla silindi.";
+        public const string CITY_DELETE_ERROR = "Bu ilin atandığı ilanlar olduğu için silinemez.";
     }
 }

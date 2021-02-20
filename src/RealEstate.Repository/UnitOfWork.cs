@@ -40,7 +40,7 @@ namespace src.RealEstate.Repository
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.InnerException);
+                Console.WriteLine(ex.InnerException.Message);
                 return false;
             }
         }

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RealEstate.Entity\RealEstate.Entity.csproj" />
     <ProjectReference Include="..\RealEstate.Repository\RealEstate.Repository.csproj" />
+    <ProjectReference Include="..\RealEstate.Common\RealEstate.Common.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

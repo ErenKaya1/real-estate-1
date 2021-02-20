@@ -258,6 +258,25 @@ function deleteEstateTypeConfirm(id) {
   });
 }
 
+function deleteProvinceConfirm(id) {
+  Swal.fire({
+    title: "Emin misiniz?",
+    text: "Bu il ve ile ait tüm ilçeler silinecektir.",
+    confirmButtonText: "Tamam",
+    cancelButtonText: "Vazgeç",
+    icon: "error",
+    showCancelButton: true,
+    customClass: {
+      confirmButton: "btn btn-danger btn-lg",
+      cancelButton: "btn btn-default btn-lg",
+    },
+  }).then((result) => {
+    if (result.value) {
+      window.location.href = "/Province/Delete" + "?provinceId=" + id;
+    }
+  });
+}
+
 $("input[name='CurrentPassword']").on("input", function () {
   if ($("input[name='CurrentPassword']").val() != "") {
     $("input[name='NewPassword']").prop("disabled", false);
