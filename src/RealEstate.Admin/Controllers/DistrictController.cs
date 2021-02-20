@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using src.RealEstate.Admin.Models.District;
 using src.RealEstate.Admin.Models.Province;
 using src.RealEstate.Common.Constants;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
 
@@ -65,6 +66,31 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             TempData["DistrictNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? provinceId, int? districtId)
+        {
+            if (provinceId == null || districtId == null)
+            {
+                TempData["DistrictNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
+            }
+
+            var result = await _districtService.DeleteByIdAsync(Convert.ToInt32(provinceId), Convert.ToInt32(districtId));
+            if (result == DeleteResponse.Success)
+            {
+                TempData["DeleteDistrictMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
+            }
+            else if (result == DeleteResponse.InUse)
+            {
+                TempData["DistrictInUseError"] = Messages.DISTRICT_DELETE_ERROR;
+                return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
+            }
+
+            TempData["DeleteDistrictError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
         }
     }

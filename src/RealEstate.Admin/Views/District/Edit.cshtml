@@ -21,7 +21,18 @@
                 <input asp-for="DistrictNameEN" class="form-control">
             </div>
             <button type="submit" class="btn btn-admin-primary">Kaydet</button>
-            <a asp-controller="Province" asp-action="Edit" asp-route-provinceId="@Model.ProvinceId" class="back-link">Geri Dön</a>
+            <a href="javascript:void(0)" class="btn btn-danger"
+                onclick="deleteDistrictConfirm('@Model.ProvinceId', '@Model.DistrictId')">Sil</a>
+            <a asp-controller="Province" asp-action="Edit" asp-route-provinceId="@Model.ProvinceId"
+                class="back-link">Geri Dön</a>
         </form>
     </div>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
+}
+
+@section Scripts{
+    <script type="text/javascript" src="/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+}

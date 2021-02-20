@@ -46,6 +46,21 @@
     <div class="alert alert-danger"><b>@TempData["DistrictNotFound"]</b></div>
 }
 
+@if (TempData["DeleteDistrictMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["DeleteDistrictMessage"]</b></div>
+}
+
+@if (TempData["DeleteDistrictError"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["DeleteDistrictError"]</b></div>
+}
+
+@if (TempData["DistrictIsUseError"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["DistrictIsUseError"]</b></div>
+}
+
 @if (Model.Districts.Count == 0)
 {
     <div class="alert alert-warning"><b>@Model.NameTR şehri için henüz ilçe eklemediniz.</b></div>
