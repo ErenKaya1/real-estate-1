@@ -1,15 +1,25 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.RealEstate.Admin.Models.Province;
+using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
+using src.RealEstate.Service.Contracts;
 
 namespace src.RealEstate.Admin.Controllers
 {
     public class DistrictController : Controller
     {
+        private readonly IDistrictService _districtService;
+
+        public DistrictController(IDistrictService districtService)
+        {
+            _districtService = districtService;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult New(ProvinceEditViewModel model)
+        public async Task<IActionResult> New(ProvinceEditViewModel model)
         {
             var entity = new District
             {
@@ -19,7 +29,15 @@ namespace src.RealEstate.Admin.Controllers
                 ProvinceId = model.Id
             };
 
-            return View();
+            var result = await _districtService.AddAsync(entity);
+            if (result)
+            {
+                TempData["NewDistrictMessage"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction("Edit", "Province", new { provinceId = model.Id });
+            }
+
+            TempData["NewDistrictError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return RedirectToAction("Edit", "Province", new { provinceId = model.Id });
         }
     }
 }
