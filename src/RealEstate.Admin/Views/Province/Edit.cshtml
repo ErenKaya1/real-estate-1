@@ -69,6 +69,26 @@ else
     </div>
 }
 
+<div class="card mb-4 mt-5">
+    <h6 class="card-header">
+        @Model.NameTR İçin İlçe Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="District" asp-action="New" method="POST" class="district-form">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="DistrictNameTR" class="form-label"></label>
+                <input asp-for="DistrictNameTR" class="form-control" placeholder="Kadıköy">
+            </div>
+            <div class="form-group">
+                <label asp-for="DistrictNameEN" class="form-label"></label>
+                <input asp-for="DistrictNameEN" class="form-control" placeholder="Kadikoy">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Yeni İlçe Ekle</button>
+        </form>
+    </div>
+</div>
+
 @section Styles{
     <link rel="stylesheet" href="/assets/vendor/libs/datatables/datatables.css">
     <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
