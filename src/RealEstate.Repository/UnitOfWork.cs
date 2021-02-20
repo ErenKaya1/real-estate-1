@@ -16,6 +16,7 @@ namespace src.RealEstate.Repository
         private IRepository<TransportationProperty> _transportationRepository;
         private IRepository<EstateType> _estateTypeRepository;
         private IRepository<Province> _provinceRepository;
+        private IRepository<District> _districtRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
@@ -23,6 +24,7 @@ namespace src.RealEstate.Repository
         public IRepository<TransportationProperty> TransportationPropertyRepository => _transportationRepository ??= new Repository<TransportationProperty>(_dbContext);
         public IRepository<EstateType> EstateTypeRepository => _estateTypeRepository ??= new Repository<EstateType>(_dbContext);
         public IRepository<Province> ProvinceRepository => _provinceRepository ??= new Repository<Province>(_dbContext);
+        public IRepository<District> DistrictRepository => _districtRepository ??= new Repository<District>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {
