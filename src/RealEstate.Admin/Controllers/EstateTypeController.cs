@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.EstateType;
 using src.RealEstate.Common.Constants;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
 
@@ -122,9 +123,14 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _estateTypeService.DeleteByIdAsync(Convert.ToInt32(estateTypeId));
-            if (result)
+            if (result == DeleteResponse.Success)
             {
                 TempData["DeleteEstateTypeMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(List));
+            }
+            else if (result == DeleteResponse.InUse)
+            {
+                TempData["EstateTypeInUseError"] = Messages.ESTATE_TYPE_DELETE_ERROR;
                 return RedirectToAction(nameof(List));
             }
 

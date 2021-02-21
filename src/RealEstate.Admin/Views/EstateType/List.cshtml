@@ -24,6 +24,11 @@
     <div class="alert alert-danger"><b>@TempData["DeleteEstateTypeError"]</b></div>
 }
 
+@if (TempData["EstateTypeInUseError"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["EstateTypeInUseError"]</b></div>
+}
+
 @if (Model.Count == 0)
 {
     <div class="alert alert-warning"><b>Henüz emlak türü eklemediniz.</b></div>

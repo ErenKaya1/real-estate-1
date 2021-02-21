@@ -14,5 +14,6 @@ namespace src.RealEstate.Common.Constants
         public const string DELETED_SUCCESSFULLY_MESSAGE = "Başarıyla silindi.";
         public const string CITY_DELETE_ERROR = "Bu ilin atandığı ilan(lar) olduğu için silinemez.";
         public const string DISTRICT_DELETE_ERROR = "Bu ilçenin atandığı ilan(lar) olduğu için silinemez.";
+        public const string ESTATE_TYPE_DELETE_ERROR = "Bu emlak tipinin atandığı ilan(lar) olduğu için silinemez.";
     }
 }
