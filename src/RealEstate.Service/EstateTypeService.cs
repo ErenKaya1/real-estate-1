@@ -1,10 +1,7 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
 using src.RealEstate.Common.Enum;
-using src.RealEstate.Dal.Context;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service.Contracts;
@@ -14,12 +11,10 @@ namespace src.RealEstate.Service
     public class EstateTypeService : IEstateTypeService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly EstateContext _dbContext;
 
-        public EstateTypeService(IUnitOfWork unitOfWork, EstateContext dbContext)
+        public EstateTypeService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _dbContext = dbContext;
         }
 
         public async Task<bool> AddOneAsync(EstateType entity)
@@ -60,29 +55,7 @@ namespace src.RealEstate.Service
             if (entity == null) return DeleteResponse.Fail;
             _unitOfWork.EstateTypeRepository.Delete(entity);
 
-            try
-            {
-                await _dbContext.SaveChangesAsync();
-                return DeleteResponse.Success;
-            }
-            catch (DbUpdateException ex)
-            {
-                var sqlEx = (MySqlException)ex?.InnerException;
-
-                switch (sqlEx.Number)
-                {
-                    case 1451:
-                        return DeleteResponse.InUse;
-                    default:
-                        return DeleteResponse.Fail;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.InnerException.Message);
-                return DeleteResponse.Fail;
-            }
+            return await _unitOfWork.SaveChangesForDelete();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 
 namespace src.RealEstate.Repository.Contracts
@@ -7,6 +8,7 @@ namespace src.RealEstate.Repository.Contracts
     public interface IUnitOfWork : IDisposable
     {
         Task<bool> SaveChanges();
+        Task<DeleteResponse> SaveChangesForDelete();
         IRepository<InteriorProperty> InteriorPropertyRepository { get; }
         IRepository<ExternalProperty> ExternalPropertyRepository { get; }
         IRepository<AmbitProperty> AmbitPropertyRepository { get; }
