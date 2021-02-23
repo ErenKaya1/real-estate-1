@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.BuildingType;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -45,8 +47,21 @@ namespace src.RealEstate.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            TempData["NewBuildingTypeError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            ViewData["NewBuildingTypeError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var models = await _buildingTypeService.GetAll().Select(x => new BuildingTypeListViewModel
+            {
+                Id = x.Id,
+                BuildingTypeNameTR = x.BuildingTypeNameTR,
+                BuildingTypeNameEN = x.BuildingTypeNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }
