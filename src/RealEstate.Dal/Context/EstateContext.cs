@@ -31,5 +31,6 @@ namespace src.RealEstate.Dal.Context
         public DbSet<BuildingType> BuildingType { get; set; }
         public DbSet<TitleDeedStatus> TitleDeedStatus { get; set; }
         public DbSet<StaticImage> StaticImage { get; set; }
+        public DbSet<PanoramicImage> PanoramicImage { get; set; }
     }
 }
