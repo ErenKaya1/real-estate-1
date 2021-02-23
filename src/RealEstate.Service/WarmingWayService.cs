@@ -39,5 +39,14 @@ namespace src.RealEstate.Service
             var entity = await _unitOfWork.WarmingWayRepository.FindOne(x => x.Id == id);
             return entity;
         }
+
+        public async Task<bool> EditAsync(WarmingWay entity)
+        {
+            if (entity == null) return false;
+            _unitOfWork.WarmingWayRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
+
     }
 }

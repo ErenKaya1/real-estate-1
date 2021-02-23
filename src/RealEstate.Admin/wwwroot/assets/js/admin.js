@@ -244,6 +244,7 @@ $(document).ready(function () {
     }
   });
 
+  // validation for warming way form
   $(".warmingway-form").on("submit", function (e) {
     if (
       $("input[name='WarmingWayNameTR']").val() == "" ||

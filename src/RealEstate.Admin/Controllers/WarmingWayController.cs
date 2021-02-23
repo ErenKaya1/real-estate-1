@@ -87,5 +87,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["WarmingWayNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(List));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(WarmingWayEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit), new { warmingWayId = model.Id });
+
+            var entity = await _warmingWayService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.WarmingWayNameTR = model.WarmingWayNameTR;
+                entity.WarmingWayNameEN = model.WarmingWayNameEN;
+
+                var result = await _warmingWayService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditWarmingWayMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(Edit), new { warmingWayId = model.Id });
+                }
+            }
+
+            TempData["WarmingWayNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
     }
 }
