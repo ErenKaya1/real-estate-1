@@ -1,0 +1,30 @@
+@model src.RealEstate.Admin.Models.WarmingWay.WarmingWayNewViewModel
+
+@{
+    ViewData["Title"] = "Yeni Isınma Yolu";
+}
+
+@if (ViewData["NewProvinceError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["NewProvinceError"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yeni Isınma Yolu Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="WarmingWay" asp-action="New" method="POST" class="province-form">
+            <div class="form-group">
+                <label asp-for="WarmingWayNameTR" class="form-label"></label>
+                <input asp-for="WarmingWayNameTR" class="form-control" placeholder="Doğalgaz">
+            </div>
+            <div class="form-group">
+                <label asp-for="WarmingWayNameEN" class="form-label"></label>
+                <input asp-for="WarmingWayNameEN" class="form-control" placeholder="Natural Gas">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="WarmingWay" asp-action="List" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
