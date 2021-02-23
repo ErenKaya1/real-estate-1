@@ -16,5 +16,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<EstateType> EstateTypeRepository { get; }
         IRepository<Province> ProvinceRepository { get; }
         IRepository<District> DistrictRepository { get; }
+        IRepository<WarmingWay> WarmingWayRepository { get; }
     }
 }
