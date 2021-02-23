@@ -262,6 +262,24 @@ $(document).ready(function () {
     }
   });
 
+  // validation for building type form
+  $(".buildingtype-form").on("submit", function (e) {
+    if (
+      $("input[name='BuildingTypeNameTR']").val() == "" ||
+      $("input[name='BuildingTypeNameEN']").val() == ""
+    ) {
+      e.preventDefault();
+      toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
+        positionClass: "toast-top-right",
+        closeButton: true,
+        progressBar: true,
+        preventDuplicates: true,
+        newestOnTop: true,
+        rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+      });
+    }
+  });
+
   var activeSidenav = $(
     ".sidenav-link[href='" + window.location.pathname + "']"
   ).parent();
