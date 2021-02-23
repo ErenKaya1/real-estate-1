@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.BuildingType;
 using src.RealEstate.Common.Constants;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
 
@@ -111,6 +112,31 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             TempData["BuildingTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? buildingTypeId)
+        {
+            if (buildingTypeId == null)
+            {
+                TempData["BuildingTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var result = await _buildingTypeService.DeleteByIdAsync(Convert.ToInt32(buildingTypeId));
+            if (result == DeleteResponse.Success)
+            {
+                TempData["DeleteBuildingTypeMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(List));
+            }
+            else if (result == DeleteResponse.InUse)
+            {
+                TempData["BuildingTypeInUseError"] = Messages.BUILDING_TYPE_DELETE_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            TempData["DeleteBuildingTypeError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(List));
         }
     }

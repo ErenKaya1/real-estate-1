@@ -392,6 +392,25 @@ function deleteWarmingWayConfirm(id) {
   });
 }
 
+function deleteBuildingTypeConfirm(id) {
+  Swal.fire({
+    title: "Emin misiniz?",
+    text: "Bir yapı türü silmek üzeresiniz.",
+    confirmButtonText: "Tamam",
+    cancelButtonText: "Vazgeç",
+    icon: "error",
+    showCancelButton: true,
+    customClass: {
+      confirmButton: "btn btn-danger btn-lg",
+      cancelButton: "btn btn-default btn-lg",
+    },
+  }).then((result) => {
+    if (result.value) {
+      window.location.href = "/BuildingType/Delete" + "?buildingTypeId=" + id;
+    }
+  });
+}
+
 $("input[name='CurrentPassword']").on("input", function () {
   if ($("input[name='CurrentPassword']").val() != "") {
     $("input[name='NewPassword']").prop("disabled", false);

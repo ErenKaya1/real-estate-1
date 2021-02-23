@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 
 namespace src.RealEstate.Service.Contracts
@@ -10,5 +11,6 @@ namespace src.RealEstate.Service.Contracts
         IQueryable<BuildingType> GetAll();
         Task<BuildingType> GetByIdAsync(int id);
         Task<bool> EditAsync(BuildingType entity);
+        Task<DeleteResponse> DeleteByIdAsync(int id);
     }
 }
