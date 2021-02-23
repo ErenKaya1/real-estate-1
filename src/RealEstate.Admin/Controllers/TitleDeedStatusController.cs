@@ -136,7 +136,7 @@ namespace src.RealEstate.Admin.Controllers
                 return RedirectToAction(nameof(List));
             }
 
-            TempData["DeleteTitleSeedStatusError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            TempData["DeleteTitleDeedStatusError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(List));
         }
     }
