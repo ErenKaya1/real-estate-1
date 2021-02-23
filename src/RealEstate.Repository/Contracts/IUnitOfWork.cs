@@ -19,5 +19,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<WarmingWay> WarmingWayRepository { get; }
         IRepository<BuildingType> BuildingTypeRepository { get; }
         IRepository<TitleDeedStatus> TitleDeedStatusRepository { get; }
+        IRepository<Estate> EstateRepository { get; }
     }
 }
