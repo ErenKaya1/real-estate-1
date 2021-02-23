@@ -4,9 +4,9 @@
     ViewData["Title"] = "Yeni Isınma Yolu";
 }
 
-@if (ViewData["NewProvinceError"] != null)
+@if (ViewData["NewWarmingWayError"] != null)
 {
-    <div class="alert alert-danger"><b>@ViewData["NewProvinceError"]</b></div>
+    <div class="alert alert-danger"><b>@ViewData["NewWarmingWayError"]</b></div>
 }
 
 <div class="card mb-4">
@@ -14,7 +14,7 @@
         Yeni Isınma Yolu Ekle
     </h6>
     <div class="card-body">
-        <form asp-controller="WarmingWay" asp-action="New" method="POST" class="province-form">
+        <form asp-controller="WarmingWay" asp-action="New" method="POST" class="warmingway-form">
             <div class="form-group">
                 <label asp-for="WarmingWayNameTR" class="form-label"></label>
                 <input asp-for="WarmingWayNameTR" class="form-control" placeholder="Doğalgaz">
