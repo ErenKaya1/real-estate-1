@@ -8,6 +8,7 @@ namespace src.RealEstate.Service.Contracts
     {
         Task<bool> AddAsync(District entity);
         Task<District> GetByIdAsync(int provinceId, int districtId);
+        Task<bool> EditAsync(District entity);
         Task<DeleteResponse> DeleteByIdAsync(int provinceId, int districtId);
     }
 }

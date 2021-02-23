@@ -71,6 +71,30 @@ namespace src.RealEstate.Admin.Controllers
             return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(DistrictEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit), new { provinceId = model.ProvinceId, districtId = model.DistrictId });
+
+            var entity = await _districtService.GetByIdAsync(model.ProvinceId, model.DistrictId);
+            if (entity != null)
+            {
+                entity.DistrictNameTR = model.DistrictNameTR;
+                entity.DistrictNameEN = model.DistrictNameEN;
+
+                var result = await _districtService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditDistrictMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(Edit), new { provinceId = model.ProvinceId, districtId = model.DistrictId });
+                }
+            }
+
+            TempData["DistrictNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction("Edit", "Province", new { provinceId = model.ProvinceId });
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int? provinceId, int? districtId)
         {

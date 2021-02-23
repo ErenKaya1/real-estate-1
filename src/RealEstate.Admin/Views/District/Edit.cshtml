@@ -4,6 +4,11 @@
     ViewData["Title"] = "İlçe Düzenle";
 }
 
+@if (TempData["EditDistrictMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["EditDistrictMessage"]</b></div>   
+}
+
 <div class="card mb-4">
     <h6 class="card-header">
         İlçe Düzenle

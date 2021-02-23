@@ -29,6 +29,14 @@ namespace src.RealEstate.Service
             return entity;
         }
 
+        public async Task<bool> EditAsync(District entity)
+        {
+            if (entity == null) return false;
+            _unitOfWork.DistrictRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
+
         public async Task<DeleteResponse> DeleteByIdAsync(int provinceId, int districtId)
         {
             var entity = await _unitOfWork.DistrictRepository.FindOne(x => x.Id == districtId && x.ProvinceId == provinceId);
