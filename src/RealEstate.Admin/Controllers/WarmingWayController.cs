@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.WarmingWay;
 using src.RealEstate.Common.Constants;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
 
@@ -109,6 +110,31 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             TempData["WarmingWayNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? warmingWayId)
+        {
+            if (warmingWayId == null)
+            {
+                TempData["WarmingWayNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var result = await _warmingWayService.DeleteByIdAsync(Convert.ToInt32(warmingWayId));
+            if (result == DeleteResponse.Success)
+            {
+                TempData["DeleteWarmingWayMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(List));
+            }
+            else if (result == DeleteResponse.InUse)
+            {
+                TempData["WarmingWayInUseError"] = Messages.WARMING_WAY_DELETE_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            TempData["DeleteWarmingWayError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(List));
         }
     }

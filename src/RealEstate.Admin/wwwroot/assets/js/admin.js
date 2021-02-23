@@ -345,7 +345,31 @@ function deleteDistrictConfirm(provinceId, districtId) {
     },
   }).then((result) => {
     if (result.value) {
-      window.location.href = "/District/Delete" + "?provinceId=" + provinceId + "&districtId=" + districtId;
+      window.location.href =
+        "/District/Delete" +
+        "?provinceId=" +
+        provinceId +
+        "&districtId=" +
+        districtId;
+    }
+  });
+}
+
+function deleteWarmingWayConfirm(id) {
+  Swal.fire({
+    title: "Emin misiniz?",
+    text: "Bir ısınma yolu silmek üzeresiniz.",
+    confirmButtonText: "Tamam",
+    cancelButtonText: "Vazgeç",
+    icon: "error",
+    showCancelButton: true,
+    customClass: {
+      confirmButton: "btn btn-danger btn-lg",
+      cancelButton: "btn btn-default btn-lg",
+    },
+  }).then((result) => {
+    if (result.value) {
+      window.location.href = "/WarmingWay/Delete" + "?warmingWayId=" + id;
     }
   });
 }

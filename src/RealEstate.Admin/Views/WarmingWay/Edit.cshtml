@@ -26,7 +26,7 @@
                 <input asp-for="WarmingWayNameEN" class="form-control">
             </div>
             <button type="submit" class="btn btn-admin-primary">Kaydet</button>
-            <a href="javascript:void(0)" class="btn btn-danger" onclick="deletewarmingWayConfirm('@Model.Id')">Sil</a>
+            <a href="javascript:void(0)" class="btn btn-danger" onclick="deleteWarmingWayConfirm('@Model.Id')">Sil</a>
             <a asp-controller="WarmingWay" asp-action="List" class="back-link">Listeye Dön</a>
         </form>
     </div>
