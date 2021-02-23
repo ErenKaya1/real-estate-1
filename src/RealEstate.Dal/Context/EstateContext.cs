@@ -30,5 +30,6 @@ namespace src.RealEstate.Dal.Context
         public DbSet<WarmingWay> WarmingWay { get; set; }
         public DbSet<BuildingType> BuildingType { get; set; }
         public DbSet<TitleDeedStatus> TitleDeedStatus { get; set; }
+        public DbSet<StaticImage> StaticImage { get; set; }
     }
 }
