@@ -40,5 +40,13 @@ namespace src.RealEstate.Service
             var entity = await _unitOfWork.BuildingTypeRepository.FindOne(x => x.Id == id);
             return entity;
         }
+
+        public async Task<bool> EditAsync(BuildingType entity)
+        {
+            if (entity == null) return false;
+            _unitOfWork.BuildingTypeRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
     }
 }

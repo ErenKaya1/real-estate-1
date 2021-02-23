@@ -89,5 +89,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["BuildingTypeNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(List));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(BuildingTypeEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit), new { buildingTypeId = model.Id });
+
+            var entity = await _buildingTypeService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.BuildingTypeNameTR = model.BuildingTypeNameTR;
+                entity.BuildingTypeNameEN = model.BuildingTypeNameEN;
+
+                var result = await _buildingTypeService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditBuildingTypeMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(Edit), new { buildingTypeId = model.Id });
+                }
+            }
+
+            TempData["BuildingTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
     }
 }
