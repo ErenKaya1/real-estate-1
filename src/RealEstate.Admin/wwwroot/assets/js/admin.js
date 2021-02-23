@@ -280,6 +280,24 @@ $(document).ready(function () {
     }
   });
 
+  // validation for title deed status form
+  $(".titledeedstatus-form").on("submit", function (e) {
+    if (
+      $("input[name='StatusNameTR']").val() == "" ||
+      $("input[name='StatusNameEN']").val() == ""
+    ) {
+      e.preventDefault();
+      toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
+        positionClass: "toast-top-right",
+        closeButton: true,
+        progressBar: true,
+        preventDuplicates: true,
+        newestOnTop: true,
+        rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+      });
+    }
+  });
+
   var activeSidenav = $(
     ".sidenav-link[href='" + window.location.pathname + "']"
   ).parent();

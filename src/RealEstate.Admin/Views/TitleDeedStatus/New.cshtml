@@ -1,0 +1,30 @@
+@model src.RealEstate.Admin.Models.TitleDeedStatus.TitleDeedStatusNewViewModel
+
+@{
+    ViewData["Title"] = "Yeni Tapu Durumu";
+}
+
+@if (ViewData["NewTitleDeedStatusError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["NewTitleDeedStatusError"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yeni Tapu Durumu Ekle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="TitleDeedStatus" asp-action="New" method="POST" class="titledeedstatus-form">
+            <div class="form-group">
+                <label asp-for="StatusNameTR" class="form-label"></label>
+                <input asp-for="StatusNameTR" class="form-control" placeholder="Kat Mülkiyeti">
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusNameEN" class="form-label"></label>
+                <input asp-for="StatusNameEN" class="form-control" placeholder="Condominium">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a asp-controller="TitleDeedStatus" asp-action="List" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
