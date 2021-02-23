@@ -44,7 +44,7 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(List));
             }
 
             ViewData["NewTitleDeedStatusError"] = Messages.DEFAULT_ERROR_MESSAGE;
@@ -62,6 +62,32 @@ namespace src.RealEstate.Admin.Controllers
             }).AsNoTracking().ToListAsync();
 
             return View(models);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? titleDeedStatusId)
+        {
+            if (titleDeedStatusId == null)
+            {
+                TempData["TitleDeedStatusNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var entity = await _titleDeedStatusService.GetByIdAsync(Convert.ToInt32(titleDeedStatusId));
+            if (entity != null)
+            {
+                var model = new TitleDeedStatusEditViewModel
+                {
+                    Id = entity.Id,
+                    StatusNameTR = entity.StatusNameTR,
+                    StatusNameEN = entity.StatusNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["TitleDeedStatusNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
         }
     }
 }

@@ -429,6 +429,25 @@ function deleteBuildingTypeConfirm(id) {
   });
 }
 
+function deleteTitleDeedStatusConfirm(id) {
+  Swal.fire({
+    title: "Emin misiniz?",
+    text: "Bir tapu durumu silmek üzeresiniz.",
+    confirmButtonText: "Tamam",
+    cancelButtonText: "Vazgeç",
+    icon: "error",
+    showCancelButton: true,
+    customClass: {
+      confirmButton: "btn btn-danger btn-lg",
+      cancelButton: "btn btn-default btn-lg",
+    },
+  }).then((result) => {
+    if (result.value) {
+      window.location.href = "/TitleDeedStatus/Delete" + "?titleDeedStatusId=" + id;
+    }
+  });
+}
+
 $("input[name='CurrentPassword']").on("input", function () {
   if ($("input[name='CurrentPassword']").val() != "") {
     $("input[name='NewPassword']").prop("disabled", false);

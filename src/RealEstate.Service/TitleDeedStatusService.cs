@@ -34,5 +34,11 @@ namespace src.RealEstate.Service
 
             return entities;
         }
+
+        public async Task<TitleDeedStatus> GetByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.TitleDeedStatusRepository.FindOne(x => x.Id == id);
+            return entity;
+        }
     }
 }
