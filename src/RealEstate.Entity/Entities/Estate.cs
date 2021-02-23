@@ -35,7 +35,11 @@ namespace src.RealEstate.Entity.Entities
 
         [Required]
         [StringLength(20)]
-        public string M2 { get; set; }
+        public string M2Brut { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string M2Net { get; set; }
 
         [Required]
         [StringLength(10)]

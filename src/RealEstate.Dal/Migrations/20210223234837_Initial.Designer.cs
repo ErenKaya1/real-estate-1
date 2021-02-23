@@ -9,7 +9,7 @@ using src.RealEstate.Dal.Context;
 namespace RealEstate.Dal.Migrations
 {
     [DbContext(typeof(EstateContext))]
-    [Migration("20210223233452_Initial")]
+    [Migration("20210223234837_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -264,7 +264,12 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
                         .HasMaxLength(500);
 
-                    b.Property<string>("M2")
+                    b.Property<string>("M2Brut")
+                        .IsRequired()
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("M2Net")
                         .IsRequired()
                         .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
                         .HasMaxLength(20);
@@ -783,31 +788,31 @@ namespace RealEstate.Dal.Migrations
                     b.HasOne("src.RealEstate.Entity.Entities.BuildingType", "BuildingType")
                         .WithMany("Estate")
                         .HasForeignKey("BuildingTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("src.RealEstate.Entity.Entities.District", "District")
                         .WithMany("Estate")
                         .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("src.RealEstate.Entity.Entities.EstateType", "EstateType")
                         .WithMany("Estate")
                         .HasForeignKey("EstateTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("src.RealEstate.Entity.Entities.Province", "Province")
                         .WithMany("Estate")
                         .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("src.RealEstate.Entity.Entities.TitleDeedStatus", "TitleDeedStatus")
                         .WithMany("Estate")
                         .HasForeignKey("TitleDeedStatusId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("src.RealEstate.Entity.Entities.WarmingWay", "WarmingWay")
