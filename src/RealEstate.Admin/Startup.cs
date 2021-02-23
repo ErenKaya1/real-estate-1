@@ -80,6 +80,7 @@ namespace RealEstate.Admin
             services.AddScoped<IProvinceService, ProvinceService>();
             services.AddScoped<IDistrictService, DistrictService>();
             services.AddScoped<IWarmingWayService, WarmingWayService>();
+            services.AddScoped<IBuildingTypeService, BuildingTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
