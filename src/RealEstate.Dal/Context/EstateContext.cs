@@ -28,5 +28,6 @@ namespace src.RealEstate.Dal.Context
         public DbSet<EstateType> EstateType { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<WarmingWay> WarmingWay { get; set; }
+        public DbSet<BuildingType> BuildingType { get; set; }
     }
 }
