@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.TitleDeedStatus;
 using src.RealEstate.Common.Constants;
 using src.RealEstate.Entity.Entities;
@@ -47,6 +49,19 @@ namespace src.RealEstate.Admin.Controllers
 
             ViewData["NewTitleDeedStatusError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var models = await _titleDeedStatusService.GetAll().Select(x => new TitleDeedStatusListViewModel
+            {
+                Id = x.Id,
+                StatusNameTR = x.StatusNameTR,
+                StatusNameEN = x.StatusNameEN
+            }).AsNoTracking().ToListAsync();
+
+            return View(models);
         }
     }
 }
