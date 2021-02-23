@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.WarmingWay;
@@ -11,6 +12,7 @@ using src.RealEstate.Service.Contracts;
 
 namespace src.RealEstate.Admin.Controllers
 {
+    [Authorize]
     public class WarmingWayController : Controller
     {
         private readonly IWarmingWayService _warmingWayService;

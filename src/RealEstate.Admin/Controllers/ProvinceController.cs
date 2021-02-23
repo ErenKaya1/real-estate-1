@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.District;
@@ -12,6 +13,7 @@ using src.RealEstate.Service.Contracts;
 
 namespace src.RealEstate.Admin.Controllers
 {
+    [Authorize]
     public class ProvinceController : Controller
     {
         private readonly IProvinceService _provinceService;
