@@ -44,7 +44,7 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(List));
             }
 
             ViewData["NewBuildingTypeError"] = Messages.DEFAULT_ERROR_MESSAGE;
@@ -62,6 +62,32 @@ namespace src.RealEstate.Admin.Controllers
             }).AsNoTracking().ToListAsync();
 
             return View(models);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? buildingTypeId)
+        {
+            if (buildingTypeId == null)
+            {
+                TempData["BuildingTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var entity = await _buildingTypeService.GetByIdAsync(Convert.ToInt32(buildingTypeId));
+            if (entity != null)
+            {
+                var model = new BuildingTypeEditViewModel
+                {
+                    Id = entity.Id,
+                    BuildingTypeNameTR = entity.BuildingTypeNameTR,
+                    BuildingTypeNameEN = entity.BuildingTypeNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["BuildingTypeNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
         }
     }
 }

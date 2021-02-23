@@ -1,0 +1,41 @@
+@model src.RealEstate.Admin.Models.BuildingType.BuildingTypeEditViewModel
+
+@{
+    ViewData["Title"] = "Yapı Türü Düzenle";
+}
+
+@if (TempData["EditBuildingTypeMessage"] != null)
+{
+    <div class="alert alert-info"><b>@TempData["EditBuildingTypeMessage"]</b></div>
+}
+
+<div class="card mb-4">
+    <h6 class="card-header">
+        Yapı Türü Düzenle
+    </h6>
+    <div class="card-body">
+        <form asp-controller="BuildingType" asp-action="Edit" method="POST"
+            class="buildingtype-form">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="BuildingTypeNameTR" class="form-label"></label>
+                <input asp-for="BuildingTypeNameTR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildingTypeNameEN" class="form-label"></label>
+                <input asp-for="BuildingTypeNameEN" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-admin-primary">Kaydet</button>
+            <a href="javascript:void(0)" class="btn btn-danger" onclick="deleteBuildingTypeConfirm('@Model.Id')">Sil</a>
+            <a asp-controller="BuildingType" asp-action="List" class="back-link">Listeye Dön</a>
+        </form>
+    </div>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="/assets/vendor/libs/sweetalert2/sweetalert2.css">
+}
+
+@section Scripts{
+    <script type="text/javascript" src="/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+}

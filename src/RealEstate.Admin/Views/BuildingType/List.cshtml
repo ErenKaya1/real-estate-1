@@ -9,6 +9,11 @@
     <div class="alert alert-success"><b>@TempData["SavedSuccessfully"]</b></div>
 }
 
+@if (TempData["BuildingTypeNotFound"] != null)
+{
+    <div class="alert alert-danger"><b>@TempData["BuildingTypeNotFound"]</b></div>
+}
+
 @if (Model.Count == 0)
 {
     <div class="alert alert-warning"><b>Henüz yapı türü eklemediniz.</b></div>
@@ -38,7 +43,7 @@ else
                         <td>@Model[i].BuildingTypeNameTR</td>
                         <td>@Model[i].BuildingTypeNameEN</td>
                         <td class="options-column">
-                            <a asp-controller="BuildingType" asp-action="Edit" asp-route-estateTypeId="@Model[i].Id" class="badge badge-info">Düzenle</a>
+                            <a asp-controller="BuildingType" asp-action="Edit" asp-route-buildingTypeId="@Model[i].Id" class="badge badge-info">Düzenle</a>
                             <a href="javascript:void(0)" class="badge badge-danger" onclick="deleteBuildingTypeConfirm('@Model[i].Id')">Sil</a>
                         </td>
                     </tr>
