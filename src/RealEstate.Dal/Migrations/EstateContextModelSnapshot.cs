@@ -206,10 +206,14 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("tinyint unsigned");
 
                     b.Property<string>("BathroomCount")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(2) CHARACTER SET utf8mb4")
+                        .HasMaxLength(2);
 
                     b.Property<string>("BuildingAge")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(5) CHARACTER SET utf8mb4")
+                        .HasMaxLength(5);
 
                     b.Property<byte>("BuildingState")
                         .HasColumnType("tinyint unsigned");
@@ -221,15 +225,19 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("date");
 
                     b.Property<string>("CustomId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
 
                     b.Property<string>("DescriptionEN")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("DescriptionTR")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("DistrictId")
@@ -242,16 +250,22 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("tinyint unsigned");
 
                     b.Property<string>("FloorNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(3) CHARACTER SET utf8mb4")
+                        .HasMaxLength(3);
 
                     b.Property<byte>("FurnitureStatus")
                         .HasColumnType("tinyint unsigned");
 
                     b.Property<string>("GoogleMapIframe")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasMaxLength(500);
 
                     b.Property<string>("M2")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
+                        .HasMaxLength(20);
 
                     b.Property<double>("PriceTRY")
                         .HasColumnType("double");
@@ -260,22 +274,30 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("RoomCount")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
+                        .HasMaxLength(10);
 
                     b.Property<byte>("SaleType")
                         .HasColumnType("tinyint unsigned");
 
                     b.Property<string>("Title")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
 
                     b.Property<int>("TitleDeedStatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("TotalFloor")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(5) CHARACTER SET utf8mb4")
+                        .HasMaxLength(5);
 
                     b.Property<string>("UrlPath")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(250) CHARACTER SET utf8mb4")
+                        .HasMaxLength(250);
 
                     b.Property<byte>("UsingStatus")
                         .HasColumnType("tinyint unsigned");
