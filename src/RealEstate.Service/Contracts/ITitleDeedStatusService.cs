@@ -9,5 +9,6 @@ namespace src.RealEstate.Service.Contracts
         Task<bool> AddOneAsync(TitleDeedStatus entity);
         IQueryable<TitleDeedStatus> GetAll();
         Task<TitleDeedStatus> GetByIdAsync(int id);
+        Task<bool> EditAsync(TitleDeedStatus entity);
     }
 }

@@ -89,5 +89,29 @@ namespace src.RealEstate.Admin.Controllers
             TempData["TitleDeedStatusNotFound"] = Messages.NOT_FOUND_ERROR;
             return RedirectToAction(nameof(List));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(TitleDeedStatusEditViewModel model)
+        {
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit), new { titleDeedStatusId = model.Id });
+
+            var entity = await _titleDeedStatusService.GetByIdAsync(model.Id);
+            if (entity != null)
+            {
+                entity.StatusNameTR = model.StatusNameTR;
+                entity.StatusNameEN = model.StatusNameEN;
+
+                var result = await _titleDeedStatusService.EditAsync(entity);
+                if (result)
+                {
+                    TempData["EditTitleDeedStatusMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
+                    return RedirectToAction(nameof(Edit), new { titleDeedStatusId = model.Id });
+                }
+            }
+
+            TempData["TitleDeedStatusNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
     }
 }

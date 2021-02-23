@@ -40,5 +40,13 @@ namespace src.RealEstate.Service
             var entity = await _unitOfWork.TitleDeedStatusRepository.FindOne(x => x.Id == id);
             return entity;
         }
+
+        public async Task<bool> EditAsync(TitleDeedStatus entity)
+        {
+            if (entity == null) return false;
+            _unitOfWork.TitleDeedStatusRepository.Update(entity);
+
+            return await _unitOfWork.SaveChanges();
+        }
     }
 }
