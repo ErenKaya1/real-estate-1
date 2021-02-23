@@ -33,5 +33,11 @@ namespace src.RealEstate.Service
                                         .AsQueryable();
             return entities;
         }
+
+        public async Task<WarmingWay> GetByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.WarmingWayRepository.FindOne(x => x.Id == id);
+            return entity;
+        }
     }
 }

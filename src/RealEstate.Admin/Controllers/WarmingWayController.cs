@@ -42,7 +42,7 @@ namespace src.RealEstate.Admin.Controllers
             if (result)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(List));
             }
 
             ViewData["NewWarmingWayError"] = Messages.DEFAULT_ERROR_MESSAGE;
@@ -60,6 +60,32 @@ namespace src.RealEstate.Admin.Controllers
             }).AsNoTracking().ToListAsync();
 
             return View(models);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? warmingWayId)
+        {
+            if (warmingWayId == null)
+            {
+                TempData["WarmingWayNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var entity = await _warmingWayService.GetByIdAsync(Convert.ToInt32(warmingWayId));
+            if (entity != null)
+            {
+                var model = new WarmingWayEditViewModel
+                {
+                    Id = entity.Id,
+                    WarmingWayNameTR = entity.WarmingWayNameTR,
+                    WarmingWayNameEN = entity.WarmingWayNameEN
+                };
+
+                return View(model);
+            }
+
+            TempData["WarmingWayNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
         }
     }
 }

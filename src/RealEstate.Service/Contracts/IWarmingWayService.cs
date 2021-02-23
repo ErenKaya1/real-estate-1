@@ -8,5 +8,6 @@ namespace src.RealEstate.Service.Contracts
     {
         Task<bool> AddOneAsync(WarmingWay entity);
         IQueryable<WarmingWay> GetAll();
+        Task<WarmingWay> GetByIdAsync(int id);
     }
 }
