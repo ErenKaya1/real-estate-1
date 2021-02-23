@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.TitleDeedStatus;
 using src.RealEstate.Common.Constants;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
 
@@ -111,6 +112,31 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             TempData["TitleDeedStatusNotFound"] = Messages.NOT_FOUND_ERROR;
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? titleDeedStatusId)
+        {
+            if (titleDeedStatusId == null)
+            {
+                TempData["TitleDeedStatusNotFound"] = Messages.NOT_FOUND_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            var result = await _titleDeedStatusService.DeleteByIdAsync(Convert.ToInt32(titleDeedStatusId));
+            if (result == DeleteResponse.Success)
+            {
+                TempData["DeleteTitleDeedStatusMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
+                return RedirectToAction(nameof(List));
+            }
+            else if (result == DeleteResponse.InUse)
+            {
+                TempData["TitleDeedStatusInUseError"] = Messages.TITLE_DEED_STATUS_DELETE_ERROR;
+                return RedirectToAction(nameof(List));
+            }
+
+            TempData["DeleteTitleSeedStatusError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction(nameof(List));
         }
     }

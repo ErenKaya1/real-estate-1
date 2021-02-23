@@ -17,5 +17,6 @@ namespace src.RealEstate.Common.Constants
         public const string ESTATE_TYPE_DELETE_ERROR = "Bu emlak tipinin atandığı ilan(lar) olduğu için silinemez.";
         public const string WARMING_WAY_DELETE_ERROR = "Bu ısınma yolunun atandığı ilan(lar) olduğu için silinemez.";
         public const string BUILDING_TYPE_DELETE_ERROR = "Bu yapı türünün atandığı ilan(lar) olduğu için silinemez.";
+        public const string TITLE_DEED_STATUS_DELETE_ERROR = "Bu tapu durumunun atandığı ilan(lar) olduğu için silinemez.";
     }
 }

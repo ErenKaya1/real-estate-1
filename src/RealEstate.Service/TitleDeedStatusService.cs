@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service.Contracts;
@@ -47,6 +48,15 @@ namespace src.RealEstate.Service
             _unitOfWork.TitleDeedStatusRepository.Update(entity);
 
             return await _unitOfWork.SaveChanges();
+        }
+
+        public async Task<DeleteResponse> DeleteByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.TitleDeedStatusRepository.FindOne(x => x.Id == id);
+            if (entity == null) return DeleteResponse.Fail;
+            _unitOfWork.TitleDeedStatusRepository.Delete(entity);
+
+            return await _unitOfWork.SaveChangesForDelete();
         }
     }
 }
