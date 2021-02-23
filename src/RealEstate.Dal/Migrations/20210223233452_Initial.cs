@@ -311,8 +311,10 @@ namespace RealEstate.Dal.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CustomId = table.Column<string>(maxLength: 30, nullable: false),
-                    Title = table.Column<string>(maxLength: 200, nullable: false),
-                    UrlPath = table.Column<string>(maxLength: 250, nullable: false),
+                    TitleTR = table.Column<string>(maxLength: 200, nullable: false),
+                    TitleEN = table.Column<string>(maxLength: 200, nullable: false),
+                    UrlPathTR = table.Column<string>(maxLength: 200, nullable: false),
+                    UrlPathEN = table.Column<string>(maxLength: 200, nullable: false),
                     PriceTRY = table.Column<double>(nullable: false),
                     M2 = table.Column<string>(maxLength: 20, nullable: false),
                     RoomCount = table.Column<string>(maxLength: 10, nullable: false),
@@ -589,20 +591,32 @@ namespace RealEstate.Dal.Migrations
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_estate_Title",
-                table: "estate",
-                column: "Title",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_estate_TitleDeedStatusId",
                 table: "estate",
                 column: "TitleDeedStatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_estate_UrlPath",
+                name: "IX_estate_TitleEN",
                 table: "estate",
-                column: "UrlPath",
+                column: "TitleEN",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_estate_TitleTR",
+                table: "estate",
+                column: "TitleTR",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_estate_UrlPathEN",
+                table: "estate",
+                column: "UrlPathEN",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_estate_UrlPathTR",
+                table: "estate",
+                column: "UrlPathTR",
                 unique: true);
 
             migrationBuilder.CreateIndex(

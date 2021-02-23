@@ -281,23 +281,33 @@ namespace RealEstate.Dal.Migrations
                     b.Property<byte>("SaleType")
                         .HasColumnType("tinyint unsigned");
 
-                    b.Property<string>("Title")
+                    b.Property<int>("TitleDeedStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TitleEN")
                         .IsRequired()
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
                         .HasMaxLength(200);
 
-                    b.Property<int>("TitleDeedStatusId")
-                        .HasColumnType("int");
+                    b.Property<string>("TitleTR")
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
 
                     b.Property<string>("TotalFloor")
                         .IsRequired()
                         .HasColumnType("varchar(5) CHARACTER SET utf8mb4")
                         .HasMaxLength(5);
 
-                    b.Property<string>("UrlPath")
+                    b.Property<string>("UrlPathEN")
                         .IsRequired()
-                        .HasColumnType("varchar(250) CHARACTER SET utf8mb4")
-                        .HasMaxLength(250);
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("UrlPathTR")
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
 
                     b.Property<byte>("UsingStatus")
                         .HasColumnType("tinyint unsigned");
@@ -318,12 +328,18 @@ namespace RealEstate.Dal.Migrations
 
                     b.HasIndex("ProvinceId");
 
-                    b.HasIndex("Title")
-                        .IsUnique();
-
                     b.HasIndex("TitleDeedStatusId");
 
-                    b.HasIndex("UrlPath")
+                    b.HasIndex("TitleEN")
+                        .IsUnique();
+
+                    b.HasIndex("TitleTR")
+                        .IsUnique();
+
+                    b.HasIndex("UrlPathEN")
+                        .IsUnique();
+
+                    b.HasIndex("UrlPathTR")
                         .IsUnique();
 
                     b.HasIndex("WarmingWayId");

@@ -18,8 +18,10 @@ namespace src.RealEstate.Dal.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Estate>().HasIndex(x => x.CustomId).IsUnique();
-            builder.Entity<Estate>().HasIndex(x => x.Title).IsUnique();
-            builder.Entity<Estate>().HasIndex(x => x.UrlPath).IsUnique();
+            builder.Entity<Estate>().HasIndex(x => x.TitleTR).IsUnique();
+            builder.Entity<Estate>().HasIndex(x => x.TitleEN).IsUnique();
+            builder.Entity<Estate>().HasIndex(x => x.UrlPathTR).IsUnique();
+            builder.Entity<Estate>().HasIndex(x => x.UrlPathEN).IsUnique();
             //builder.Entity<Estate>().HasOne(x => x.District).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.Province).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.BuildingType).WithMany().OnDelete(DeleteBehavior.Restrict);

@@ -51,8 +51,11 @@ namespace src.RealEstate.Admin.Controllers
         }
 
         [HttpGet("/login")]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null) return RedirectToAction("index", "home");
+
             return View();
         }
 
