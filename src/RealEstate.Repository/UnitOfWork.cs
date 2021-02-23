@@ -22,6 +22,7 @@ namespace src.RealEstate.Repository
         private IRepository<District> _districtRepository;
         private IRepository<WarmingWay> _warmingWayRepository;
         private IRepository<BuildingType> _buildingTypeRepository;
+        private IRepository<TitleDeedStatus> _titleDeedStatusRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
@@ -32,6 +33,7 @@ namespace src.RealEstate.Repository
         public IRepository<District> DistrictRepository => _districtRepository ??= new Repository<District>(_dbContext);
         public IRepository<WarmingWay> WarmingWayRepository => _warmingWayRepository ??= new Repository<WarmingWay>(_dbContext);
         public IRepository<BuildingType> BuildingTypeRepository => _buildingTypeRepository ??= new Repository<BuildingType>(_dbContext);
+        public IRepository<TitleDeedStatus> TitleDeedStatusRepository => _titleDeedStatusRepository ??= new Repository<TitleDeedStatus>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {

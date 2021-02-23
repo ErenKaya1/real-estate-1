@@ -18,5 +18,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<District> DistrictRepository { get; }
         IRepository<WarmingWay> WarmingWayRepository { get; }
         IRepository<BuildingType> BuildingTypeRepository { get; }
+        IRepository<TitleDeedStatus> TitleDeedStatusRepository { get; }
     }
 }
