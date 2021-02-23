@@ -18,5 +18,10 @@ namespace src.RealEstate.Entity.Entities
         [Required]
         [StringLength(3)]
         public string Sort { get; set; }
+
+        [Required]
+        public int EstateId { get; set; }
+
+        public Estate Estate { get; set; }
     }
 }

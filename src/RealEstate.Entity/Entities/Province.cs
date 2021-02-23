@@ -22,5 +22,6 @@ namespace src.RealEstate.Entity.Entities
         public DateTime CreatedDate { get; set; }
 
         public List<District> District { get; set; }
+        public List<Estate> Estate { get; set; }
     }
 }

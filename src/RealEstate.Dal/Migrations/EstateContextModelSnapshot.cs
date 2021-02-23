@@ -193,6 +193,167 @@ namespace RealEstate.Dal.Migrations
                     b.ToTable("district");
                 });
 
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.Estate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<byte>("AvailableForLoan")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<byte>("AvailableForTrade")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<string>("BathroomCount")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("BuildingAge")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<byte>("BuildingState")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<byte>("BuildingStatus")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<int>("BuildingTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CustomId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("DescriptionEN")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("DescriptionTR")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EstateTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Facade")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<string>("FloorNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<byte>("FurnitureStatus")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<string>("GoogleMapIframe")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("M2")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("PriceTRY")
+                        .HasColumnType("double");
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoomCount")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<byte>("SaleType")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<int>("TitleDeedStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TotalFloor")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("UrlPath")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<byte>("UsingStatus")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<int>("WarmingWayId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuildingTypeId");
+
+                    b.HasIndex("CustomId")
+                        .IsUnique();
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("EstateTypeId");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.HasIndex("TitleDeedStatusId");
+
+                    b.HasIndex("UrlPath")
+                        .IsUnique();
+
+                    b.HasIndex("WarmingWayId");
+
+                    b.ToTable("estate");
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateAmbitProperty", b =>
+                {
+                    b.Property<int>("EstateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmbitPropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EstateId", "AmbitPropertyId");
+
+                    b.HasIndex("AmbitPropertyId");
+
+                    b.ToTable("estate_ambit_property");
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateExternalProperty", b =>
+                {
+                    b.Property<int>("EstateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExternalPropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EstateId", "ExternalPropertyId");
+
+                    b.HasIndex("ExternalPropertyId");
+
+                    b.ToTable("estate_external_property");
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateInteriorProperty", b =>
+                {
+                    b.Property<int>("EstateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InteriorPropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EstateId", "InteriorPropertyId");
+
+                    b.HasIndex("InteriorPropertyId");
+
+                    b.ToTable("estate_interior_property");
+                });
+
             modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -218,6 +379,21 @@ namespace RealEstate.Dal.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateTransportationProperty", b =>
+                {
+                    b.Property<int>("EstateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransportationPropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EstateId", "TransportationPropertyId");
+
+                    b.HasIndex("TransportationPropertyId");
+
+                    b.ToTable("estate_transportation_property");
                 });
 
             modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateType", b =>
@@ -355,6 +531,9 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
                         .HasMaxLength(30);
 
+                    b.Property<int>("EstateId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
@@ -366,6 +545,8 @@ namespace RealEstate.Dal.Migrations
                         .HasMaxLength(3);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstateId");
 
                     b.ToTable("panoramic_image");
                 });
@@ -405,6 +586,9 @@ namespace RealEstate.Dal.Migrations
                         .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
                         .HasMaxLength(30);
 
+                    b.Property<int>("EstateId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
@@ -416,6 +600,8 @@ namespace RealEstate.Dal.Migrations
                         .HasMaxLength(3);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstateId");
 
                     b.ToTable("static_image");
                 });
@@ -548,6 +734,123 @@ namespace RealEstate.Dal.Migrations
                     b.HasOne("src.RealEstate.Entity.Entities.Province", "Province")
                         .WithMany("District")
                         .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.Estate", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.BuildingType", "BuildingType")
+                        .WithMany("Estate")
+                        .HasForeignKey("BuildingTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.District", "District")
+                        .WithMany("Estate")
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.EstateType", "EstateType")
+                        .WithMany("Estate")
+                        .HasForeignKey("EstateTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.Province", "Province")
+                        .WithMany("Estate")
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.TitleDeedStatus", "TitleDeedStatus")
+                        .WithMany("Estate")
+                        .HasForeignKey("TitleDeedStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.WarmingWay", "WarmingWay")
+                        .WithMany("Estate")
+                        .HasForeignKey("WarmingWayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateAmbitProperty", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.AmbitProperty", "AmbitProperty")
+                        .WithMany()
+                        .HasForeignKey("AmbitPropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.Estate", "Estate")
+                        .WithMany("EstateAmbitProperty")
+                        .HasForeignKey("EstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateExternalProperty", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.Estate", "Estate")
+                        .WithMany("EstateExternalProperty")
+                        .HasForeignKey("EstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.ExternalProperty", "ExternalProperty")
+                        .WithMany()
+                        .HasForeignKey("ExternalPropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateInteriorProperty", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.Estate", "Estate")
+                        .WithMany("EstateInteriorProperty")
+                        .HasForeignKey("EstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.InteriorProperty", "InteriorProperty")
+                        .WithMany()
+                        .HasForeignKey("InteriorPropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.EstateTransportationProperty", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.Estate", "Estate")
+                        .WithMany("EstateTransportationProperty")
+                        .HasForeignKey("EstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("src.RealEstate.Entity.Entities.TransportationProperty", "TransportationProperty")
+                        .WithMany()
+                        .HasForeignKey("TransportationPropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.PanoramicImage", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.Estate", "Estate")
+                        .WithMany("PanoramicImage")
+                        .HasForeignKey("EstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("src.RealEstate.Entity.Entities.StaticImage", b =>
+                {
+                    b.HasOne("src.RealEstate.Entity.Entities.Estate", "Estate")
+                        .WithMany("StaticImage")
+                        .HasForeignKey("EstateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

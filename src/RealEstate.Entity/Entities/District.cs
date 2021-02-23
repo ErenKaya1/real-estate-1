@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using src.RealEstate.Entity.Entities.Base;
@@ -23,6 +24,7 @@ namespace src.RealEstate.Entity.Entities
         [Required]
         public int ProvinceId { get; set; }
 
+        public List<Estate> Estate { get; set; }
         public Province Province { get; set; }
     }
 }
