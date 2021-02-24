@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +37,31 @@ namespace src.RealEstate.Service
             return entities;
         }
 
+        public IQueryable<WarmingWay> GetAll(CultureInfo culture)
+        {
+            var entities = new List<WarmingWay>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.WarmingWayRepository.FindAll().OrderBy(x => x.WarmingWayNameEN).Select(x => new WarmingWay
+                    {
+                        Id = x.Id,
+                        WarmingWayNameEN = x.WarmingWayNameEN
+                    }).AsNoTracking();
+                    break;
+                default:
+                    entities = _unitOfWork.WarmingWayRepository.FindAll().OrderBy(x => x.WarmingWayNameTR).Select(x => new WarmingWay
+                    {
+                        Id = x.Id,
+                        WarmingWayNameTR = x.WarmingWayNameTR
+                    }).AsNoTracking();
+                    break;
+            }
+
+            return entities;
+        }
+
         public async Task<WarmingWay> GetByIdAsync(int id)
         {
             var entity = await _unitOfWork.WarmingWayRepository.FindOne(x => x.Id == id);
@@ -52,7 +79,7 @@ namespace src.RealEstate.Service
         public async Task<DeleteResponse> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.WarmingWayRepository.FindOne(x => x.Id == id);
-            if(entity == null) return DeleteResponse.Fail;
+            if (entity == null) return DeleteResponse.Fail;
             _unitOfWork.WarmingWayRepository.Delete(entity);
 
             return await _unitOfWork.SaveChangesForDelete();

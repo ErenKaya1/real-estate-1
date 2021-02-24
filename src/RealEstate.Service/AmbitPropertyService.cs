@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +37,31 @@ namespace src.RealEstate.Service
             return entities;
         }
 
+        public IQueryable<AmbitProperty> GetAll(CultureInfo culture)
+        {
+            var entities = new List<AmbitProperty>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.AmbitPropertyRepository.FindAll().OrderBy(x => x.PropertyNameEN).Select(x => new AmbitProperty
+                    {
+                        Id = x.Id,
+                        PropertyNameEN = x.PropertyNameEN
+                    }).AsNoTracking();
+                    break;
+                default:
+                    entities = _unitOfWork.AmbitPropertyRepository.FindAll().OrderBy(x => x.PropertyNameTR).Select(x => new AmbitProperty
+                    {
+                        Id = x.Id,
+                        PropertyNameTR = x.PropertyNameTR
+                    }).AsNoTracking();
+                    break;
+            }
+
+            return entities;
+        }
+
         public async Task<AmbitProperty> GetByIdAsync(int id)
         {
             var entity = await _unitOfWork.AmbitPropertyRepository.FindOne(x => x.Id == id);
@@ -52,7 +79,7 @@ namespace src.RealEstate.Service
         public async Task<bool> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.AmbitPropertyRepository.FindOne(x => x.Id == id);
-            if(entity == null) return false;
+            if (entity == null) return false;
             _unitOfWork.AmbitPropertyRepository.Delete(entity);
 
             return await _unitOfWork.SaveChanges();

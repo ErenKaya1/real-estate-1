@@ -7,6 +7,11 @@
 @inject IEstateTypeService _estateTypeService
 @inject IBuildingTypeService _buildingTypeService
 @inject ITitleDeedStatusService _titleDeedStatusService
+@inject IWarmingWayService _warmingWayService
+@inject IInteriorPropertyService _interiorPropertyService
+@inject IExternalPropertyService _externalPropertyService
+@inject IAmbitPropertyService _ambitPropertyService
+@inject ITransportationPropertyService _transportationPropertyService
 
 @{
     ViewData["Title"] = "Yeni İlan";
@@ -16,6 +21,11 @@
     var estateTypes = await _estateTypeService.GetAll(cultureInfo).ToListAsync();
     var buildingTypes = await _buildingTypeService.GetAll(cultureInfo).ToListAsync();
     var titleDeedStatuses = await _titleDeedStatusService.GetAll(cultureInfo).ToListAsync();
+    var warmingWays = await _warmingWayService.GetAll(cultureInfo).ToListAsync();
+    var interiorProperties = await _interiorPropertyService.GetAll(cultureInfo).ToListAsync();
+    var externalProperties = await _externalPropertyService.GetAll(cultureInfo).ToListAsync();
+    var ambitProperties = await _ambitPropertyService.GetAll(cultureInfo).ToListAsync();
+    var transportationProperties = await _transportationPropertyService.GetAll(cultureInfo).ToListAsync();
 }
 
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
@@ -192,17 +202,149 @@
                                 </select>
                             </div>
                         }
+                        @if (warmingWays.Count > 0)
+                        {
+                            <div class="form-group col-3">
+                                <label asp-for="WarmingWayId" class="form-label"></label>
+                                <select asp-for="WarmingWayId" class="form-control">
+                                    @foreach (var warmingWay in warmingWays)
+                                    {
+                                        <option value="@warmingWay.Id">@warmingWay.WarmingWayNameTR</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label asp-for="GoogleMapIframe" class="form-label"></label>
+                            <input asp-for="GoogleMapIframe" class="form-control">
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="description">
-                <h4>Açıklamalar</h4>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label asp-for="DescriptionTR" class="form-label"></label>
+                            <textarea asp-for="DescriptionTR" class="form-control" rows="6"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label asp-for="DescriptionEN" class="form-label"></label>
+                            <textarea asp-for="DescriptionEN" class="form-control" rows="6"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="tags">
-                <h4>Etiketler</h4>
+                <div class="card-body">
+                    @if (interiorProperties.Count > 0)
+                    {
+                        <h4 class="text-center mb-4">İç Özellikler</h4>
+                        <div class="row">
+                            @foreach (var property in interiorProperties)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+                                    <label class="switcher switcher-success">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <span class="switcher-indicator">
+                                        <span class="switcher-yes">
+                                            <span class="ion ion-md-checkmark"></span>
+                                        </span>
+                                        <span class="switcher-no">
+                                            <span class="ion ion-md-close"></span>
+                                        </span>
+                                        </span>
+                                        <span class="switcher-label">@property.PropertyNameTR</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (externalProperties.Count > 0)
+                    {
+                        <h4 class="text-center mb-4">Dış Özellikler</h4>
+                        <div class="row">
+                            @foreach (var property in externalProperties)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+                                    <label class="switcher switcher-success">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <span class="switcher-indicator">
+                                        <span class="switcher-yes">
+                                            <span class="ion ion-md-checkmark"></span>
+                                        </span>
+                                        <span class="switcher-no">
+                                            <span class="ion ion-md-close"></span>
+                                        </span>
+                                        </span>
+                                        <span class="switcher-label">@property.PropertyNameTR</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (ambitProperties.Count > 0)
+                    {
+                        <h4 class="text-center mb-4">Muhit Özellikleri</h4>
+                        <div class="row">
+                            @foreach (var property in ambitProperties)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+                                    <label class="switcher switcher-success">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <span class="switcher-indicator">
+                                        <span class="switcher-yes">
+                                            <span class="ion ion-md-checkmark"></span>
+                                        </span>
+                                        <span class="switcher-no">
+                                            <span class="ion ion-md-close"></span>
+                                        </span>
+                                        </span>
+                                        <span class="switcher-label">@property.PropertyNameTR</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (transportationProperties.Count > 0)
+                    {
+                        <h4 class="text-center mb-4">Ulaşım Özellikleri</h4>
+                        <div class="row">
+                            @foreach (var property in transportationProperties)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+                                    <label class="switcher switcher-success">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <span class="switcher-indicator">
+                                        <span class="switcher-yes">
+                                            <span class="ion ion-md-checkmark"></span>
+                                        </span>
+                                        <span class="switcher-no">
+                                            <span class="ion ion-md-close"></span>
+                                        </span>
+                                        </span>
+                                        <span class="switcher-label">@property.PropertyNameTR</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
             </div>
             <div class="tab-pane fade" id="images">
-                <h4>Görseller</h4>
+                
             </div>
         </div>
     </div>

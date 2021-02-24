@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +33,31 @@ namespace src.RealEstate.Service
                                         .OrderByDescending(x => x.CreatedTime)
                                         .AsNoTracking()
                                         .AsQueryable();
+
+            return entities;
+        }
+
+        public IQueryable<InteriorProperty> GetAll(CultureInfo culture)
+        {
+            var entities = new List<InteriorProperty>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.InteriorPropertyRepository.FindAll().OrderBy(x => x.PropertyNameEN).Select(x => new InteriorProperty
+                    {
+                        Id = x.Id,
+                        PropertyNameEN = x.PropertyNameEN
+                    }).AsNoTracking();
+                    break;
+                default:
+                    entities = _unitOfWork.InteriorPropertyRepository.FindAll().OrderBy(x => x.PropertyNameTR).Select(x => new InteriorProperty
+                    {
+                        Id = x.Id,
+                        PropertyNameTR = x.PropertyNameTR
+                    }).AsNoTracking();
+                    break;
+            }
 
             return entities;
         }

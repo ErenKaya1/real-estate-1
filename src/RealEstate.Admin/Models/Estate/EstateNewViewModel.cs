@@ -67,7 +67,7 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Isınma Şekli")]
-        public int WarmingWayId { get; set; }
+        public int WarmingWayId { get; set; }//
 
         [Required]
         [Display(Name = "Krediye Uygunluk")]
@@ -92,7 +92,7 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Tapu Durumu")]
-        public int TitleDeedStatusId { get; set; }
+        public int TitleDeedStatusId { get; set; }//
 
         [Required]
         [Display(Name = "Kullanım Durumu")]
@@ -108,15 +108,15 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Açıklama (Türkçe)")]
-        public string DescriptionTR { get; set; }
+        public string DescriptionTR { get; set; }//
 
         [Required]
         [Display(Name = "Açıklama (İngilizce)")]
-        public string DescriptionEN { get; set; }
+        public string DescriptionEN { get; set; }//
 
         [Required]
         [Display(Name = "Emlak Tipi")]
-        public int EstateTypeId { get; set; }
+        public int EstateTypeId { get; set; }//
 
         [Required]
         [Display(Name = "İl")]
@@ -133,7 +133,7 @@ namespace src.RealEstate.Admin.Models.Estate
         [Required]
         [StringLength(500)]
         [Display(Name = "Google Map Iframe")]
-        public string GoogleMapIframe { get; set; }
+        public string GoogleMapIframe { get; set; }//
         
         [Display(Name = "Static Fotoğraflar")]
         public List<IFormFile> StaticImage { get; set; }

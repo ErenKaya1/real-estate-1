@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +36,31 @@ namespace src.RealEstate.Service
             return entities;
         }
 
+        public IQueryable<ExternalProperty> GetAll(CultureInfo culture)
+        {
+            var entities = new List<ExternalProperty>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.ExternalPropertyRepository.FindAll().OrderBy(x => x.PropertyNameEN).Select(x => new ExternalProperty
+                    {
+                        Id = x.Id,
+                        PropertyNameEN = x.PropertyNameEN
+                    }).AsNoTracking();
+                    break;
+                default:
+                    entities = _unitOfWork.ExternalPropertyRepository.FindAll().OrderBy(x => x.PropertyNameTR).Select(x => new ExternalProperty
+                    {
+                        Id = x.Id,
+                        PropertyNameTR = x.PropertyNameTR
+                    }).AsNoTracking();
+                    break;
+            }
+
+            return entities;
+        }
+
         public async Task<ExternalProperty> GetByIdAsync(int id)
         {
             var entity = await _unitOfWork.ExternalPropertyRepository.FindOne(x => x.Id == id);
@@ -52,7 +79,7 @@ namespace src.RealEstate.Service
             var entity = await _unitOfWork.ExternalPropertyRepository.FindOne(x => x.Id == id);
             if (entity == null) return false;
             _unitOfWork.ExternalPropertyRepository.Delete(entity);
-            
+
             return await _unitOfWork.SaveChanges();
         }
     }
