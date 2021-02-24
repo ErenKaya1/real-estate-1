@@ -1,7 +1,13 @@
 @model src.RealEstate.Admin.Models.Estate.EstateNewViewModel
+@using System.Globalization
+@using Microsoft.EntityFrameworkCore
+@using src.RealEstate.Service.Contracts
+@inject IProvinceService _provinceService
 
 @{
     ViewData["Title"] = "Yeni İlan";
+
+    var provinces = await _provinceService.GetAll(new CultureInfo("tr-TR")).ToListAsync();
 }
 
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
@@ -23,7 +29,83 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="general">
-                <h4>Genel Bilgiler</h4>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-2">
+                            <label asp-for="CustomId" class="form-label"></label>
+                            <input asp-for="CustomId" class="form-control">
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="PriceTRY" class="form-label"></label>
+                            <input asp-for="PriceTRY" class="form-control">
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="M2Brut" class="form-label"></label>
+                            <input asp-for="M2Brut" class="form-control">
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="M2Net" class="form-label"></label>
+                            <input asp-for="M2Net" class="form-control">
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="RoomCount" class="form-label"></label>
+                            <input asp-for="RoomCount" class="form-control">
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="IsActive" class="form-label"></label>
+                            <input asp-for="IsActive" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label asp-for="TitleTR" class="form-label"></label>
+                            <input asp-for="TitleTR" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label asp-for="TitleEN" class="form-label"></label>
+                            <input asp-for="TitleEN" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label asp-for="FloorNumber" class="form-label"></label>
+                            <input asp-for="FloorNumber" class="form-control">
+                        </div>
+                        <div class="form-group col-3">
+                            <label asp-for="TotalFloor" class="form-label"></label>
+                            <input asp-for="TotalFloor" class="form-control">
+                        </div>
+                        <div class="form-group col-3">
+                            <label asp-for="BuildingAge" class="form-label"></label>
+                            <input asp-for="BuildingAge" class="form-control">
+                        </div>
+                        <div class="form-group col-3">
+                            <label asp-for="BathroomCount" class="form-label"></label>
+                            <input asp-for="BathroomCount" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        @if (provinces.Count > 0)
+                        {
+                            <div class="form-group col-3">
+                                <label asp-for="ProvinceId" class="form-label"></label>
+                                <select asp-for="ProvinceId" class="form-control">
+                                    <option value="-1">--Seçiniz--</option>
+                                    @foreach (var province in provinces)
+                                    {
+                                        <option value="@province.Id">@province.NameTR</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        <div class="form-group col-3">
+                            <label asp-for="DistrictId" class="form-label"></label>
+                            <select asp-for="DistrictId" class="form-control" disabled></select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="description">
                 <h4>Açıklamalar</h4>

@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
@@ -44,6 +48,31 @@ namespace src.RealEstate.Service
             _unitOfWork.DistrictRepository.Delete(entity);
 
             return await _unitOfWork.SaveChangesForDelete();
+        }
+
+        public IQueryable<District> GetAll(int provinceId, CultureInfo culture)
+        {
+            var entities = new List<District>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.DistrictRepository.Find(x => x.ProvinceId == provinceId).OrderBy(x => x.DistrictNameEN).Select(x => new District
+                    {
+                        Id = x.Id,
+                        DistrictNameEN = x.DistrictNameEN,
+                    }).AsNoTracking();
+                    break;
+                default:
+                entities = _unitOfWork.DistrictRepository.Find(x => x.ProvinceId == provinceId).OrderBy(x => x.DistrictNameTR).Select(x => new District
+                    {
+                        Id = x.Id,
+                        DistrictNameTR = x.DistrictNameTR,
+                    }).AsNoTracking();
+                    break;
+            }
+
+            return entities;
         }
     }
 }

@@ -11,46 +11,46 @@ namespace src.RealEstate.Admin.Models.Estate
         [Required]
         [StringLength(30)]
         [Display(Name = "ID")]
-        public string CustomId { get; set; }
+        public string CustomId { get; set; }//
 
         [Required]
         [StringLength(200)]
         [Display(Name = "Başlık (Türkçe)")]
-        public string TitleTR { get; set; }
+        public string TitleTR { get; set; }//
 
         [Required]
         [StringLength(200)]
         [Display(Name = "Başlık (İngilizce)")]
-        public string TitleEN { get; set; }
+        public string TitleEN { get; set; }//
 
         [Required]
         [Display(Name = "Fiyat (₺)")]
-        public double PriceTRY { get; set; }
+        public double PriceTRY { get; set; }//
 
         [Required]
         [StringLength(20)]
         [Display(Name = "M2 (Brüt)")]
-        public string M2Brut { get; set; }
+        public string M2Brut { get; set; }//
 
         [Required]
         [StringLength(20)]
         [Display(Name = "M2 (Net)")]
-        public string M2Net { get; set; }
+        public string M2Net { get; set; }//
 
         [Required]
         [StringLength(10)]
         [Display(Name = "Oda Sayısı (2+1)")]
-        public string RoomCount { get; set; }
+        public string RoomCount { get; set; }//
 
         [Required]
         [StringLength(3)]
         [Display(Name = "Kat Numarası")]
-        public string FloorNumber { get; set; }
+        public string FloorNumber { get; set; }//
 
         [Required]
         [StringLength(5)]
         [Display(Name = "Toplam Kat Sayısı")]
-        public string TotalFloor { get; set; }
+        public string TotalFloor { get; set; }//
 
         [Required]
         [Display(Name = "Bina Durumu")]
@@ -63,7 +63,7 @@ namespace src.RealEstate.Admin.Models.Estate
         [Required]
         [StringLength(5)]
         [Display(Name = "Bina Yaşı")]
-        public string BuildingAge { get; set; }
+        public string BuildingAge { get; set; }//
 
         [Required]
         [Display(Name = "Isınma Şekli")]
@@ -80,7 +80,7 @@ namespace src.RealEstate.Admin.Models.Estate
         [Required]
         [StringLength(2)]
         [Display(Name = "Banyo Sayısı")]
-        public string BathroomCount { get; set; }
+        public string BathroomCount { get; set; }//
 
         [Required]
         [Display(Name = "Yapı Durumu")]
@@ -125,6 +125,10 @@ namespace src.RealEstate.Admin.Models.Estate
         [Required]
         [Display(Name = "İlçe")]
         public int DistrictId { get; set; }
+
+        [Required]
+        [Display(Name = "Aktif")]
+        public bool IsActive { get; set; }//
 
         [Required]
         [StringLength(500)]

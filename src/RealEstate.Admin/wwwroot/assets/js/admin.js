@@ -298,6 +298,7 @@ $(document).ready(function () {
     }
   });
 
+  // add active class to the selected sidenav item
   var activeSidenav = $(
     ".sidenav-link[href='" + window.location.pathname + "']"
   ).parent();
@@ -308,6 +309,28 @@ $(document).ready(function () {
   } else {
     activeSidenav.addClass("active");
   }
+
+  // to fetch districts of the selected province from server
+  $("select[name='ProvinceId']").on("change", async function () {
+    const districtSelectElement = $("select[name='DistrictId']");
+    districtSelectElement.html("");
+    districtSelectElement.prop("disabled", true);
+    const provinceId = $(this).val();
+    
+    if (provinceId != -1) {
+      const response = await fetch(
+        "/District/GetAllByProvinceId?culture=tr-TR&provinceId=" + provinceId
+      );
+      const data = await response.json();
+
+      data.map((item) => {
+        districtSelectElement.append(
+          `<option value=${item.id}>${item.districtName}</option>`
+        );
+      });
+      districtSelectElement.prop("disabled", false);
+    }
+  });
 });
 
 function deletePropertyConfirm(action, id) {
@@ -443,7 +466,8 @@ function deleteTitleDeedStatusConfirm(id) {
     },
   }).then((result) => {
     if (result.value) {
-      window.location.href = "/TitleDeedStatus/Delete" + "?titleDeedStatusId=" + id;
+      window.location.href =
+        "/TitleDeedStatus/Delete" + "?titleDeedStatusId=" + id;
     }
   });
 }

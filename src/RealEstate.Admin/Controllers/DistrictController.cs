@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using src.RealEstate.Admin.Models.District;
 using src.RealEstate.Admin.Models.Province;
 using src.RealEstate.Common.Constants;
@@ -118,6 +122,18 @@ namespace src.RealEstate.Admin.Controllers
 
             TempData["DeleteDistrictError"] = Messages.DEFAULT_ERROR_MESSAGE;
             return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
+        }
+
+        [HttpGet]
+        public async Task<List<DistrictNewEstateViewModel>> GetAllByProvinceId(int provinceId, string culture)
+        {
+            var entities = await _districtService.GetAll(provinceId, new CultureInfo(culture)).Select(x => new DistrictNewEstateViewModel
+            {
+                Id = x.Id,
+                DistrictName = x.DistrictNameTR == null ? x.DistrictNameEN : x.DistrictNameTR
+            }).ToListAsync();
+            
+            return entities;
         }
     }
 }
