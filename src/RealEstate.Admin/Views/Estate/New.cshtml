@@ -6,6 +6,7 @@
 @inject IProvinceService _provinceService
 @inject IEstateTypeService _estateTypeService
 @inject IBuildingTypeService _buildingTypeService
+@inject ITitleDeedStatusService _titleDeedStatusService
 
 @{
     ViewData["Title"] = "Yeni İlan";
@@ -14,6 +15,7 @@
     var provinces = await _provinceService.GetAll(cultureInfo).ToListAsync();
     var estateTypes = await _estateTypeService.GetAll(cultureInfo).ToListAsync();
     var buildingTypes = await _buildingTypeService.GetAll(cultureInfo).ToListAsync();
+    var titleDeedStatuses = await _titleDeedStatusService.GetAll(cultureInfo).ToListAsync();
 }
 
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
@@ -174,6 +176,18 @@
                                     @foreach (var buildingType in buildingTypes)
                                     {
                                         <option value="@buildingType.Id">@buildingType.BuildingTypeNameTR</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        @if (titleDeedStatuses.Count > 0)
+                        {
+                            <div class="form-group col-3">
+                                <label asp-for="TitleDeedStatusId" class="form-label"></label>
+                                <select asp-for="TitleDeedStatusId" class="form-control">
+                                    @foreach (var titleDeedStatus in titleDeedStatuses)
+                                    {
+                                        <option value="@titleDeedStatus.Id">@titleDeedStatus.StatusNameTR</option>
                                     }
                                 </select>
                             </div>

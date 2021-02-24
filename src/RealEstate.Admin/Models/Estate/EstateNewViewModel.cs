@@ -88,7 +88,7 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Yapı Tipi")]
-        public int BuildingTypeId { get; set; }
+        public int BuildingTypeId { get; set; }//
 
         [Required]
         [Display(Name = "Tapu Durumu")]

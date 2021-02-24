@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +34,31 @@ namespace src.RealEstate.Service
                                         .OrderByDescending(x => x.CreatedDate)
                                         .AsNoTracking()
                                         .AsQueryable();
+
+            return entities;
+        }
+
+        public IQueryable<TitleDeedStatus> GetAll(CultureInfo culture)
+        {
+            var entities = new List<TitleDeedStatus>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.TitleDeedStatusRepository.FindAll().OrderBy(x => x.StatusNameEN).Select(x => new TitleDeedStatus
+                    {
+                        Id = x.Id,
+                        StatusNameEN = x.StatusNameEN
+                    }).AsNoTracking();
+                    break;
+                default:
+                    entities = _unitOfWork.TitleDeedStatusRepository.FindAll().OrderBy(x => x.StatusNameTR).Select(x => new TitleDeedStatus
+                    {
+                        Id = x.Id,
+                        StatusNameTR = x.StatusNameTR
+                    }).AsNoTracking();
+                    break;
+            }
 
             return entities;
         }
