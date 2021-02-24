@@ -5,6 +5,7 @@
 @using src.RealEstate.Service.Contracts
 @inject IProvinceService _provinceService
 @inject IEstateTypeService _estateTypeService
+@inject IBuildingTypeService _buildingTypeService
 
 @{
     ViewData["Title"] = "Yeni İlan";
@@ -12,6 +13,7 @@
     var cultureInfo = new CultureInfo("tr-TR");
     var provinces = await _provinceService.GetAll(cultureInfo).ToListAsync();
     var estateTypes = await _estateTypeService.GetAll(cultureInfo).ToListAsync();
+    var buildingTypes = await _buildingTypeService.GetAll(cultureInfo).ToListAsync();
 }
 
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
@@ -110,37 +112,45 @@
                         </div>
                         <div class="form-group col-3">
                             <label asp-for="AvailableForLoan" class="form-label"></label>
-                            <select asp-for="AvailableForLoan" class="form-control" asp-items="@Html.GetEnumSelectList<AvailableForLoan>()"></select>
+                            <select asp-for="AvailableForLoan" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<AvailableForLoan>()"></select>
                         </div>
                         <div class="form-group col-3">
                             <label asp-for="AvailableForTrade" class="form-label"></label>
-                            <select asp-for="AvailableForTrade" class="form-control" asp-items="@Html.GetEnumSelectList<AvailableForTrade>()"></select>
+                            <select asp-for="AvailableForTrade" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<AvailableForTrade>()"></select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-2">
                             <label asp-for="SaleType" class="form-label"></label>
-                            <select asp-for="SaleType" class="form-control" asp-items="@Html.GetEnumSelectList<SaleType>()"></select>
+                            <select asp-for="SaleType" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<SaleType>()"></select>
                         </div>
                         <div class="form-group col-2">
                             <label asp-for="BuildingStatus" class="form-label"></label>
-                            <select asp-for="BuildingStatus" class="form-control" asp-items="@Html.GetEnumSelectList<BuildingStatus>()"></select>
+                            <select asp-for="BuildingStatus" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<BuildingStatus>()"></select>
                         </div>
                         <div class="form-group col-2">
                             <label asp-for="FurnitureStatus" class="form-label"></label>
-                            <select asp-for="FurnitureStatus" class="form-control" asp-items="@Html.GetEnumSelectList<FurnitureStatus>()"></select>
+                            <select asp-for="FurnitureStatus" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<FurnitureStatus>()"></select>
                         </div>
                         <div class="form-group col-2">
                             <label asp-for="BuildingState" class="form-label"></label>
-                            <select asp-for="BuildingState" class="form-control" asp-items="@Html.GetEnumSelectList<BuildingState>()"></select>
+                            <select asp-for="BuildingState" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<BuildingState>()"></select>
                         </div>
                         <div class="form-group col-2">
                             <label asp-for="UsingStatus" class="form-label"></label>
-                            <select asp-for="UsingStatus" class="form-control" asp-items="@Html.GetEnumSelectList<UsingStatus>()"></select>
+                            <select asp-for="UsingStatus" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<UsingStatus>()"></select>
                         </div>
                         <div class="form-group col-2">
                             <label asp-for="Facade" class="form-label"></label>
-                            <select asp-for="Facade" class="form-control" asp-items="@Html.GetEnumSelectList<Facade>()"></select>
+                            <select asp-for="Facade" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<Facade>()"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -152,6 +162,18 @@
                                     @foreach (var estateType in estateTypes)
                                     {
                                         <option value="@estateType.Id">@estateType.TypeNameTR</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        @if (buildingTypes.Count > 0)
+                        {
+                            <div class="form-group col-3">
+                                <label asp-for="BuildingTypeId" class="form-label"></label>
+                                <select asp-for="BuildingTypeId" class="form-control">
+                                    @foreach (var buildingType in buildingTypes)
+                                    {
+                                        <option value="@buildingType.Id">@buildingType.BuildingTypeNameTR</option>
                                     }
                                 </select>
                             </div>

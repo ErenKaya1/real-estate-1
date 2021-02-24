@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +38,31 @@ namespace src.RealEstate.Service
             return entities;
         }
 
+        public IQueryable<BuildingType> GetAll(CultureInfo culture)
+        {
+            var entities = new List<BuildingType>().AsQueryable();
+
+            switch (culture.Name)
+            {
+                case "en-EN":
+                    entities = _unitOfWork.BuildingTypeRepository.FindAll().OrderBy(x => x.BuildingTypeNameEN).Select(x => new BuildingType
+                    {
+                        Id = x.Id,
+                        BuildingTypeNameEN = x.BuildingTypeNameEN
+                    }).AsNoTracking();
+                    break;
+                default:
+                    entities = _unitOfWork.BuildingTypeRepository.FindAll().OrderBy(x => x.BuildingTypeNameTR).Select(x => new BuildingType
+                    {
+                        Id = x.Id,
+                        BuildingTypeNameTR = x.BuildingTypeNameTR
+                    }).AsNoTracking();
+                    break;
+            }
+
+            return entities;
+        }
+
         public async Task<BuildingType> GetByIdAsync(int id)
         {
             var entity = await _unitOfWork.BuildingTypeRepository.FindOne(x => x.Id == id);
@@ -53,7 +80,7 @@ namespace src.RealEstate.Service
         public async Task<DeleteResponse> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.BuildingTypeRepository.FindOne(x => x.Id == id);
-            if(entity == null) return DeleteResponse.Fail;
+            if (entity == null) return DeleteResponse.Fail;
             _unitOfWork.BuildingTypeRepository.Delete(entity);
 
             return await _unitOfWork.SaveChangesForDelete();
