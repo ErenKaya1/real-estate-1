@@ -132,7 +132,7 @@ namespace src.RealEstate.Admin.Controllers
                 Id = x.Id,
                 DistrictName = x.DistrictNameTR == null ? x.DistrictNameEN : x.DistrictNameTR
             }).ToListAsync();
-            
+
             return entities;
         }
     }

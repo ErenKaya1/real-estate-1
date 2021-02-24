@@ -1,13 +1,17 @@
 @model src.RealEstate.Admin.Models.Estate.EstateNewViewModel
 @using System.Globalization
 @using Microsoft.EntityFrameworkCore
+@using src.RealEstate.Common.Enum
 @using src.RealEstate.Service.Contracts
 @inject IProvinceService _provinceService
+@inject IEstateTypeService _estateTypeService
 
 @{
     ViewData["Title"] = "Yeni İlan";
 
-    var provinces = await _provinceService.GetAll(new CultureInfo("tr-TR")).ToListAsync();
+    var cultureInfo = new CultureInfo("tr-TR");
+    var provinces = await _provinceService.GetAll(cultureInfo).ToListAsync();
+    var estateTypes = await _estateTypeService.GetAll(cultureInfo).ToListAsync();
 }
 
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
@@ -104,6 +108,54 @@
                             <label asp-for="DistrictId" class="form-label"></label>
                             <select asp-for="DistrictId" class="form-control" disabled></select>
                         </div>
+                        <div class="form-group col-3">
+                            <label asp-for="AvailableForLoan" class="form-label"></label>
+                            <select asp-for="AvailableForLoan" class="form-control" asp-items="@Html.GetEnumSelectList<AvailableForLoan>()"></select>
+                        </div>
+                        <div class="form-group col-3">
+                            <label asp-for="AvailableForTrade" class="form-label"></label>
+                            <select asp-for="AvailableForTrade" class="form-control" asp-items="@Html.GetEnumSelectList<AvailableForTrade>()"></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-2">
+                            <label asp-for="SaleType" class="form-label"></label>
+                            <select asp-for="SaleType" class="form-control" asp-items="@Html.GetEnumSelectList<SaleType>()"></select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="BuildingStatus" class="form-label"></label>
+                            <select asp-for="BuildingStatus" class="form-control" asp-items="@Html.GetEnumSelectList<BuildingStatus>()"></select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="FurnitureStatus" class="form-label"></label>
+                            <select asp-for="FurnitureStatus" class="form-control" asp-items="@Html.GetEnumSelectList<FurnitureStatus>()"></select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="BuildingState" class="form-label"></label>
+                            <select asp-for="BuildingState" class="form-control" asp-items="@Html.GetEnumSelectList<BuildingState>()"></select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="UsingStatus" class="form-label"></label>
+                            <select asp-for="UsingStatus" class="form-control" asp-items="@Html.GetEnumSelectList<UsingStatus>()"></select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label asp-for="Facade" class="form-label"></label>
+                            <select asp-for="Facade" class="form-control" asp-items="@Html.GetEnumSelectList<Facade>()"></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        @if (estateTypes.Count > 0)
+                        {
+                            <div class="form-group col-3">
+                                <label asp-for="EstateTypeId" class="form-label"></label>
+                                <select asp-for="EstateTypeId" class="form-control">
+                                    @foreach (var estateType in estateTypes)
+                                    {
+                                        <option value="@estateType.Id">@estateType.TypeNameTR</option>
+                                    }
+                                </select>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -54,11 +54,11 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Bina Durumu")]
-        public BuildingStatus BuildingStatus { get; set; }
+        public BuildingStatus BuildingStatus { get; set; }//
 
         [Required]
         [Display(Name = "Satış Tipi")]
-        public SaleType SaleType { get; set; }
+        public SaleType SaleType { get; set; }//
 
         [Required]
         [StringLength(5)]
@@ -71,11 +71,11 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Krediye Uygunluk")]
-        public AvailableForLoan AvailableForLoan { get; set; }
+        public AvailableForLoan AvailableForLoan { get; set; }//
 
         [Required]
         [Display(Name = "Eşya Durumu")]
-        public FurnitureStatus FurnitureStatus { get; set; }
+        public FurnitureStatus FurnitureStatus { get; set; }//
 
         [Required]
         [StringLength(2)]
@@ -84,7 +84,7 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Yapı Durumu")]
-        public BuildingState BuildingState { get; set; }
+        public BuildingState BuildingState { get; set; }//
 
         [Required]
         [Display(Name = "Yapı Tipi")]
@@ -96,15 +96,15 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "Kullanım Durumu")]
-        public UsingStatus UsingStatus { get; set; }
+        public UsingStatus UsingStatus { get; set; }//
 
         [Required]
         [Display(Name = "Takasa Uygunluk")]
-        public AvailableForTrade AvailableForTrade { get; set; }
+        public AvailableForTrade AvailableForTrade { get; set; }//
 
         [Required]
         [Display(Name = "Cephe")]
-        public Facade Facade { get; set; }
+        public Facade Facade { get; set; }//
 
         [Required]
         [Display(Name = "Açıklama (Türkçe)")]
@@ -120,11 +120,11 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Required]
         [Display(Name = "İl")]
-        public int ProvinceId { get; set; }
+        public int ProvinceId { get; set; }//
 
         [Required]
         [Display(Name = "İlçe")]
-        public int DistrictId { get; set; }
+        public int DistrictId { get; set; }//
 
         [Required]
         [Display(Name = "Aktif")]

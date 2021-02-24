@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using src.RealEstate.Common.Enum;
@@ -9,6 +10,7 @@ namespace src.RealEstate.Service.Contracts
     {
         Task<bool> AddOneAsync(EstateType entity);
         IQueryable<EstateType> GetAll();
+        IQueryable<EstateType> GetAll(CultureInfo culture);
         Task<EstateType> GetByIdAsync(int id);
         Task<bool> EditAsync(EstateType entity);
         Task<DeleteResponse> DeleteByIdAsync(int id);
