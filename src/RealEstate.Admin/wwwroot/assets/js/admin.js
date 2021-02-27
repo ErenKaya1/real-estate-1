@@ -316,7 +316,7 @@ $(document).ready(function () {
     districtSelectElement.html("");
     districtSelectElement.prop("disabled", true);
     const provinceId = $(this).val();
-    
+
     if (provinceId != -1) {
       const response = await fetch(
         "/District/GetAllByProvinceId?culture=tr-TR&provinceId=" + provinceId
@@ -331,7 +331,47 @@ $(document).ready(function () {
       districtSelectElement.prop("disabled", false);
     }
   });
+
+  $("input[name='StaticImage']").on("change", function () {
+    const files = $(this).get(0).files;
+    const staticImageContainer = $(".static-images");
+
+    if (files.length > 0) {
+      staticImageContainer.append(`
+        <div class="row mt-3 remove-all-static-button">
+          <div class="col-12">
+            <button type="button" class="btn btn-danger" onclick=removeAllStaticImages()>Hepsini Kaldır</button>
+          </div>
+        </div>
+        <div class='row static-images-wrapper mt-3'></div>
+      `);
+      const staticImageWrapper = $(".static-images-wrapper");
+      for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        const file = files[i];
+
+        reader.readAsDataURL(file);
+
+        reader.onload = (e) => {
+          staticImageWrapper.append(`
+          <div class="col-1 img-preview">
+            <img src='${e.target.result}'>
+            <div class='text-center img-preview-details'>
+              <input type="text" value="${i + 1}">
+            </div>
+          </div>
+        `);
+        };
+      }
+    }
+  });
 });
+
+function removeAllStaticImages() {
+  $("input[name='StaticImage']").val("");
+  $(".remove-all-static-button").html("");
+  $(".static-images-wrapper").html("");
+}
 
 function deletePropertyConfirm(action, id) {
   Swal.fire({

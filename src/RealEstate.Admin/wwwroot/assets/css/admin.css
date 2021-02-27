@@ -200,6 +200,34 @@
   height: 15px;
 }
 
+.img-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.img-preview img {
+  display: block;
+  height: 75px;
+  width: 100%;
+}
+
+.img-preview-details span {
+  overflow: hidden;
+}
+
+.img-preview input {
+  margin-top: 5px;
+  width: 30%;
+  border: 1px solid #a1a1a1;
+}
+
+.img-preview input:focus {
+  border: 1px solid var(--admin-primary);
+}
+
 @media (max-width: 991px) {
   .app-brand-logo img {
     height: 45px;

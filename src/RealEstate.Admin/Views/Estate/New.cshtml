@@ -251,14 +251,15 @@
                             {
                                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                                     <label class="switcher switcher-success">
-                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties"
+                                            class="switcher-input" value="@property.Id">
                                         <span class="switcher-indicator">
-                                        <span class="switcher-yes">
-                                            <span class="ion ion-md-checkmark"></span>
-                                        </span>
-                                        <span class="switcher-no">
-                                            <span class="ion ion-md-close"></span>
-                                        </span>
+                                            <span class="switcher-yes">
+                                                <span class="ion ion-md-checkmark"></span>
+                                            </span>
+                                            <span class="switcher-no">
+                                                <span class="ion ion-md-close"></span>
+                                            </span>
                                         </span>
                                         <span class="switcher-label">@property.PropertyNameTR</span>
                                     </label>
@@ -276,14 +277,15 @@
                             {
                                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                                     <label class="switcher switcher-success">
-                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties"
+                                            class="switcher-input" value="@property.Id">
                                         <span class="switcher-indicator">
-                                        <span class="switcher-yes">
-                                            <span class="ion ion-md-checkmark"></span>
-                                        </span>
-                                        <span class="switcher-no">
-                                            <span class="ion ion-md-close"></span>
-                                        </span>
+                                            <span class="switcher-yes">
+                                                <span class="ion ion-md-checkmark"></span>
+                                            </span>
+                                            <span class="switcher-no">
+                                                <span class="ion ion-md-close"></span>
+                                            </span>
                                         </span>
                                         <span class="switcher-label">@property.PropertyNameTR</span>
                                     </label>
@@ -301,14 +303,15 @@
                             {
                                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                                     <label class="switcher switcher-success">
-                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties"
+                                            class="switcher-input" value="@property.Id">
                                         <span class="switcher-indicator">
-                                        <span class="switcher-yes">
-                                            <span class="ion ion-md-checkmark"></span>
-                                        </span>
-                                        <span class="switcher-no">
-                                            <span class="ion ion-md-close"></span>
-                                        </span>
+                                            <span class="switcher-yes">
+                                                <span class="ion ion-md-checkmark"></span>
+                                            </span>
+                                            <span class="switcher-no">
+                                                <span class="ion ion-md-close"></span>
+                                            </span>
                                         </span>
                                         <span class="switcher-label">@property.PropertyNameTR</span>
                                     </label>
@@ -326,14 +329,15 @@
                             {
                                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                                     <label class="switcher switcher-success">
-                                        <input type="checkbox" id="@property.Id" name="InteriorProperties" class="switcher-input" value="@property.Id">
+                                        <input type="checkbox" id="@property.Id" name="InteriorProperties"
+                                            class="switcher-input" value="@property.Id">
                                         <span class="switcher-indicator">
-                                        <span class="switcher-yes">
-                                            <span class="ion ion-md-checkmark"></span>
-                                        </span>
-                                        <span class="switcher-no">
-                                            <span class="ion ion-md-close"></span>
-                                        </span>
+                                            <span class="switcher-yes">
+                                                <span class="ion ion-md-checkmark"></span>
+                                            </span>
+                                            <span class="switcher-no">
+                                                <span class="ion ion-md-close"></span>
+                                            </span>
                                         </span>
                                         <span class="switcher-label">@property.PropertyNameTR</span>
                                     </label>
@@ -344,7 +348,26 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="images">
-                
+                <div class="card-body static-images">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="custom-file">
+                                <input asp-for="StaticImage" class="custom-file-input" accept="image/*">
+                                <label asp-for="StaticImage" class="custom-file-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="custom-file">
+                                <input asp-for="PanoramicImage" class="custom-file-input" accept="image/*">
+                                <label asp-for="PanoramicImage" class="custom-file-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
