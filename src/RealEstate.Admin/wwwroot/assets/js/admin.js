@@ -335,6 +335,7 @@ $(document).ready(function () {
   $("input[name='StaticImage']").on("change", function () {
     const files = $(this).get(0).files;
     const staticImageContainer = $(".static-images");
+    var orders = [];
 
     if (files.length > 0) {
       staticImageContainer.append(`
@@ -354,13 +355,27 @@ $(document).ready(function () {
 
         reader.onload = (e) => {
           staticImageWrapper.append(`
-          <div class="col-1 img-preview">
-            <img src='${e.target.result}'>
-            <div class='text-center img-preview-details'>
-              <input type="text" value="${i + 1}">
+            <div class="col-1 img-preview">
+              <img src='${e.target.result}'>
+              <div class='text-center img-preview-details'>
+                <input type="text" name="fileName${i}" value="${
+            i + 1
+          }" data-image="${file.name}">
+              </div>
             </div>
-          </div>
-        `);
+          `);
+
+          orders.push({
+            name: file.name,
+            order: $(`input[name='fileName${i}']`).val(),
+          });
+
+          $("input[name^='fileName']").on("change", function () {
+            const selectedImageIndex = orders.findIndex(
+              (x) => x.name === $(this).attr("data-image")
+            );
+            orders[selectedImageIndex].order = $(this).val();
+          });
         };
       }
     }
