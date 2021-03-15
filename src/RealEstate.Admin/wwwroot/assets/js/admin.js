@@ -314,6 +314,53 @@ $(document).ready(function () {
   });
 
   // preview and sort panoramic images
+  $("input[name='PanoramicImage']").on("change", function () {
+    if (window.location.pathname.toLowerCase() === "/estate/new") {
+      const files = $(this).get(0).files;
+      const previewElement = $(".panoramic-images-preview");
+      const previewContainerElement = $(".panoramic-images-preview-container");
+      var result = "";
+
+      if (files.length > 0) {
+        previewElement.css("display", "block");
+        previewElement.LoadingOverlay("show");
+        previewContainerElement.html("");
+
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+
+          reader.readAsDataURL(file);
+
+          reader.onload = (e) => {
+            previewContainerElement.append(`
+              <div class="col-xl-1 col-lg-2 col-md-3 col-4 panoramic-img-preview" data-image=${file.name}>
+                <img src="${e.target.result}">
+              </div>
+            `);
+          };
+        }
+
+        $("#panoramic-images").sortable({
+          group: "panoramic",
+          sort: true,
+          animation: 150,
+
+          onEnd: function () {
+            result = "";
+            $(".panoramic-img-preview").each(function (index, element) {
+              if (index === 0) result += $(element).attr("data-image");
+              else result = result + ";" + $(element).attr("data-image");
+            });
+
+            $("input[name='PanoramicImageOrder']").val(result);
+          },
+        });
+
+        previewElement.LoadingOverlay("hide");
+      }
+    }
+  });
 });
 
 function deletePropertyConfirm(action, id) {
