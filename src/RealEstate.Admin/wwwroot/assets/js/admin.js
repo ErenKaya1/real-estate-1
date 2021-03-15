@@ -1,10 +1,7 @@
 $(document).ready(function () {
   // validation for login form
   $(".login-form").on("submit", function (e) {
-    if (
-      $("input[name='Username']").val() == "" ||
-      $("input[name='Password']").val() == ""
-    ) {
+    if ($("input[name='Username']").val() == "" || $("input[name='Password']").val() == "") {
       e.preventDefault();
       toastr["error"]("Kullanıcı adı veya parola boş bırakılamaz.", "", {
         positionClass: "toast-top-right",
@@ -34,10 +31,7 @@ $(document).ready(function () {
 
   // validation for reset password form
   $(".resetpassword-form").on("submit", function (e) {
-    if (
-      $("input[name='Password']").val() == "" ||
-      $("input[name='PasswordConfirm']").val() == ""
-    ) {
+    if ($("input[name='Password']").val() == "" || $("input[name='PasswordConfirm']").val() == "") {
       e.preventDefault();
       toastr["error"]("Parola alanları boş bırakılamaz.", "", {
         positionClass: "toast-top-right",
@@ -47,10 +41,7 @@ $(document).ready(function () {
         newestOnTop: true,
         rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
       });
-    } else if (
-      $("input[name='Password']").val() !=
-      $("input[name='PasswordConfirm']").val()
-    ) {
+    } else if ($("input[name='Password']").val() != $("input[name='PasswordConfirm']").val()) {
       e.preventDefault();
       toastr["error"]("Parolalar eşleşmiyor.", "", {
         positionClass: "toast-top-right",
@@ -65,48 +56,28 @@ $(document).ready(function () {
 
   // validation for account settings form
   $(".accountsettings-form").on("submit", function (e) {
-    if (
-      $("input[name='UserName']").val() == "" ||
-      $("input[name='Email']").val() == ""
-    ) {
+    if ($("input[name='UserName']").val() == "" || $("input[name='Email']").val() == "") {
       e.preventDefault();
-      toastr["error"](
-        "Kullanıcı adı ve e-posta alanları boş bırakılamaz.",
-        "",
-        {
+      toastr["error"]("Kullanıcı adı ve e-posta alanları boş bırakılamaz.", "", {
+        positionClass: "toast-top-right",
+        closeButton: true,
+        progressBar: true,
+        preventDuplicates: true,
+        newestOnTop: true,
+        rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+      });
+    } else if ($("input[name='CurrentPassword']").val() != "") {
+      if ($("input[name='NewPassword']").val() == "" || $("input[name='NewPasswordConfirm']").val() == "") {
+        e.preventDefault();
+        toastr["error"]("Lütfen tüm parola alanlarını doldurunuz. Eğer parolanızı değiştirmek istemiyorsanız güncel parola alanını boş bırakınız.", "", {
           positionClass: "toast-top-right",
           closeButton: true,
           progressBar: true,
           preventDuplicates: true,
           newestOnTop: true,
-          rtl:
-            $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
-        }
-      );
-    } else if ($("input[name='CurrentPassword']").val() != "") {
-      if (
-        $("input[name='NewPassword']").val() == "" ||
-        $("input[name='NewPasswordConfirm']").val() == ""
-      ) {
-        e.preventDefault();
-        toastr["error"](
-          "Lütfen tüm parola alanlarını doldurunuz. Eğer parolanızı değiştirmek istemiyorsanız güncel parola alanını boş bırakınız.",
-          "",
-          {
-            positionClass: "toast-top-right",
-            closeButton: true,
-            progressBar: true,
-            preventDuplicates: true,
-            newestOnTop: true,
-            rtl:
-              $("body").attr("dir") === "rtl" ||
-              $("html").attr("dir") === "rtl",
-          }
-        );
-      } else if (
-        $("input[name='NewPassword']").val() !=
-        $("input[name='NewPasswordConfirm']").val()
-      ) {
+          rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+        });
+      } else if ($("input[name='NewPassword']").val() != $("input[name='NewPasswordConfirm']").val()) {
         e.preventDefault();
         toastr["error"]("Parolalar uyuşmuyor.", "", {
           positionClass: "toast-top-right",
@@ -114,14 +85,9 @@ $(document).ready(function () {
           progressBar: true,
           preventDuplicates: true,
           newestOnTop: true,
-          rtl:
-            $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+          rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
         });
-      } else if (
-        $("input[name='NewPassword']").val() ==
-          $("input[name='NewPasswordConfirm']").val() &&
-        $("input[name='NewPassword']").val().length < 6
-      ) {
+      } else if ($("input[name='NewPassword']").val() == $("input[name='NewPasswordConfirm']").val() && $("input[name='NewPassword']").val().length < 6) {
         e.preventDefault();
         toastr["error"]("Parola 6-12 karakter uzunluğunda olmalıdır.", "", {
           positionClass: "toast-top-right",
@@ -129,8 +95,7 @@ $(document).ready(function () {
           progressBar: true,
           preventDuplicates: true,
           newestOnTop: true,
-          rtl:
-            $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
+          rtl: $("body").attr("dir") === "rtl" || $("html").attr("dir") === "rtl",
         });
       }
     }
@@ -138,10 +103,7 @@ $(document).ready(function () {
 
   // validation for property forms
   $(".property-form").on("submit", function (e) {
-    if (
-      $("input[name='PropertyNameTR']").val() == "" ||
-      $("input[name='PropertyNameEN']").val() == ""
-    ) {
+    if ($("input[name='PropertyNameTR']").val() == "" || $("input[name='PropertyNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -156,10 +118,7 @@ $(document).ready(function () {
 
   // validation for estate type form
   $(".estatetype-form").on("submit", function (e) {
-    if (
-      $("input[name='TypeNameTR']").val() == "" ||
-      $("input[name='TypeNameEN']").val() == ""
-    ) {
+    if ($("input[name='TypeNameTR']").val() == "" || $("input[name='TypeNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -174,10 +133,7 @@ $(document).ready(function () {
 
   // validation for province form
   $(".province-form").on("submit", function (e) {
-    if (
-      $("input[name='NameTR']").val() == "" ||
-      $("input[name='NameEN']").val() == ""
-    ) {
+    if ($("input[name='NameTR']").val() == "" || $("input[name='NameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -192,10 +148,7 @@ $(document).ready(function () {
 
   // validation for edit province form
   $(".editprovince-form").on("submit", function (e) {
-    if (
-      $("input[name='NameTR']").val() == "" ||
-      $("input[name='NameEN']").val() == ""
-    ) {
+    if ($("input[name='NameTR']").val() == "" || $("input[name='NameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm il adı alanlarını doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -210,10 +163,7 @@ $(document).ready(function () {
 
   // validation for new district form
   $(".district-form").on("submit", function (e) {
-    if (
-      $("input[name='DistrictNameTR']").val() == "" ||
-      $("input[name='DistrictNameEN']").val() == ""
-    ) {
+    if ($("input[name='DistrictNameTR']").val() == "" || $("input[name='DistrictNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm ilçe adı alanlarını doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -228,10 +178,7 @@ $(document).ready(function () {
 
   // validation for edit district form
   $(".editdistrict-form").on("submit", function (e) {
-    if (
-      $("input[name='DistrictNameTR']").val() == "" ||
-      $("input[name='DistrictNameEN']").val() == ""
-    ) {
+    if ($("input[name='DistrictNameTR']").val() == "" || $("input[name='DistrictNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -246,10 +193,7 @@ $(document).ready(function () {
 
   // validation for warming way form
   $(".warmingway-form").on("submit", function (e) {
-    if (
-      $("input[name='WarmingWayNameTR']").val() == "" ||
-      $("input[name='WarmingWayNameEN']").val() == ""
-    ) {
+    if ($("input[name='WarmingWayNameTR']").val() == "" || $("input[name='WarmingWayNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -264,10 +208,7 @@ $(document).ready(function () {
 
   // validation for building type form
   $(".buildingtype-form").on("submit", function (e) {
-    if (
-      $("input[name='BuildingTypeNameTR']").val() == "" ||
-      $("input[name='BuildingTypeNameEN']").val() == ""
-    ) {
+    if ($("input[name='BuildingTypeNameTR']").val() == "" || $("input[name='BuildingTypeNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -282,10 +223,7 @@ $(document).ready(function () {
 
   // validation for title deed status form
   $(".titledeedstatus-form").on("submit", function (e) {
-    if (
-      $("input[name='StatusNameTR']").val() == "" ||
-      $("input[name='StatusNameEN']").val() == ""
-    ) {
+    if ($("input[name='StatusNameTR']").val() == "" || $("input[name='StatusNameEN']").val() == "") {
       e.preventDefault();
       toastr["error"]("Lütfen tüm alanları doldurunuz.", "", {
         positionClass: "toast-top-right",
@@ -299,9 +237,7 @@ $(document).ready(function () {
   });
 
   // add active class to the selected sidenav item
-  var activeSidenav = $(
-    ".sidenav-link[href='" + window.location.pathname + "']"
-  ).parent();
+  var activeSidenav = $(".sidenav-link[href='" + window.location.pathname + "']").parent();
 
   if (activeSidenav.parent().hasClass("sidenav-menu")) {
     activeSidenav.parent().parent().addClass("open");
@@ -318,20 +254,17 @@ $(document).ready(function () {
     const provinceId = $(this).val();
 
     if (provinceId != -1) {
-      const response = await fetch(
-        "/District/GetAllByProvinceId?culture=tr-TR&provinceId=" + provinceId
-      );
+      const response = await fetch("/District/GetAllByProvinceId?culture=tr-TR&provinceId=" + provinceId);
       const data = await response.json();
 
       data.map((item) => {
-        districtSelectElement.append(
-          `<option value=${item.id}>${item.districtName}</option>`
-        );
+        districtSelectElement.append(`<option value=${item.id}>${item.districtName}</option>`);
       });
       districtSelectElement.prop("disabled", false);
     }
   });
 
+  // preview for static images when input
   $("input[name='StaticImage']").on("change", function () {
     const files = $(this).get(0).files;
     const staticImageContainer = $(".static-images");
@@ -358,9 +291,7 @@ $(document).ready(function () {
             <div class="col-1 img-preview">
               <img src='${e.target.result}'>
               <div class='text-center img-preview-details'>
-                <input type="text" name="fileName${i}" value="${
-            i + 1
-          }" data-image="${file.name}">
+                <input type="text" name="fileName${i}" value="${i + 1}" data-image="${file.name}">
               </div>
             </div>
           `);
@@ -371,9 +302,7 @@ $(document).ready(function () {
           });
 
           $("input[name^='fileName']").on("change", function () {
-            const selectedImageIndex = orders.findIndex(
-              (x) => x.name === $(this).attr("data-image")
-            );
+            const selectedImageIndex = orders.findIndex((x) => x.name === $(this).attr("data-image"));
             orders[selectedImageIndex].order = $(this).val();
           });
         };
@@ -459,12 +388,7 @@ function deleteDistrictConfirm(provinceId, districtId) {
     },
   }).then((result) => {
     if (result.value) {
-      window.location.href =
-        "/District/Delete" +
-        "?provinceId=" +
-        provinceId +
-        "&districtId=" +
-        districtId;
+      window.location.href = "/District/Delete" + "?provinceId=" + provinceId + "&districtId=" + districtId;
     }
   });
 }
@@ -521,8 +445,7 @@ function deleteTitleDeedStatusConfirm(id) {
     },
   }).then((result) => {
     if (result.value) {
-      window.location.href =
-        "/TitleDeedStatus/Delete" + "?titleDeedStatusId=" + id;
+      window.location.href = "/TitleDeedStatus/Delete" + "?titleDeedStatusId=" + id;
     }
   });
 }
@@ -555,18 +478,12 @@ $(function () {
 
 // Collapse menu
 (function () {
-  if (
-    $("#layout-sidenav").hasClass("sidenav-horizontal") ||
-    window.layoutHelpers.isSmallScreen()
-  ) {
+  if ($("#layout-sidenav").hasClass("sidenav-horizontal") || window.layoutHelpers.isSmallScreen()) {
     return;
   }
 
   try {
-    window.layoutHelpers.setCollapsed(
-      localStorage.getItem("layoutCollapsed") === "true",
-      false
-    );
+    window.layoutHelpers.setCollapsed(localStorage.getItem("layoutCollapsed") === "true", false);
   } catch (e) {}
 })();
 
@@ -574,9 +491,7 @@ $(function () {
   // Initialize sidenav
   $("#layout-sidenav").each(function () {
     new SideNav(this, {
-      orientation: $(this).hasClass("sidenav-horizontal")
-        ? "horizontal"
-        : "vertical",
+      orientation: $(this).hasClass("sidenav-horizontal") ? "horizontal" : "vertical",
     });
   });
 
@@ -586,10 +501,7 @@ $(function () {
     window.layoutHelpers.toggleCollapsed();
     if (!window.layoutHelpers.isSmallScreen()) {
       try {
-        localStorage.setItem(
-          "layoutCollapsed",
-          String(window.layoutHelpers.isCollapsed())
-        );
+        localStorage.setItem("layoutCollapsed", String(window.layoutHelpers.isCollapsed()));
       } catch (e) {}
     }
   });
