@@ -30,6 +30,8 @@
 
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
 <form asp-controller="Estate" asp-action="New" method="POST" class="estate-form" enctype="multipart/form-data">
+    <input type="hidden" asp-for="StaticImageOrder">
+    <input type="hidden" asp-for="PanoramicImageOrder">
     <div class="nav-tabs-top nav-responsive-sm">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -357,6 +359,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row static-images-preview">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-danger" onclick="removeAllImages('static-images')">Hepsini Kaldır</button>
+                        </div>
+                        <div class="col-12">
+                            <div class="row static-images-preview-container" id="static-preview"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -364,6 +374,14 @@
                             <div class="custom-file">
                                 <input asp-for="PanoramicImage" class="custom-file-input" accept="image/*">
                                 <label asp-for="PanoramicImage" class="custom-file-label"></label>
+                            </div>
+                        </div>
+                        <div class="row panoramic-images-preview">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-danger" onclick="removeAllImages('panoramic-images')">Hepsini Kaldır</button>
+                            </div>
+                            <div class="col-12">
+                                <div class="row panoramic-images-preview-container" id="panoramic-images"></div>
                             </div>
                         </div>
                     </div>
@@ -376,3 +394,9 @@
         <button type="submit" class="btn btn-admin-primary">Kaydet</button>
     </div>
 </form>
+
+@section Scripts{
+    <script type="text/javascript" src="/assets/vendor/libs/sortablejs/Sortable.min.js"></script>
+    <script type="text/javascript" src="/assets/vendor/libs/sortablejs/jquery-sortable.js"></script>
+    <script type="text/javascript" src="/assets/vendor/libs/loading-overlay/loading-overlay.js"></script>
+}

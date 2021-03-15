@@ -264,58 +264,57 @@ $(document).ready(function () {
     }
   });
 
-  // preview for static images when input
+  // preview and sor static images
   $("input[name='StaticImage']").on("change", function () {
-    const files = $(this).get(0).files;
-    const staticImageContainer = $(".static-images");
-    var orders = [];
+    if (window.location.pathname.toLowerCase() === "/estate/new") {
+      const files = $(this).get(0).files;
+      const previewElement = $(".static-images-preview");
+      const previewContainerElement = $(".static-images-preview-container");
+      var result = "";
 
-    if (files.length > 0) {
-      staticImageContainer.append(`
-        <div class="row mt-3 remove-all-static-button">
-          <div class="col-12">
-            <button type="button" class="btn btn-danger" onclick=removeAllStaticImages()>Hepsini Kaldır</button>
-          </div>
-        </div>
-        <div class='row static-images-wrapper mt-3'></div>
-      `);
-      const staticImageWrapper = $(".static-images-wrapper");
-      for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-        const file = files[i];
+      if (files.length > 0) {
+        previewElement.css("display", "block");
+        previewElement.LoadingOverlay("show");
+        previewContainerElement.html("");
 
-        reader.readAsDataURL(file);
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
 
-        reader.onload = (e) => {
-          staticImageWrapper.append(`
-            <div class="col-1 img-preview">
-              <img src='${e.target.result}'>
-              <div class='text-center img-preview-details'>
-                <input type="text" name="fileName${i}" value="${i + 1}" data-image="${file.name}">
-              </div>
+          reader.readAsDataURL(file);
+
+          reader.onload = (e) => {
+            previewContainerElement.append(`
+            <div class="col-xl-1 col-lg-2 col-md-3 col-4 static-img-preview" data-image=${file.name}>
+              <img src="${e.target.result}">
             </div>
           `);
+          };
+        }
 
-          orders.push({
-            name: file.name,
-            order: $(`input[name='fileName${i}']`).val(),
-          });
+        $("#static-preview").sortable({
+          group: "static",
+          sort: true,
+          animation: 150,
 
-          $("input[name^='fileName']").on("change", function () {
-            const selectedImageIndex = orders.findIndex((x) => x.name === $(this).attr("data-image"));
-            orders[selectedImageIndex].order = $(this).val();
-          });
-        };
+          onEnd: function () {
+            result = "";
+            $(".static-img-preview").each(function (index, element) {
+              if (index === 0) result += $(element).attr("data-image");
+              else result = result + ";" + $(element).attr("data-image");
+            });
+
+            $("input[name='StaticImageOrder']").val(result);
+          },
+        });
+
+        previewElement.LoadingOverlay("hide");
       }
     }
   });
-});
 
-function removeAllStaticImages() {
-  $("input[name='StaticImage']").val("");
-  $(".remove-all-static-button").html("");
-  $(".static-images-wrapper").html("");
-}
+  // preview and sort panoramic images
+});
 
 function deletePropertyConfirm(action, id) {
   Swal.fire({
