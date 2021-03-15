@@ -38,7 +38,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _districtService.AddAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["NewDistrictMessage"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction("Edit", "Province", new { provinceId = model.Id });
@@ -88,7 +88,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.DistrictNameEN = model.DistrictNameEN;
 
                 var result = await _districtService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditDistrictMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(Edit), new { provinceId = model.ProvinceId, districtId = model.DistrictId });
@@ -109,12 +109,12 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _districtService.DeleteByIdAsync(Convert.ToInt32(provinceId), Convert.ToInt32(districtId));
-            if (result == DeleteResponse.Success)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteDistrictMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction("Edit", "Province", new { provinceId = provinceId });
             }
-            else if (result == DeleteResponse.InUse)
+            else if (result == SaveResult.InUse)
             {
                 TempData["DistrictInUseError"] = Messages.DISTRICT_DELETE_ERROR;
                 return RedirectToAction("Edit", "Province", new { provinceId = provinceId });

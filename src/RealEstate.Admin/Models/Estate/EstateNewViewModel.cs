@@ -140,7 +140,7 @@ namespace src.RealEstate.Admin.Models.Estate
 
         [Display(Name = "Panoramik Fotoğraflar")]
         public List<IFormFile> PanoramicImage { get; set; }
-
+        public IFormCollection CheckBoxes { get; set; }
         public string StaticImageOrder { get; set; }
         public string PanoramicImageOrder { get; set; }
     }

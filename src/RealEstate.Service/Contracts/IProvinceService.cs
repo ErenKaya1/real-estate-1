@@ -8,12 +8,12 @@ namespace src.RealEstate.Service.Contracts
 {
     public interface IProvinceService
     {
-        Task<bool> AddOneAsync(Province entity);
+        Task<SaveResult> AddOneAsync(Province entity);
         IQueryable<Province> GetAll();
         IQueryable<Province> GetAll(CultureInfo culture);
         Task<Province> GetByIdAsync(int id);
         Task<Province> GetWithDistrictsByIdAsync(int id);
-        Task<bool> EditAsync(Province entity);
-        Task<DeleteResponse> DeleteByIdAsync(int id);
+        Task<SaveResult> EditAsync(Province entity);
+        Task<SaveResult> DeleteByIdAsync(int id);
     }
 }

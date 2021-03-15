@@ -43,27 +43,12 @@ namespace src.RealEstate.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<bool> SaveChanges()
+        public async Task<SaveResult> SaveChanges()
         {
             try
             {
                 await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.InnerException.Message);
-                return false;
-            }
-        }
-
-        public async Task<DeleteResponse> SaveChangesForDelete()
-        {
-            try
-            {
-                await _dbContext.SaveChangesAsync();
-                return DeleteResponse.Success;
+                return SaveResult.Success;
             }
             catch (DbUpdateException ex)
             {
@@ -72,16 +57,18 @@ namespace src.RealEstate.Repository
                 switch (sqlEx.Number)
                 {
                     case 1451:
-                        return DeleteResponse.InUse;
+                        return SaveResult.InUse;
+                    case 1062:
+                        return SaveResult.Duplicated;
                     default:
-                        return DeleteResponse.Fail;
+                        return SaveResult.Fail;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.InnerException.Message);
-                return DeleteResponse.Fail;
+                return SaveResult.Fail;
             }
         }
 

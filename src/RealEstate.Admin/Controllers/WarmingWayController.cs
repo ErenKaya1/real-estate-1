@@ -42,7 +42,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _warmingWayService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
@@ -104,7 +104,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.WarmingWayNameEN = model.WarmingWayNameEN;
 
                 var result = await _warmingWayService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditWarmingWayMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(Edit), new { warmingWayId = model.Id });

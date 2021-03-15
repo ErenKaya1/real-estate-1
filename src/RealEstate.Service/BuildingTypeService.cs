@@ -19,9 +19,9 @@ namespace src.RealEstate.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddOneAsync(BuildingType entity)
+        public async Task<SaveResult> AddOneAsync(BuildingType entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.BuildingTypeRepository.Add(entity);
 
             return await _unitOfWork.SaveChanges();
@@ -69,21 +69,21 @@ namespace src.RealEstate.Service
             return entity;
         }
 
-        public async Task<bool> EditAsync(BuildingType entity)
+        public async Task<SaveResult> EditAsync(BuildingType entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.BuildingTypeRepository.Update(entity);
 
             return await _unitOfWork.SaveChanges();
         }
 
-        public async Task<DeleteResponse> DeleteByIdAsync(int id)
+        public async Task<SaveResult> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.BuildingTypeRepository.FindOne(x => x.Id == id);
-            if (entity == null) return DeleteResponse.Fail;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.BuildingTypeRepository.Delete(entity);
 
-            return await _unitOfWork.SaveChangesForDelete();
+            return await _unitOfWork.SaveChanges();
         }
     }
 }

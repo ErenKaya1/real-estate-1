@@ -19,9 +19,9 @@ namespace src.RealEstate.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddOneAsync(WarmingWay entity)
+        public async Task<SaveResult> AddOneAsync(WarmingWay entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.WarmingWayRepository.Add(entity);
 
             return await _unitOfWork.SaveChanges();
@@ -68,21 +68,21 @@ namespace src.RealEstate.Service
             return entity;
         }
 
-        public async Task<bool> EditAsync(WarmingWay entity)
+        public async Task<SaveResult> EditAsync(WarmingWay entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.WarmingWayRepository.Update(entity);
 
             return await _unitOfWork.SaveChanges();
         }
 
-        public async Task<DeleteResponse> DeleteByIdAsync(int id)
+        public async Task<SaveResult> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.WarmingWayRepository.FindOne(x => x.Id == id);
-            if (entity == null) return DeleteResponse.Fail;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.WarmingWayRepository.Delete(entity);
 
-            return await _unitOfWork.SaveChangesForDelete();
+            return await _unitOfWork.SaveChanges();
         }
     }
 }

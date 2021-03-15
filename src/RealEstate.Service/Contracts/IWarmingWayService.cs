@@ -8,11 +8,11 @@ namespace src.RealEstate.Service.Contracts
 {
     public interface IWarmingWayService
     {
-        Task<bool> AddOneAsync(WarmingWay entity);
+        Task<SaveResult> AddOneAsync(WarmingWay entity);
         IQueryable<WarmingWay> GetAll();
         IQueryable<WarmingWay> GetAll(CultureInfo culture);
         Task<WarmingWay> GetByIdAsync(int id);
-        Task<bool> EditAsync(WarmingWay entity);
-        Task<DeleteResponse> DeleteByIdAsync(int id);
+        Task<SaveResult> EditAsync(WarmingWay entity);
+        Task<SaveResult> DeleteByIdAsync(int id);
     }
 }

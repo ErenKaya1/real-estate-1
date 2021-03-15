@@ -42,7 +42,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _buildingTypeService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
@@ -104,7 +104,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.BuildingTypeNameEN = model.BuildingTypeNameEN;
 
                 var result = await _buildingTypeService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditBuildingTypeMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(Edit), new { buildingTypeId = model.Id });
@@ -125,12 +125,12 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _buildingTypeService.DeleteByIdAsync(Convert.ToInt32(buildingTypeId));
-            if (result == DeleteResponse.Success)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteBuildingTypeMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
             }
-            else if (result == DeleteResponse.InUse)
+            else if (result == SaveResult.InUse)
             {
                 TempData["BuildingTypeInUseError"] = Messages.BUILDING_TYPE_DELETE_ERROR;
                 return RedirectToAction(nameof(List));

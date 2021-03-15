@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Repository.Contracts;
 using src.RealEstate.Service.Contracts;
@@ -18,9 +19,9 @@ namespace src.RealEstate.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddOneAsync(AmbitProperty entity)
+        public async Task<SaveResult> AddOneAsync(AmbitProperty entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.AmbitPropertyRepository.Add(entity);
 
             return await _unitOfWork.SaveChanges();
@@ -68,18 +69,18 @@ namespace src.RealEstate.Service
             return entity;
         }
 
-        public async Task<bool> EditAsync(AmbitProperty entity)
+        public async Task<SaveResult> EditAsync(AmbitProperty entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.AmbitPropertyRepository.Update(entity);
 
             return await _unitOfWork.SaveChanges();
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)
+        public async Task<SaveResult> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.AmbitPropertyRepository.FindOne(x => x.Id == id);
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.AmbitPropertyRepository.Delete(entity);
 
             return await _unitOfWork.SaveChanges();

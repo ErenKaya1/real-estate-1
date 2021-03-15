@@ -42,7 +42,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _titleDeedStatusService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
@@ -104,7 +104,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.StatusNameEN = model.StatusNameEN;
 
                 var result = await _titleDeedStatusService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditTitleDeedStatusMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(Edit), new { titleDeedStatusId = model.Id });
@@ -125,12 +125,12 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _titleDeedStatusService.DeleteByIdAsync(Convert.ToInt32(titleDeedStatusId));
-            if (result == DeleteResponse.Success)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteTitleDeedStatusMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
             }
-            else if (result == DeleteResponse.InUse)
+            else if (result == SaveResult.InUse)
             {
                 TempData["TitleDeedStatusInUseError"] = Messages.TITLE_DEED_STATUS_DELETE_ERROR;
                 return RedirectToAction(nameof(List));

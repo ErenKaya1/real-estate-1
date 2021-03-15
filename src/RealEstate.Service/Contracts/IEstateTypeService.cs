@@ -8,11 +8,11 @@ namespace src.RealEstate.Service.Contracts
 {
     public interface IEstateTypeService
     {
-        Task<bool> AddOneAsync(EstateType entity);
+        Task<SaveResult> AddOneAsync(EstateType entity);
         IQueryable<EstateType> GetAll();
         IQueryable<EstateType> GetAll(CultureInfo culture);
         Task<EstateType> GetByIdAsync(int id);
-        Task<bool> EditAsync(EstateType entity);
-        Task<DeleteResponse> DeleteByIdAsync(int id);
+        Task<SaveResult> EditAsync(EstateType entity);
+        Task<SaveResult> DeleteByIdAsync(int id);
     }
 }

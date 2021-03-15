@@ -1,9 +1,10 @@
 namespace src.RealEstate.Common.Enum
 {
-    public enum DeleteResponse : byte
+    public enum SaveResult
     {
         Fail,
         Success,
-        InUse
+        InUse,
+        Duplicated
     }
 }

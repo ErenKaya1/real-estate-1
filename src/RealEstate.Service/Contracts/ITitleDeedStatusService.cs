@@ -8,11 +8,11 @@ namespace src.RealEstate.Service.Contracts
 {
     public interface ITitleDeedStatusService
     {
-        Task<bool> AddOneAsync(TitleDeedStatus entity);
+        Task<SaveResult> AddOneAsync(TitleDeedStatus entity);
         IQueryable<TitleDeedStatus> GetAll();
         IQueryable<TitleDeedStatus> GetAll(CultureInfo culture);
         Task<TitleDeedStatus> GetByIdAsync(int id);
-        Task<bool> EditAsync(TitleDeedStatus entity);
-        Task<DeleteResponse> DeleteByIdAsync(int id);
+        Task<SaveResult> EditAsync(TitleDeedStatus entity);
+        Task<SaveResult> DeleteByIdAsync(int id);
     }
 }

@@ -19,9 +19,9 @@ namespace src.RealEstate.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddAsync(District entity)
+        public async Task<SaveResult> AddAsync(District entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.DistrictRepository.Add(entity);
 
             return await _unitOfWork.SaveChanges();
@@ -33,21 +33,21 @@ namespace src.RealEstate.Service
             return entity;
         }
 
-        public async Task<bool> EditAsync(District entity)
+        public async Task<SaveResult> EditAsync(District entity)
         {
-            if (entity == null) return false;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.DistrictRepository.Update(entity);
 
             return await _unitOfWork.SaveChanges();
         }
 
-        public async Task<DeleteResponse> DeleteByIdAsync(int provinceId, int districtId)
+        public async Task<SaveResult> DeleteByIdAsync(int provinceId, int districtId)
         {
             var entity = await _unitOfWork.DistrictRepository.FindOne(x => x.Id == districtId && x.ProvinceId == provinceId);
-            if (entity == null) return DeleteResponse.Fail;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.DistrictRepository.Delete(entity);
 
-            return await _unitOfWork.SaveChangesForDelete();
+            return await _unitOfWork.SaveChanges();
         }
 
         public IQueryable<District> GetAll(int provinceId, CultureInfo culture)

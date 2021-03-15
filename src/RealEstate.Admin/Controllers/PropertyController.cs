@@ -9,6 +9,7 @@ using src.RealEstate.Admin.Models.ExternalProperty;
 using src.RealEstate.Admin.Models.InteriorProperty;
 using src.RealEstate.Admin.Models.TransportationProperty;
 using src.RealEstate.Common.Constants;
+using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
 
@@ -53,7 +54,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _interiorPropertyService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListInteriors));
@@ -115,7 +116,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.PropertyNameEN = model.PropertyNameEN;
 
                 var result = await _interiorPropertyService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditInteriorMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(EditInterior), new { propertyId = model.Id });
@@ -136,7 +137,7 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _interiorPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteInteriorMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListInteriors));
@@ -166,7 +167,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _externalPropertyService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListExternals));
@@ -228,7 +229,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.PropertyNameEN = model.PropertyNameEN;
 
                 var result = await _externalPropertyService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditExternalMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(EditExternal), new { propertyId = model.Id });
@@ -249,7 +250,7 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _externalPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteExternalMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListExternals));
@@ -279,7 +280,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _ambitPropertyService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListAmbits));
@@ -341,7 +342,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.PropertyNameEN = model.PropertyNameEN;
 
                 var result = await _ambitPropertyService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditAmbitMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(EditAmbit), new { propertyId = model.Id });
@@ -362,7 +363,7 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _ambitPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteAmbitMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListAmbits));
@@ -392,7 +393,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _transportationPropertyService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListTransportations));
@@ -454,7 +455,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.PropertyNameEN = model.PropertyNameEN;
 
                 var result = await _transportationPropertyService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditTransportationMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(EditTransportation), new { propertyId = entity.Id });
@@ -475,7 +476,7 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _transportationPropertyService.DeleteByIdAsync(Convert.ToInt32(propertyId));
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteTransportationMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(ListTransportations));

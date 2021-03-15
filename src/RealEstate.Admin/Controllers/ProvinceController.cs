@@ -43,7 +43,7 @@ namespace src.RealEstate.Admin.Controllers
             };
 
             var result = await _provinceService.AddOneAsync(entity);
-            if (result)
+            if (result == SaveResult.Success)
             {
                 TempData["SavedSuccessfully"] = Messages.SAVED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
@@ -111,7 +111,7 @@ namespace src.RealEstate.Admin.Controllers
                 entity.NameEN = model.NameEN;
 
                 var result = await _provinceService.EditAsync(entity);
-                if (result)
+                if (result == SaveResult.Success)
                 {
                     TempData["EditProvinceMessage"] = Messages.EDIT_SUCCESSFULLY_MESSAGE;
                     return RedirectToAction(nameof(Edit), new { provinceId = model.Id });
@@ -132,12 +132,12 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _provinceService.DeleteByIdAsync(Convert.ToInt32(provinceId));
-            if (result == DeleteResponse.Success)
+            if (result == SaveResult.Success)
             {
                 TempData["ProvinceDeleteMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
             }
-            else if (result == DeleteResponse.InUse)
+            else if (result == SaveResult.InUse)
             {
                 TempData["ProvinceIsUseError"] = Messages.CITY_DELETE_ERROR;
                 return RedirectToAction(nameof(List));
