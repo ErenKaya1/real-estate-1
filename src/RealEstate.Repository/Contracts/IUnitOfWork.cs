@@ -20,5 +20,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<TitleDeedStatus> TitleDeedStatusRepository { get; }
         IRepository<Estate> EstateRepository { get; }
         IRepository<StaticImage> StaticImageRepository { get; }
+        IRepository<PanoramicImage> PanoramicImageRepository { get; }
     }
 }

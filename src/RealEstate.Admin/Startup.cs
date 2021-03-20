@@ -84,6 +84,7 @@ namespace RealEstate.Admin
             services.AddScoped<ITitleDeedStatusService, TitleDeedStatusService>();
             services.AddScoped<IEstateService, EstateService>();
             services.AddScoped<IStaticImageService, StaticImageService>();
+            services.AddScoped<IPanoramicImageService, PanoramicImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

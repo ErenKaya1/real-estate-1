@@ -25,6 +25,7 @@ namespace src.RealEstate.Repository
         private IRepository<TitleDeedStatus> _titleDeedStatusRepository;
         private IRepository<Estate> _estateRepository;
         private IRepository<StaticImage> _staticImageRepository;
+        private IRepository<PanoramicImage> _panoramicImageRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
@@ -38,6 +39,7 @@ namespace src.RealEstate.Repository
         public IRepository<TitleDeedStatus> TitleDeedStatusRepository => _titleDeedStatusRepository ??= new Repository<TitleDeedStatus>(_dbContext);
         public IRepository<Estate> EstateRepository => _estateRepository ??= new Repository<Estate>(_dbContext);
         public IRepository<StaticImage> StaticImageRepository => _staticImageRepository ??= new Repository<StaticImage>(_dbContext);
+        public IRepository<PanoramicImage> PanoramicImageRepository => _panoramicImageRepository ??= new Repository<PanoramicImage>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {
