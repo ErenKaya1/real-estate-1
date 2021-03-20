@@ -28,7 +28,7 @@
     var transportationProperties = await _transportationPropertyService.GetAll(cultureInfo).ToListAsync();
 }
 
-<h4 class="font-weight-bold py-3 mb-4">Yeni İlan</span></h4>
+<h4 class="font-weight-bold py-3 mb-4">Yeni İlan</h4>
 <form asp-controller="Estate" asp-action="New" method="POST" class="estate-form" enctype="multipart/form-data">
     <input type="hidden" asp-for="StaticImageOrder">
     <input type="hidden" asp-for="PanoramicImageOrder">
@@ -361,7 +361,7 @@
                     </div>
                     <div class="row static-images-preview">
                         <div class="col-12">
-                            <button type="button" class="btn btn-danger" onclick="removeAllImages('static-images')">Hepsini Kaldır</button>
+                            <button type="button" class="btn btn-danger" onclick="removeAllImages('static')">Hepsini Kaldır</button>
                         </div>
                         <div class="col-12">
                             <div class="row static-images-preview-container" id="static-preview"></div>
@@ -378,7 +378,7 @@
                         </div>
                         <div class="row panoramic-images-preview">
                             <div class="col-12">
-                                <button type="button" class="btn btn-danger" onclick="removeAllImages('panoramic-images')">Hepsini Kaldır</button>
+                                <button type="button" class="btn btn-danger" onclick="removeAllImages('panoramic')">Hepsini Kaldır</button>
                             </div>
                             <div class="col-12">
                                 <div class="row panoramic-images-preview-container" id="panoramic-images"></div>

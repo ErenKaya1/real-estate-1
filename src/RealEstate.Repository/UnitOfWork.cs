@@ -24,6 +24,7 @@ namespace src.RealEstate.Repository
         private IRepository<BuildingType> _buildingTypeRepository;
         private IRepository<TitleDeedStatus> _titleDeedStatusRepository;
         private IRepository<Estate> _estateRepository;
+        private IRepository<StaticImage> _staticImageRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
@@ -36,6 +37,7 @@ namespace src.RealEstate.Repository
         public IRepository<BuildingType> BuildingTypeRepository => _buildingTypeRepository ??= new Repository<BuildingType>(_dbContext);
         public IRepository<TitleDeedStatus> TitleDeedStatusRepository => _titleDeedStatusRepository ??= new Repository<TitleDeedStatus>(_dbContext);
         public IRepository<Estate> EstateRepository => _estateRepository ??= new Repository<Estate>(_dbContext);
+        public IRepository<StaticImage> StaticImageRepository => _staticImageRepository ??= new Repository<StaticImage>(_dbContext);
 
         public UnitOfWork(EstateContext dbContext)
         {
@@ -43,7 +45,7 @@ namespace src.RealEstate.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<SaveResult> SaveChanges()
+        public async Task<SaveResult> SaveChangesAsync()
         {
             try
             {

@@ -24,7 +24,7 @@ namespace src.RealEstate.Service
             if (entity == null) return SaveResult.Fail;
             _unitOfWork.TitleDeedStatusRepository.Add(entity);
 
-            return await _unitOfWork.SaveChanges();
+            return await _unitOfWork.SaveChangesAsync();
         }
 
         public IQueryable<TitleDeedStatus> GetAll()
@@ -74,7 +74,7 @@ namespace src.RealEstate.Service
             if (entity == null) return SaveResult.Fail;
             _unitOfWork.TitleDeedStatusRepository.Update(entity);
 
-            return await _unitOfWork.SaveChanges();
+            return await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<SaveResult> DeleteByIdAsync(int id)
@@ -83,7 +83,7 @@ namespace src.RealEstate.Service
             if (entity == null) return SaveResult.Fail;
             _unitOfWork.TitleDeedStatusRepository.Delete(entity);
 
-            return await _unitOfWork.SaveChanges();
+            return await _unitOfWork.SaveChangesAsync();
         }
     }
 }

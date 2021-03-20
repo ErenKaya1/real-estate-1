@@ -12,12 +12,7 @@ namespace src.RealEstate.Entity.Entities
         public string ImageName { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public string CustomId { get; set; }
-
-        [Required]
-        [StringLength(3)]
-        public string Sort { get; set; }
+        public int Order { get; set; }
 
         [Required]
         public int EstateId { get; set; }

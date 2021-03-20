@@ -24,7 +24,7 @@ namespace src.RealEstate.Service
             if (entity == null) return SaveResult.Fail;
             _unitOfWork.ProvinceRepository.Add(entity);
 
-            return await _unitOfWork.SaveChanges();
+            return await _unitOfWork.SaveChangesAsync();
         }
 
         public IQueryable<Province> GetAll()
@@ -81,7 +81,7 @@ namespace src.RealEstate.Service
             if (entity == null) return SaveResult.Fail;
             _unitOfWork.ProvinceRepository.Update(entity);
 
-            return await _unitOfWork.SaveChanges();
+            return await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<SaveResult> DeleteByIdAsync(int id)
@@ -90,7 +90,7 @@ namespace src.RealEstate.Service
             if (entity == null) return SaveResult.Fail;
             _unitOfWork.ProvinceRepository.Delete(entity);
 
-            return await _unitOfWork.SaveChanges();
+            return await _unitOfWork.SaveChangesAsync();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace src.RealEstate.Repository.Contracts
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task<SaveResult> SaveChanges();
+        Task<SaveResult> SaveChangesAsync();
         IRepository<InteriorProperty> InteriorPropertyRepository { get; }
         IRepository<ExternalProperty> ExternalPropertyRepository { get; }
         IRepository<AmbitProperty> AmbitPropertyRepository { get; }
@@ -19,5 +19,6 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<BuildingType> BuildingTypeRepository { get; }
         IRepository<TitleDeedStatus> TitleDeedStatusRepository { get; }
         IRepository<Estate> EstateRepository { get; }
+        IRepository<StaticImage> StaticImageRepository { get; }
     }
 }

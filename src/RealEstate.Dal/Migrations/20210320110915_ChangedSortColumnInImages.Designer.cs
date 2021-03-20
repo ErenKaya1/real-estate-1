@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using src.RealEstate.Dal.Context;
 
 namespace RealEstate.Dal.Migrations
 {
     [DbContext(typeof(EstateContext))]
-    partial class EstateContextModelSnapshot : ModelSnapshot
+    [Migration("20210320110915_ChangedSortColumnInImages")]
+    partial class ChangedSortColumnInImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -569,6 +571,11 @@ namespace RealEstate.Dal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomId")
+                        .IsRequired()
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
+
                     b.Property<int>("EstateId")
                         .HasColumnType("int");
 
@@ -616,6 +623,11 @@ namespace RealEstate.Dal.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("CustomId")
+                        .IsRequired()
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
 
                     b.Property<int>("EstateId")
                         .HasColumnType("int");

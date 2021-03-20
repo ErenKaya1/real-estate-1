@@ -363,6 +363,21 @@ $(document).ready(function () {
   });
 });
 
+function removeAllImages(name) {
+  switch (name) {
+    case "static":
+      $("input[name='StaticImage']").val("");
+      $(".static-images-preview-container").html("");
+      $(".static-images-preview").css("display", "none");
+      break;
+    case "panoramic":
+      $("input[name='PanoramicImage']").val("");
+      $(".panoramic-images-preview-container").html("");
+      $(".panoramic-images-preview").css("display", "none");
+      break;
+  }
+}
+
 function deletePropertyConfirm(action, id) {
   Swal.fire({
     title: "Emin misiniz?",
@@ -530,7 +545,7 @@ $(function () {
 
   try {
     window.layoutHelpers.setCollapsed(localStorage.getItem("layoutCollapsed") === "true", false);
-  } catch (e) {}
+  } catch (e) { }
 })();
 
 $(function () {
@@ -548,7 +563,7 @@ $(function () {
     if (!window.layoutHelpers.isSmallScreen()) {
       try {
         localStorage.setItem("layoutCollapsed", String(window.layoutHelpers.isCollapsed()));
-      } catch (e) {}
+      } catch (e) { }
     }
   });
 

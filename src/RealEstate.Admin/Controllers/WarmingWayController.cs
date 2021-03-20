@@ -125,12 +125,12 @@ namespace src.RealEstate.Admin.Controllers
             }
 
             var result = await _warmingWayService.DeleteByIdAsync(Convert.ToInt32(warmingWayId));
-            if (result == DeleteResponse.Success)
+            if (result == SaveResult.Success)
             {
                 TempData["DeleteWarmingWayMessage"] = Messages.DELETED_SUCCESSFULLY_MESSAGE;
                 return RedirectToAction(nameof(List));
             }
-            else if (result == DeleteResponse.InUse)
+            else if (result == SaveResult.InUse)
             {
                 TempData["WarmingWayInUseError"] = Messages.WARMING_WAY_DELETE_ERROR;
                 return RedirectToAction(nameof(List));

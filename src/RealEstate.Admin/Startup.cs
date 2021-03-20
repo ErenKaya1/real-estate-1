@@ -53,7 +53,7 @@ namespace RealEstate.Admin
                 {
                     Name = "user",
                     HttpOnly = false,
-                    SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax,
+                    SameSite = SameSiteMode.Lax,
                     SecurePolicy = CookieSecurePolicy.Always
                 };
                 options.SlidingExpiration = true;
@@ -83,6 +83,7 @@ namespace RealEstate.Admin
             services.AddScoped<IBuildingTypeService, BuildingTypeService>();
             services.AddScoped<ITitleDeedStatusService, TitleDeedStatusService>();
             services.AddScoped<IEstateService, EstateService>();
+            services.AddScoped<IStaticImageService, StaticImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
