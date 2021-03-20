@@ -126,7 +126,6 @@ namespace src.RealEstate.Admin.Models.Estate
         [Display(Name = "İlçe")]
         public int DistrictId { get; set; }
 
-        [Required]
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
 

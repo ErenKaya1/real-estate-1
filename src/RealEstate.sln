@@ -1,21 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Admin", "RealEstate.Admin\RealEstate.Admin.csproj", "{42EA82B9-4CB8-4F81-8CF6-C470900E19A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Admin", "RealEstate.Admin\RealEstate.Admin.csproj", "{42EA82B9-4CB8-4F81-8CF6-C470900E19A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Dal", "RealEstate.Dal\RealEstate.Dal.csproj", "{CF4899CB-2F08-4092-B75C-178AC63174A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Dal", "RealEstate.Dal\RealEstate.Dal.csproj", "{CF4899CB-2F08-4092-B75C-178AC63174A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Entity", "RealEstate.Entity\RealEstate.Entity.csproj", "{20012861-5C8B-48FC-AD65-38ED3D49D77A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Entity", "RealEstate.Entity\RealEstate.Entity.csproj", "{20012861-5C8B-48FC-AD65-38ED3D49D77A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Repository", "RealEstate.Repository\RealEstate.Repository.csproj", "{F2B7EA98-7FAD-4A06-A5BA-9645CC64ED2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Repository", "RealEstate.Repository\RealEstate.Repository.csproj", "{F2B7EA98-7FAD-4A06-A5BA-9645CC64ED2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Service", "RealEstate.Service\RealEstate.Service.csproj", "{77723FC8-99B3-4969-8E75-841C48D5F8BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Service", "RealEstate.Service\RealEstate.Service.csproj", "{77723FC8-99B3-4969-8E75-841C48D5F8BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.UI.Web", "RealEstate.UI.Web\RealEstate.UI.Web.csproj", "{7F0C6DE5-81A5-48BC-AABF-9E37ADD56390}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.UI.Web", "RealEstate.UI.Web\RealEstate.UI.Web.csproj", "{7F0C6DE5-81A5-48BC-AABF-9E37ADD56390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Common", "RealEstate.Common\RealEstate.Common.csproj", "{609D8FBC-4097-479F-841C-3AEF440F81C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Common", "RealEstate.Common\RealEstate.Common.csproj", "{609D8FBC-4097-479F-841C-3AEF440F81C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Images", "RealEstate.Images\RealEstate.Images.csproj", "{BCA8C386-18CA-4EA3-80B1-399278D57B87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{42EA82B9-4CB8-4F81-8CF6-C470900E19A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -114,5 +113,23 @@ Global
 		{609D8FBC-4097-479F-841C-3AEF440F81C3}.Release|x64.Build.0 = Release|Any CPU
 		{609D8FBC-4097-479F-841C-3AEF440F81C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{609D8FBC-4097-479F-841C-3AEF440F81C3}.Release|x86.Build.0 = Release|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Debug|x64.Build.0 = Debug|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Debug|x86.Build.0 = Debug|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Release|x64.ActiveCfg = Release|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Release|x64.Build.0 = Release|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Release|x86.ActiveCfg = Release|Any CPU
+		{BCA8C386-18CA-4EA3-80B1-399278D57B87}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C90E2650-90E7-4938-855A-63931AB92551}
 	EndGlobalSection
 EndGlobal

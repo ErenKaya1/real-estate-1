@@ -22,12 +22,15 @@ namespace src.RealEstate.Dal.Context
             builder.Entity<Estate>().HasIndex(x => x.TitleEN).IsUnique();
             builder.Entity<Estate>().HasIndex(x => x.UrlPathTR).IsUnique();
             builder.Entity<Estate>().HasIndex(x => x.UrlPathEN).IsUnique();
+
+            // Bu alanlar migration dosyasýnda restrict yapýlacak.
             //builder.Entity<Estate>().HasOne(x => x.District).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.Province).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.BuildingType).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.EstateType).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.TitleDeedStatus).WithMany().OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Estate>().HasOne(x => x.WarmingWay).WithMany().OnDelete(DeleteBehavior.Restrict);
+
             builder.Entity<EstateInteriorProperty>().HasKey(x => new { x.EstateId, x.InteriorPropertyId });
             builder.Entity<EstateExternalProperty>().HasKey(x => new { x.EstateId, x.ExternalPropertyId });
             builder.Entity<EstateAmbitProperty>().HasKey(x => new { x.EstateId, x.AmbitPropertyId });

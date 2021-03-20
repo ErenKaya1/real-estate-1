@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,8 +18,11 @@ namespace RealEstate.Admin.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            using var client = new HttpClient();
+            await client.GetAsync("https://localhost:5005/home");
+
             return View();
         }
 

@@ -28,6 +28,11 @@
     var transportationProperties = await _transportationPropertyService.GetAll(cultureInfo).ToListAsync();
 }
 
+@if (ViewData["NewEstateError"] != null)
+{
+    <div class="alert alert-danger"><b>@ViewData["NewEstateError"]</b></div>
+}
+
 <h4 class="font-weight-bold py-3 mb-4">Yeni İlan</h4>
 <form asp-controller="Estate" asp-action="New" method="POST" class="estate-form" enctype="multipart/form-data">
     <input type="hidden" asp-for="StaticImageOrder">

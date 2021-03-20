@@ -92,8 +92,8 @@ namespace src.RealEstate.Admin.Controllers
             var (result, id) = await _estateService.AddOneAsync(entity);
             if (result == SaveResult.Success)
             {
-                await _staticImageService.AddRangeAsync(model.StaticImage, entity.Id.ToString(), model.StaticImageOrder);
-                await _panoramicImageService.AddRangeAsync(model.PanoramicImage, entity.Id.ToString(), model.PanoramicImageOrder);
+                await _staticImageService.AddRangeAsync(model.StaticImage, id.ToString(), model.StaticImageOrder);
+                await _panoramicImageService.AddRangeAsync(model.PanoramicImage, id.ToString(), model.PanoramicImageOrder);
 
                 var interiorProperties = model.CheckBoxes["InteriorProperties"].ToList();
                 var externalProperties = model.CheckBoxes["ExternalProperties"].ToList();
@@ -109,7 +109,7 @@ namespace src.RealEstate.Admin.Controllers
                 {
                     estateInteriorProperties.Add(new EstateInteriorProperty
                     {
-                        EstateId = entity.Id,
+                        EstateId = id,
                         InteriorPropertyId = int.Parse(property)
                     });
                 }
@@ -118,7 +118,7 @@ namespace src.RealEstate.Admin.Controllers
                 {
                     estateExternalProperties.Add(new EstateExternalProperty
                     {
-                        EstateId = entity.Id,
+                        EstateId = id,
                         ExternalPropertyId = int.Parse(property)
                     });
                 }
@@ -127,7 +127,7 @@ namespace src.RealEstate.Admin.Controllers
                 {
                     estateAmbitProperties.Add(new EstateAmbitProperty
                     {
-                        EstateId = entity.Id,
+                        EstateId = id,
                         AmbitPropertyId = int.Parse(property)
                     });
                 }
@@ -136,7 +136,7 @@ namespace src.RealEstate.Admin.Controllers
                 {
                     estateTransportationProperties.Add(new EstateTransportationProperty
                     {
-                        EstateId = entity.Id,
+                        EstateId = id,
                         TransportationPropertyId = int.Parse(property)
                     }) ;
                 }
@@ -145,6 +145,8 @@ namespace src.RealEstate.Admin.Controllers
                 await _externalPropertyService.AddEstateExternalPropertyAsync(estateExternalProperties);
                 await _ambitPropertyService.AddEstateAmbitPropertyAsync(estateAmbitProperties);
                 await _transportationPropertyService.AddEstateTransportationPropertyAsync(estateTransportationProperties);
+
+                return RedirectToAction("List");
             }
             else if (result == SaveResult.Duplicated)
             {
