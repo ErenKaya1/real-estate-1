@@ -83,5 +83,13 @@ namespace src.RealEstate.Service
 
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<SaveResult> AddEstateExternalPropertyAsync(List<EstateExternalProperty> entities)
+        {
+            foreach (var entity in entities)
+                _unitOfWork.EstateExternalPropertyRepository.Add(entity);
+
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

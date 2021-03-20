@@ -85,5 +85,13 @@ namespace src.RealEstate.Service
 
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<SaveResult> AddEstateAmbitPropertyAsync(List<EstateAmbitProperty> entities)
+        {
+            foreach (var entity in entities)
+                _unitOfWork.EstateAmbitPropertyRepository.Add(entity);
+
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

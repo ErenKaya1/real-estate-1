@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.Common.Functions.Extensions;
 using src.RealEstate.Admin.Models.Estate;
+using src.RealEstate.Common.Constants;
 using src.RealEstate.Common.Enum;
 using src.RealEstate.Entity.Entities;
 using src.RealEstate.Service.Contracts;
@@ -16,10 +17,28 @@ namespace src.RealEstate.Admin.Controllers
     public class EstateController : Controller
     {
         private readonly IEstateService _estateService;
+        private readonly IStaticImageService _staticImageService;
+        private readonly IPanoramicImageService _panoramicImageService;
+        private readonly IInteriorPropertyService _interiorPropertyService;
+        private readonly IExternalPropertyService _externalPropertyService;
+        private readonly IAmbitPropertyService _ambitPropertyService;
+        private readonly ITransportationPropertyService _transportationPropertyService;
 
-        public EstateController(IEstateService estateService)
+        public EstateController(IEstateService estateService,
+                                IStaticImageService staticImageService, 
+                                IPanoramicImageService panoramicImageService,
+                                IInteriorPropertyService interiorPropertyService,
+                                IExternalPropertyService externalPropertyService,
+                                IAmbitPropertyService ambitPropertyService,
+                                ITransportationPropertyService transportationPropertyService)
         {
             _estateService = estateService;
+            _staticImageService = staticImageService;
+            _panoramicImageService = panoramicImageService;
+            _interiorPropertyService = interiorPropertyService;
+            _externalPropertyService = externalPropertyService;
+            _ambitPropertyService = ambitPropertyService;
+            _transportationPropertyService = transportationPropertyService;
         }
 
         [HttpGet]
@@ -30,6 +49,7 @@ namespace src.RealEstate.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> New(EstateNewViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -72,41 +92,68 @@ namespace src.RealEstate.Admin.Controllers
             var (result, id) = await _estateService.AddOneAsync(entity);
             if (result == SaveResult.Success)
             {
-                var staticImages = new List<StaticImage>();
-                var panoramicImages = new List<PanoramicImage>();
-                var staticOrders = string.IsNullOrEmpty(model.StaticImageOrder) ? new List<string>() : model.StaticImageOrder.Split(';').ToList();
-                var panoramicOrders = string.IsNullOrEmpty(model.PanoramicImageOrder) ? new List<string>() : model.PanoramicImageOrder.Split(';').ToList();
-                int order = 0;
+                await _staticImageService.AddRangeAsync(model.StaticImage, entity.Id.ToString(), model.StaticImageOrder);
+                await _panoramicImageService.AddRangeAsync(model.PanoramicImage, entity.Id.ToString(), model.PanoramicImageOrder);
 
-                foreach (var image in model.StaticImage)
+                var interiorProperties = model.CheckBoxes["InteriorProperties"].ToList();
+                var externalProperties = model.CheckBoxes["ExternalProperties"].ToList();
+                var ambitProperties = model.CheckBoxes["AmbitProperties"].ToList();
+                var transportationProperties = model.CheckBoxes["TransportationProperties"].ToList();
+
+                var estateInteriorProperties = new List<EstateInteriorProperty>();
+                var estateExternalProperties = new List<EstateExternalProperty>();
+                var estateAmbitProperties = new List<EstateAmbitProperty>();
+                var estateTransportationProperties = new List<EstateTransportationProperty>();
+
+                foreach (var property in interiorProperties)
                 {
-                    if (!image.IsImage()) continue;
-                    order = staticOrders.Count == 0 ? 0 : staticOrders.IndexOf(staticOrders.First(x => x == image.FileName));
-                    staticImages.Add(new StaticImage
+                    estateInteriorProperties.Add(new EstateInteriorProperty
                     {
-                        ImageName = image.FileName,
-                        Order = order,
+                        EstateId = entity.Id,
+                        InteriorPropertyId = int.Parse(property)
                     });
                 }
 
-                foreach (var image in model.PanoramicImage)
+                foreach (var property in externalProperties)
                 {
-                    if (!image.IsImage()) continue;
-                    order = panoramicOrders.Count == 0 ? 0 : panoramicOrders.IndexOf(panoramicOrders.First(x => x == image.FileName));
-                    panoramicImages.Add(new PanoramicImage
+                    estateExternalProperties.Add(new EstateExternalProperty
                     {
-                        ImageName = image.FileName,
-                        Order = order
+                        EstateId = entity.Id,
+                        ExternalPropertyId = int.Parse(property)
                     });
                 }
+
+                foreach (var property in ambitProperties)
+                {
+                    estateAmbitProperties.Add(new EstateAmbitProperty
+                    {
+                        EstateId = entity.Id,
+                        AmbitPropertyId = int.Parse(property)
+                    });
+                }
+
+                foreach (var property in transportationProperties)
+                {
+                    estateTransportationProperties.Add(new EstateTransportationProperty
+                    {
+                        EstateId = entity.Id,
+                        TransportationPropertyId = int.Parse(property)
+                    }) ;
+                }
+
+                await _interiorPropertyService.AddEstateInteriorPropertyAsync(estateInteriorProperties);
+                await _externalPropertyService.AddEstateExternalPropertyAsync(estateExternalProperties);
+                await _ambitPropertyService.AddEstateAmbitPropertyAsync(estateAmbitProperties);
+                await _transportationPropertyService.AddEstateTransportationPropertyAsync(estateTransportationProperties);
+            }
+            else if (result == SaveResult.Duplicated)
+            {
+                ViewData["NewEstateError"] = Messages.DUPLICATED_DATA_ERROR;
+                return View(model);
             }
 
-            return NotFound();
-
-            //var interiorProperties = model.CheckBoxes["InteriorProperties"].ToList();
-            //var externalProperties = model.CheckBoxes["ExternalProperties"].ToList();
-            //var ambitProperties = model.CheckBoxes["AmbitProperties"].ToList();
-            //var transportationProperties = model.CheckBoxes["TransportationProperties"].ToList();
+            ViewData["NewEstateError"] = Messages.DEFAULT_ERROR_MESSAGE;
+            return View(model);
         }
     }
 }

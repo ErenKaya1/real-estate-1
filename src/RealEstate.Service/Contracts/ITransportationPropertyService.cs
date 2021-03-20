@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace src.RealEstate.Service.Contracts
         Task<TransportationProperty> GetByIdAsync(int id);
         Task<SaveResult> EditAsync(TransportationProperty entity);
         Task<SaveResult> DeleteByIdAsync(int id);
+        Task<SaveResult> AddEstateTransportationPropertyAsync(List<EstateTransportationProperty> entities);
     }
 }

@@ -21,5 +21,9 @@ namespace src.RealEstate.Repository.Contracts
         IRepository<Estate> EstateRepository { get; }
         IRepository<StaticImage> StaticImageRepository { get; }
         IRepository<PanoramicImage> PanoramicImageRepository { get; }
+        IRepository<EstateInteriorProperty> EstateInteriorPropertyRepository { get; }
+        IRepository<EstateExternalProperty> EstateExternalPropertyRepository { get; }
+        IRepository<EstateAmbitProperty> EstateAmbitPropertyRepository { get; }
+        IRepository<EstateTransportationProperty> EstateTransportationPropertyRepository { get; }
     }
 }

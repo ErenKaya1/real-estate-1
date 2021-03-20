@@ -26,6 +26,10 @@ namespace src.RealEstate.Repository
         private IRepository<Estate> _estateRepository;
         private IRepository<StaticImage> _staticImageRepository;
         private IRepository<PanoramicImage> _panoramicImageRepository;
+        private IRepository<EstateInteriorProperty> _estateInteriorPropertyRepository;
+        private IRepository<EstateExternalProperty> _estateExternalPropertyRepository;
+        private IRepository<EstateAmbitProperty> _estateAmbitPropertyRepository;
+        private IRepository<EstateTransportationProperty> _estateTransportationPropertyRepository;
 
         public IRepository<InteriorProperty> InteriorPropertyRepository => _interiorPropertyRepository ??= new Repository<InteriorProperty>(_dbContext);
         public IRepository<ExternalProperty> ExternalPropertyRepository => _externalPropertyRepository ??= new Repository<ExternalProperty>(_dbContext);
@@ -40,7 +44,11 @@ namespace src.RealEstate.Repository
         public IRepository<Estate> EstateRepository => _estateRepository ??= new Repository<Estate>(_dbContext);
         public IRepository<StaticImage> StaticImageRepository => _staticImageRepository ??= new Repository<StaticImage>(_dbContext);
         public IRepository<PanoramicImage> PanoramicImageRepository => _panoramicImageRepository ??= new Repository<PanoramicImage>(_dbContext);
-
+        public IRepository<EstateInteriorProperty> EstateInteriorPropertyRepository => _estateInteriorPropertyRepository ??= new Repository<EstateInteriorProperty>(_dbContext);
+        public IRepository<EstateExternalProperty> EstateExternalPropertyRepository => _estateExternalPropertyRepository ??= new Repository<EstateExternalProperty>(_dbContext);
+        public IRepository<EstateAmbitProperty> EstateAmbitPropertyRepository => _estateAmbitPropertyRepository ??= new Repository<EstateAmbitProperty>(_dbContext);
+        public IRepository<EstateTransportationProperty> EstateTransportationPropertyRepository => _estateTransportationPropertyRepository ??= new Repository<EstateTransportationProperty>(_dbContext);
+ 
         public UnitOfWork(EstateContext dbContext)
         {
             if (dbContext == null) return;

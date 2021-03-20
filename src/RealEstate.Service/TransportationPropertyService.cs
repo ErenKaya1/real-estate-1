@@ -80,8 +80,16 @@ namespace src.RealEstate.Service
         public async Task<SaveResult> DeleteByIdAsync(int id)
         {
             var entity = await _unitOfWork.TransportationPropertyRepository.FindOne(x => x.Id == id);
-            if(entity == null) return SaveResult.Fail;
+            if (entity == null) return SaveResult.Fail;
             _unitOfWork.TransportationPropertyRepository.Delete(entity);
+
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<SaveResult> AddEstateTransportationPropertyAsync(List<EstateTransportationProperty> entities)
+        {
+            foreach (var entity in entities)
+                _unitOfWork.EstateTransportationPropertyRepository.Add(entity);
 
             return await _unitOfWork.SaveChangesAsync();
         }

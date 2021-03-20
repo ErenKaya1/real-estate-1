@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace src.RealEstate.Service.Contracts
         Task<AmbitProperty> GetByIdAsync(int id);
         Task<SaveResult> EditAsync(AmbitProperty entity);
         Task<SaveResult> DeleteByIdAsync(int id);
+        Task<SaveResult> AddEstateAmbitPropertyAsync(List<EstateAmbitProperty> entities);
     }
 }
